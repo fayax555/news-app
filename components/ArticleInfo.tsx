@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import author from '../assets/author.jpg';
 
 const ArticleInfoWrap = styled.div`
   display: flex;
@@ -26,18 +25,22 @@ const ArticleInfoWrap = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  name: string;
+  date: string;
+  img: StaticImageData;
+}
 
-const ArticleInfo: FC<Props> = () => {
+const ArticleInfo: FC<Props> = ({ name, date, img }) => {
   return (
     <ArticleInfoWrap>
       <div>
-        <Image src={author} alt=''></Image>
+        <Image src={img} alt=''></Image>
       </div>
       <p>
-        By <span>John Doe</span>
+        By <span>{name}</span>
       </p>
-      <p>Posted: 12 Jul 2021 10:05 pm</p>
+      <p>Posted:{date} </p>
     </ArticleInfoWrap>
   );
 };

@@ -1,22 +1,28 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 import { ArticleWrap } from './ArticleStyles';
 import ArticleInfo from './ArticleInfo';
+import { articles } from './articleData';
 
 interface Props {}
 
 const Article: FC<Props> = () => {
+  const {
+    query: { id },
+  } = useRouter();
+
+  const article = articles[Number(id) - 1];
+  console.log(id);
+
   return (
     <ArticleWrap>
-      <h2>Relic Is Teasing Something on its Twitch Channel</h2>
-      <ArticleInfo />
-      <p>
-        There is something going on over on Relic Entertainment&apos; twitch
-        channel. The developer seems to be broadcasting a map of the
-        Mediterranean Sea shown from high above, and it is stylized in a way
-        that gives off early 20th Century vibes. There is one franchise in the
-        studio&apos; history that definitely aligns with this most closely, but
-        just to be thorough, let&apos; explore all the possibilities.
-      </p>
+      <h2>{article.title}</h2>
+      <ArticleInfo
+        name={article.name}
+        date={article.date}
+        img={article.authorImg}
+      />
+      <p>{article.content}</p>
     </ArticleWrap>
   );
 };
