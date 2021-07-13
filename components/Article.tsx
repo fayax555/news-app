@@ -6,7 +6,6 @@ interface Props {
   article: {
     id: number;
     name: string;
-    authorImg: StaticImageData;
     date: string;
     title: string;
     body: string;
@@ -21,7 +20,6 @@ const Article: FC<Props> = ({ article }) => {
       <ArticleInfo
         name={article.name}
         date={article.date}
-        img={article.authorImg}
       />
       <p>{article.body}</p>
     </ArticleWrap>

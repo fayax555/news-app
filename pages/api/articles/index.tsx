@@ -1,5 +1,12 @@
-import { articles } from 'articleData';
+import fs from 'fs';
+import path from 'path';
 
-export default function handler(req: any, res: any) {
-  res.status(200).json(articles);
+export function buildFeedbackPath() {
+  return path.join(process.cwd(), 'data', 'articleData.json');
+}
+
+export function extractFeedback(filePath: any) {
+  const fileData = fs.readFileSync(filePath);
+  const data = JSON.parse(fileData.toString());
+  return data;
 }

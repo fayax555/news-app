@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Image from 'next/image';
 import styled from 'styled-components';
 
 const ArticleInfoWrap = styled.div`
@@ -28,14 +27,13 @@ const ArticleInfoWrap = styled.div`
 interface Props {
   name: string;
   date: string;
-  img: StaticImageData;
 }
 
-const ArticleInfo: FC<Props> = ({ name, date, img }) => {
+const ArticleInfo: FC<Props> = ({ name, date }) => {
   return (
     <ArticleInfoWrap>
       <div>
-        <Image src={img} alt=''></Image>
+        {/* <Image src={img} alt=''></Image> */}
       </div>
       <p>
         By <span>{name}</span>

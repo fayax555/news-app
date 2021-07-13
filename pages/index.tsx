@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { server } from 'config';
 import Link from 'next/link';
 import ArticleList from '@/components/ArticleList';
 import styled from 'styled-components';
+import { buildFeedbackPath, extractFeedback } from 'pages/api/articles/index';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,15 +33,15 @@ const Home: FC<Props> = ({ articles }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const res = await fetch(`${server}/api/articles`);
-  const articles = await res.json();
-
+export async function getStaticProps() {
+  const filePath = buildFeedbackPath();
+  console.log(filePath);
+  const data = extractFeedback(filePath);
   return {
     props: {
-      articles,
+      articles: data,
     },
   };
-};
+}
 
 export default Home;
