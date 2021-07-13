@@ -9,11 +9,12 @@ interface Props {
     authorImg: StaticImageData;
     date: string;
     title: string;
-    content: string;
+    body: string;
   };
 }
 
 const Article: FC<Props> = ({ article }) => {
+  console.log(article);
   return (
     <ArticleWrap>
       <h2>{article.title}</h2>
@@ -22,7 +23,7 @@ const Article: FC<Props> = ({ article }) => {
         date={article.date}
         img={article.authorImg}
       />
-      <p>{article.content}</p>
+      <p>{article.body}</p>
     </ArticleWrap>
   );
 };

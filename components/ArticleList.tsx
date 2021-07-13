@@ -1,19 +1,20 @@
 import { FC } from 'react';
 import ArticleItem from './ArticleItem';
 import { ArticleListWrap } from './ArticleStyles';
-import { articles } from './articleData';
 
-interface Props {}
+interface Props {
+  articles: any;
+}
 
-const ArticleList: FC<Props> = () => {
+const ArticleList: FC<Props> = ({ articles }) => {
   return (
     <ArticleListWrap>
-      {articles.map((article) => (
+      {articles.map((article: any) => (
         <ArticleItem
           key={article.id}
           newsId={article.id}
           title={article.title}
-          description={article.content.slice(0,120)}
+          description={article.body.slice(0, 120)}
         />
       ))}
     </ArticleListWrap>
