@@ -18,9 +18,9 @@ const Home: FC<Props> = ({ articles }) => {
         </Link>
       </div>
       <NewsBtnWrap>
-          <Link href='/write' passHref>
-            <button>Write</button>
-          </Link>
+        <Link href='/write' passHref>
+          <button>Write</button>
+        </Link>
       </NewsBtnWrap>
       <ArticleList articles={articles} />
     </NewsWrap>
@@ -36,6 +36,7 @@ export async function getStaticProps() {
     props: {
       articles: data,
     },
+    revalidate: 1,
   };
 }
 

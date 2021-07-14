@@ -10,6 +10,10 @@ interface Props {
 }
 
 const NewsId: FC<Props> = ({ article }) => {
+  if (!article) {
+    return <h1>Loading!</h1>;
+  }
+
   return (
     <NewsWrap>
       <Link href='/' passHref>
@@ -28,7 +32,7 @@ export async function getStaticProps(context: any) {
   const jsonData = fs.readFileSync(filePath);
   const data = JSON.parse(jsonData.toString());
   const article = data.find((item: any) => item.id === nid);
-
+  console.log(article);
   return {
     props: {
       article,
@@ -46,7 +50,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }
 
