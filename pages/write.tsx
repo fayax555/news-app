@@ -1,41 +1,8 @@
 import { FC, useRef } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
-
-const Wrap = styled.div`
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  form {
-    padding: 0.5rem;
-
-    div {
-      padding: 0.5rem;
-    }
-
-    label {
-      display: block;
-      font-size: 1.2rem;
-      padding-bottom: 0.5rem;
-    }
-
-    input,
-    textarea {
-      padding: 0.5rem;
-      width: 100%;
-      font-size: 1.1rem;
-      border: 1px solid #888;
-      border-radius: 5px;
-    }
-
-    button {
-      padding: 0.5rem 1rem;
-      margin-left: 0.5rem;
-      cursor: pointer;
-    }
-  }
-`;
+import { NewsWrap, FormWrap } from 'components/ArticleStyles';
+import { useRouter } from 'next/router';
 
 interface Props {}
 
@@ -43,27 +10,56 @@ const Write: FC<Props> = () => {
   const titleInputRef = useRef<any>();
   const bodyInputRef = useRef<any>();
 
+  const router = useRouter();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    const enteredTitle = titleInputRef.current.value;
+    const inputTitle = titleInputRef.current.value;
+    const inputBody = bodyInputRef.current.value;
+
+    const reqBody = { newsTitle: inputTitle, newsBody: inputBody };
+
+    fetch('/api/articles', {
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+
+    setTimeout(() => {
+      router.push('/');
+    }, 500);
   };
 
   return (
-    <Wrap>
-      <h1>Write</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='title'>Title</label>
-          <input id='title' type='text' ref={titleInputRef} required/>
-        </div>
-        <div>
-          <label htmlFor='body'>Body</label>
-          <textarea id='body' cols={65} rows={15} ref={bodyInputRef} required></textarea>
-        </div>
-        <button type='submit'>Submit</button>
-      </form>
-    </Wrap>
+    <NewsWrap>
+      <Link href='/' passHref>
+        <h1>News</h1>
+      </Link>
+      <FormWrap>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='title'>Title</label>
+            <input id='title' type='text' ref={titleInputRef} required />
+          </div>
+          <div>
+            <label htmlFor='body'>Body</label>
+            <textarea
+              id='body'
+              cols={65}
+              rows={15}
+              ref={bodyInputRef}
+              required
+            ></textarea>
+          </div>
+          <button type='submit'>Submit</button>
+        </form>
+      </FormWrap>
+    </NewsWrap>
   );
 };
 

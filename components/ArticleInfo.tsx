@@ -32,13 +32,13 @@ interface Props {
 const ArticleInfo: FC<Props> = ({ name, date }) => {
   return (
     <ArticleInfoWrap>
-      <div>
-        {/* <Image src={img} alt=''></Image> */}
-      </div>
+      {/* <div>
+        <Image src={img} alt=''></Image>
+      </div> */}
       <p>
         By <span>{name}</span>
       </p>
-      <p>Posted:{date} </p>
+      <p>Posted: {date} </p>
     </ArticleInfoWrap>
   );
 };

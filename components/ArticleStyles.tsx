@@ -33,14 +33,75 @@ export const ArticleListWrap = styled.div`
 
 // Article
 export const ArticleWrap = styled.div`
-  padding-top: 2rem;
+  padding-top: 4rem;
   width: 600px;
-
-  h2 {
-    padding-bottom: 1rem;
-  }
 
   p {
     font-size: 1.1rem;
+  }
+`;
+
+// news pages
+export const NewsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  h1:hover,
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  div {
+    button {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+  }
+`;
+
+export const NewsBtnWrap = styled.div`
+  display: flex;
+  transform: translateX(282px);
+`;
+
+//write.tsx
+export const FormWrap = styled.div`
+  padding-top: 2rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    padding: 0.5rem;
+
+    div {
+      padding: 0.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 1.2rem;
+      padding-bottom: 0.5rem;
+    }
+
+    input,
+    textarea {
+      padding: 0.5rem;
+      width: 100%;
+      font-size: 1.1rem;
+      border: 1px solid #888;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
   }
 `;
