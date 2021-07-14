@@ -32,7 +32,7 @@ const Write: FC<Props> = () => {
 
     setTimeout(() => {
       router.push('/');
-    }, 500);
+    }, 1000);
   };
 
   return (

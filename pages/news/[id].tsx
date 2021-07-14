@@ -38,14 +38,14 @@ export async function getStaticProps(context: any) {
 }
 
 export async function getStaticPaths() {
+  const filePath = path.join(process.cwd(), 'data', 'articleData.json');
+  const jsonData = fs.readFileSync(filePath);
+  const articles = JSON.parse(jsonData.toString());
+  const ids = articles.map((article: any) => article.id);
+  const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
+
   return {
-    paths: [
-      { params: { id: '1' } },
-      { params: { id: '2' } },
-      { params: { id: '3' } },
-      { params: { id: '4' } },
-      { params: { id: '5' } },
-    ],
+    paths,
     fallback: false,
   };
 }

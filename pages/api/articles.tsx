@@ -10,7 +10,7 @@ export default function handler(req: any, res: any) {
     const data = JSON.parse(fileData.toString());
 
     const newArticle = {
-      id: (data.length + 1).toString(),
+      id: '3',
       name: 'John',
       date: '14 Jul 2021',
       title: newsTitle,
