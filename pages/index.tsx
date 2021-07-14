@@ -35,8 +35,8 @@ const Home: FC<Props> = ({ articles }) => {
 
 export async function getStaticProps() {
   const filePath = buildFeedbackPath();
-  console.log(filePath);
   const data = extractFeedback(filePath);
+  
   return {
     props: {
       articles: data,
