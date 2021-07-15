@@ -10,10 +10,6 @@ interface Props {
 }
 
 const NewsId: FC<Props> = ({ article }) => {
-  if (!article) {
-    return <h1>Loading!</h1>;
-  }
-
   return (
     <NewsWrap>
       <Link href='/' passHref>
@@ -24,15 +20,18 @@ const NewsId: FC<Props> = ({ article }) => {
   );
 };
 
+function getData() {
+  const filePath = path.join(process.cwd(), 'data', 'articleData.json');
+  const jsonData = fs.readFileSync(filePath);
+  return JSON.parse(jsonData.toString());
+}
+
 export async function getStaticProps(context: any) {
   const { params } = context;
   const nid = params.id;
 
-  const filePath = path.join(process.cwd(), 'data', 'articleData.json');
-  const jsonData = fs.readFileSync(filePath);
-  const data = JSON.parse(jsonData.toString());
-  const article = data.find((item: any) => item.id === nid);
-  console.log(article);
+  const article = getData().find((item: any) => item.id === nid);
+
   return {
     props: {
       article,
@@ -42,15 +41,12 @@ export async function getStaticProps(context: any) {
 }
 
 export async function getStaticPaths() {
-  const filePath = path.join(process.cwd(), 'data', 'articleData.json');
-  const jsonData = fs.readFileSync(filePath);
-  const articles = JSON.parse(jsonData.toString());
-  const ids = articles.map((article: any) => article.id);
+  const ids = getData().map((article: any) => article.id);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 }
 
