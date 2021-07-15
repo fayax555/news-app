@@ -26,18 +26,22 @@ const Write: FC<Props> = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
 
-    router.push('/');
+    setTimeout(() => {
+      router.push('/');
+    }, 500);
   };
 
   return (
     <NewsWrap>
-      <Link href='/' passHref>
-        <h1>News</h1>
-      </Link>
+      <h1
+        onClick={() => {
+          router.push('/');
+        }}
+      >
+        News
+      </h1>
       <FormWrap>
         <form onSubmit={handleSubmit}>
           <div>

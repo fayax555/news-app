@@ -4,17 +4,24 @@ import { FC } from 'react';
 import Link from 'next/link';
 import Article from '@/components/Article';
 import { NewsWrap } from 'components/ArticleStyles';
+import { useRouter } from 'next/router';
 
 interface Props {
   article: any;
 }
 
 const NewsId: FC<Props> = ({ article }) => {
+  const router = useRouter();
+
   return (
     <NewsWrap>
-      <Link href='/' passHref>
-        <h1>News</h1>
-      </Link>
+      <h1
+        onClick={() => {
+          router.push('/');
+        }}
+      >
+        News
+      </h1>
       <Article article={article} />
     </NewsWrap>
   );
