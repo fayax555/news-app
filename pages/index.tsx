@@ -27,7 +27,7 @@ const Home: FC<Props> = ({ articles }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const filePath = path.join(process.cwd(), 'data', 'articleData.json');
   const jsonData = fs.readFileSync(filePath);
   const data = JSON.parse(jsonData.toString());
@@ -36,7 +36,6 @@ export async function getStaticProps() {
     props: {
       articles: data,
     },
-    revalidate: 1,
   };
 }
 

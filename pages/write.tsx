@@ -30,9 +30,7 @@ const Write: FC<Props> = () => {
       .then((res) => res.json())
       .then((data) => console.log(data));
 
-    setTimeout(() => {
-      router.push('/');
-    }, 3000);
+    router.push('/');
   };
 
   return (
