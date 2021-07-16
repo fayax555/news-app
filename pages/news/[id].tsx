@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Article from '@/components/Article';
 import { NewsWrap } from 'components/ArticleStyles';
 import { useRouter } from 'next/router';
-import { MongoClient } from 'mongodb';
+import { connectToDatabase } from 'util/mongodb';
 
 interface Props {
   article: any;
@@ -11,6 +11,8 @@ interface Props {
 
 const NewsId: FC<Props> = ({ article }) => {
   const router = useRouter();
+
+  if (!article) return <h1>Loading</h1>;
 
   return (
     <NewsWrap>
@@ -27,22 +29,16 @@ const NewsId: FC<Props> = ({ article }) => {
 };
 
 async function getArticles() {
-  const client = await MongoClient.connect(
-    'mongodb+srv://fayax555:rnsDZrSwDUd3w1F2@cluster0.jhvmq.mongodb.net/newsdatabase?retryWrites=true&w=majority'
-  );
+  const { client } = await connectToDatabase();
 
   const db = client.db();
   return await db.collection('articles').find({}).toArray();
 }
 
 export async function getStaticProps(context: any) {
-  const { params } = context;
-  const nid = params.id;
-  console.log(nid);
+  const nid = context.params.id;
 
-  const article = (await getArticles()).find(
-    (item: any) => item._id.toString() === nid
-  );
+  const article = (await getArticles()).find((item: any) => item.nid === nid);
 
   return {
     props: {
@@ -53,7 +49,7 @@ export async function getStaticProps(context: any) {
 }
 
 export async function getStaticPaths() {
-  const ids = (await getArticles()).map((article: any) => article._id);
+  const ids = (await getArticles()).map((article: any) => article.nid);
   const paths = ids.map((id: any) => ({ params: { id: id.toString() } }));
 
   return {

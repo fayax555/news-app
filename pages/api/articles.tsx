@@ -1,13 +1,18 @@
-import { MongoClient } from 'mongodb';
+import { connectToDatabase } from 'util/mongodb';
+import { customAlphabet } from 'nanoid';
+const nanoid = customAlphabet('1234567890', 4);
 
 export default async function handler(req: any, res: any) {
-  const client = await MongoClient.connect(
-    'mongodb+srv://fayax555:rnsDZrSwDUd3w1F2@cluster0.jhvmq.mongodb.net/newsdatabase?retryWrites=true&w=majority'
-  );
+  const { client } = await connectToDatabase();
 
   if (req.method === 'POST') {
+    const { title } = req.body;
+
     const db = client.db();
-    const result = await db.collection('articles').insertOne(req.body);
+    const result = await db.collection('articles').insertOne({
+      nid: `${title.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
+      ...req.body,
+    });
     console.log(result);
     // req.body.id = result.insertedId;
 

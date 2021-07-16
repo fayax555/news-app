@@ -19,8 +19,8 @@ const Write: FC<Props> = () => {
 
     setIsSubmit(true);
 
-    const inputTitle = titleInputRef.current.value;
-    const inputBody = bodyInputRef.current.value;
+    const inputTitle = titleInputRef.current.value.trim();
+    const inputBody = bodyInputRef.current.value.trim();
 
     const reqBody = { title: inputTitle, body: inputBody };
 
