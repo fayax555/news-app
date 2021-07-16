@@ -38,7 +38,7 @@ export async function getStaticProps() {
     .sort({ _id: -1 })
     .toArray();
 
-  console.log(articles);
+  // console.log(articles);
 
   return {
     props: {
