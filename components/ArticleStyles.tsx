@@ -6,8 +6,12 @@ export const ArticleListWrap = styled.div`
   grid-template-columns: 1fr 1fr;
   padding: 3rem;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
   > div {
-    width: 300px;
+    max-width: 300px;
     background-color: #f4f4f4;
     margin: 1rem;
     padding: 1rem;
@@ -66,6 +70,10 @@ export const NewsWrap = styled.div`
 export const NewsBtnWrap = styled.div`
   display: flex;
   transform: translateX(282px);
+
+  @media (max-width: 818px) {
+    transform: none;
+  }
 `;
 
 //write.tsx

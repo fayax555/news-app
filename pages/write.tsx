@@ -13,7 +13,8 @@ const Write: FC<Props> = () => {
 
   const router = useRouter();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
+    console.log('form submitted');
     e.preventDefault();
 
     setIsSubmit(true);
@@ -21,9 +22,9 @@ const Write: FC<Props> = () => {
     const inputTitle = titleInputRef.current.value;
     const inputBody = bodyInputRef.current.value;
 
-    const reqBody = { newsTitle: inputTitle, newsBody: inputBody };
+    const reqBody = { title: inputTitle, body: inputBody };
 
-    fetch('/api/articles', {
+    const res = await fetch('/api/articles', {
       method: 'POST',
       body: JSON.stringify(reqBody),
       headers: {
@@ -31,9 +32,10 @@ const Write: FC<Props> = () => {
       },
     });
 
-    setTimeout(() => {
-      router.push('/');
-    }, 500);
+    const data = await res.json();
+    console.log(data);
+    // .then((res) => res.json())
+    // .then((data) => console.log(data));
   };
 
   return (

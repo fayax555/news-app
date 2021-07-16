@@ -11,7 +11,7 @@ const ArticleList: FC<Props> = ({ articles }) => {
     <ArticleListWrap>
       {articles.map((article: any) => (
         <ArticleItem
-          key={article.id}
+          key={article._id}
           newsId={article.id}
           title={article.title}
           description={article.body.slice(0, 120)}
