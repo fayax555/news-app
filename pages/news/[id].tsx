@@ -29,9 +29,8 @@ const NewsId: FC<Props> = ({ article }) => {
 };
 
 async function getArticles() {
-  const { client } = await connectToDatabase();
+  const { db } = await connectToDatabase();
 
-  const db = client.db();
   return await db.collection('articles').find({}).toArray();
 }
 

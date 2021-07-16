@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import ArticleList from '@/components/ArticleList';
 import { NewsWrap, NewsBtnWrap } from 'components/ArticleStyles';
-import { MongoClient } from 'mongodb';
+import { connectToDatabase } from 'util/mongodb';
 
 interface Props {
   articles: any;
@@ -27,11 +27,8 @@ const Home: FC<Props> = ({ articles }) => {
 };
 
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    'mongodb+srv://fayax555:rnsDZrSwDUd3w1F2@cluster0.jhvmq.mongodb.net/newsdatabase?retryWrites=true&w=majority'
-  );
+  const { db } = await connectToDatabase();
 
-  const db = client.db();
   const articles = await db
     .collection('articles')
     .find({})

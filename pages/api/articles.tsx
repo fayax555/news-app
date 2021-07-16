@@ -3,12 +3,11 @@ import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('1234567890', 4);
 
 export default async function handler(req: any, res: any) {
-  const { client } = await connectToDatabase();
+  const { db } = await connectToDatabase();
 
   if (req.method === 'POST') {
     const { title } = req.body;
 
-    const db = client.db();
     const result = await db.collection('articles').insertOne({
       nid: `${title.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
       ...req.body,
@@ -19,5 +18,5 @@ export default async function handler(req: any, res: any) {
     res.status(201).json({ message: 'Success!', article: req.body });
   }
 
-  client.close();
+  // client.close();
 }
