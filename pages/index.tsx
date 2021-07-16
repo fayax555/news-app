@@ -1,5 +1,3 @@
-import fs from 'fs';
-import path from 'path';
 import { FC } from 'react';
 import Link from 'next/link';
 import ArticleList from '@/components/ArticleList';
@@ -22,21 +20,19 @@ const Home: FC<Props> = ({ articles }) => {
           <button>Write</button>
         </Link>
       </NewsBtnWrap>
-      <ArticleList articles={articles} />
+      {/* <ArticleList articles={articles} /> */}
     </NewsWrap>
   );
 };
 
-export async function getServerSideProps() {
-  const filePath = path.join(process.cwd(), 'data', 'articleData.json');
-  const jsonData = fs.readFileSync(filePath);
-  const data = JSON.parse(jsonData.toString());
+// export async function getServerSideProps() {
+  
 
-  return {
-    props: {
-      articles: data,
-    },
-  };
-}
+//   return {
+//     props: {
+//       articles: data,
+//     },
+//   };
+// }
 
 export default Home;

@@ -1,26 +1,22 @@
-import fs from 'fs';
-import path from 'path';
+import { MongoClient } from 'mongodb';
 
-export default function handler(req: any, res: any) {
+export default async function handler(req: any, res: any) {
+  const client = await MongoClient.connect(
+    'mongodb+srv://fayax555:rnsDZrSwDUd3w1F2@cluster0.jhvmq.mongodb.net/newsdatabase?retryWrites=true&w=majority'
+  );
+
+  const db = client.db();
+
   if (req.method === 'POST') {
-    const { newsTitle, newsBody } = req.body;
+    const result = await db.collection('articles').insertOne(req.body);
+    console.log(result);
+    req.body.id = result.insertedId;
 
-    const filePath = path.join(process.cwd(), 'data', 'articleData.json');
-    const fileData = fs.readFileSync(filePath);
-    const data = JSON.parse(fileData.toString());
-
-    const newArticle = {
-      id: (data.length + 1).toString(),
-      name: 'John',
-      date: '14 Jul 2021',
-      title: newsTitle,
-      body: newsBody,
-    };
-
-    data.push(newArticle);
-    fs.writeFileSync(filePath, JSON.stringify(data));
-    res.status(201).json({ message: 'Success!', article: newArticle });
-  } else {
-    res.status(200).json({ message: 'this works' });
+    res.status(201).json({ message: 'Success!', article: req.body });
   }
+
+  if (req.method === 'GET') {
+  }
+
+  client.close();
 }

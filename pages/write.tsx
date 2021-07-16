@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useRef, useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { NewsWrap, FormWrap } from 'components/ArticleStyles';
@@ -9,11 +9,14 @@ interface Props {}
 const Write: FC<Props> = () => {
   const titleInputRef = useRef<any>();
   const bodyInputRef = useRef<any>();
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    setIsSubmit(true);
 
     const inputTitle = titleInputRef.current.value;
     const inputBody = bodyInputRef.current.value;
@@ -58,7 +61,9 @@ const Write: FC<Props> = () => {
               required
             ></textarea>
           </div>
-          <button type='submit'>Submit</button>
+          <button disabled={isSubmit} type='submit'>
+            Submit
+          </button>
         </form>
       </FormWrap>
     </NewsWrap>

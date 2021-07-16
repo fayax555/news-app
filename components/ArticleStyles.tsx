@@ -34,7 +34,7 @@ export const ArticleListWrap = styled.div`
 // Article
 export const ArticleWrap = styled.div`
   padding-top: 4rem;
-  width: 600px;
+  max-width: 600px;
 
   p {
     font-size: 1.1rem;
