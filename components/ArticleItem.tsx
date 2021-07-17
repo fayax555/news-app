@@ -9,14 +9,12 @@ interface Props {
 
 const ArticleItem: FC<Props> = ({ newsId, title, description }) => {
   return (
-    <div>
-      <Link href={`/news/${newsId}`} passHref>
-        <div>
-          <a>{title}</a>
-          <p>{description} ...</p>
-        </div>
-      </Link>
-    </div>
+    <Link href={`/news/${newsId}`} passHref>
+      <a>
+        <h2>{title}</h2>
+        <p>{description} ...</p>
+      </a>
+    </Link>
   );
 };
 
