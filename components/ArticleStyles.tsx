@@ -2,65 +2,18 @@ import styled from 'styled-components';
 
 // news pages
 export const NewsWrap = styled.div`
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
   padding: 2rem;
-  
-  a:hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`;
-
-// ArticleList
-export const ArticleListWrap = styled.div`
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 3rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-
-  > a {
-    width: 300px;
-    height: 150px;
-    background-color: #f4f4f4;
-    margin: 1rem;
-    padding: 1.25rem;
-
-    h2 {
-      font-size: 1.3rem;
-      padding-bottom: 0.5rem;
-    }
-
-    &:hover {
-      outline: 1px solid #1b47a5;
-      cursor: pointer;
-    }
-  }
-
-  > div > div {
-    cursor: pointer;
-  } */
 `;
 
 // Article
 export const ArticleWrap = styled.div`
   padding-top: 4rem;
-  max-width: 600px;
+  max-width: 760px;
 
   p {
-    font-size: 1.1rem;
-  }
-`;
-
-export const NewsBtnWrap = styled.div`
-  display: flex;
-  transform: translateX(282px);
-
-  @media (max-width: 818px) {
-    transform: none;
+    font-size: 1.2rem;
   }
 `;
 

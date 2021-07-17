@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import ArticleItem from '../ArticleItem';
-import { ArticleListWrap } from '../ArticleStyles';
+import ArticleItem from './ArticleItem';
 import Header from './Header';
 import SecondSection from './SecondSection';
 
@@ -10,7 +9,7 @@ interface Props {
 
 const ArticleList: FC<Props> = () => {
   return (
-    <ArticleListWrap>
+    <>
       <Header />
       <SecondSection />
       {/* {articles.map((article: any) => (
@@ -21,7 +20,7 @@ const ArticleList: FC<Props> = () => {
           description={article.body.slice(0, 120)}
         />
       ))} */}
-    </ArticleListWrap>
+    </>
   );
 };
 

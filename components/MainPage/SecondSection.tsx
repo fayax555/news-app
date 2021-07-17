@@ -13,10 +13,14 @@ const SecondSectionWrap = styled.div`
   padding: 3rem 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem 2rem;
+  gap: 2.5rem 2rem;
 
   h2 {
     font-size: 1.1rem;
+  }
+
+  h2:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -36,11 +40,11 @@ const SecondSection: FC<Props> = () => {
     <SecondSectionWrap>
       {data.map(({title, img}) => (
         <Link key={title} href='' passHref>
-          <div>
-            <Image src={img} alt='' />
+          <a>
+            <Image width={400} src={img} alt='' />
             <h2>{title}</h2>
             <p>Lorem ipsum nimi sequi perferendis commodi...</p>
-          </div>
+          </a>
         </Link>
       ))}
     </SecondSectionWrap>

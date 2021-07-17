@@ -13,7 +13,6 @@ const Wrap = styled.a`
   }
 
   > div {
-    /* transform: translateY(-50px); */
     bottom: 0;
     padding: 1rem;
     color: #fff;
@@ -22,10 +21,10 @@ const Wrap = styled.a`
 
     h1 {
       font-size: 1.7rem;
-    }
 
-    p {
-      font-size: 0.7rem;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     span:first-child {
@@ -46,7 +45,7 @@ const Header: FC<Props> = () => {
         <div>
           <h1>Create Device Mockups in Browser with DeviceMock</h1>
           <p>
-            By <span>John Doe</span> <span>June 18, 2020</span>
+           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus nihil eos eum! Repellendus itaque quas quod.
           </p>
         </div>
       </Wrap>

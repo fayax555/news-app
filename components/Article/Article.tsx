@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { ArticleWrap } from './ArticleStyles';
+import { ArticleWrap } from '../ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 
 interface Props {
   article: {
-    id: number;
-    name: string;
-    date: string;
+    id?: number;
+    name?: string;
+    date?: string;
     title: string;
     body: string;
   };
@@ -15,7 +15,7 @@ interface Props {
 const Article: FC<Props> = ({ article }) => {
   return (
     <ArticleWrap>
-      <h2>{article.title}</h2>
+      <h1>{article.title}</h1>
       {/* <ArticleInfo name={article.name} date={article.date} /> */}
       <p>{article.body}</p>
     </ArticleWrap>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import ArticleList from '@/components/MainPage/ArticleList';
-import { NewsWrap, NewsBtnWrap } from 'components/ArticleStyles';
+import { NewsWrap } from 'components/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 
 interface Props {
@@ -11,12 +11,6 @@ interface Props {
 const Home: FC<Props> = ({ articles }) => {
   return (
     <NewsWrap>
-      <div>
-        <Link href='/' passHref>
-          <h1>News</h1>
-        </Link>
-      </div>
-
       <ArticleList />
     </NewsWrap>
   );
