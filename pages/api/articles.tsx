@@ -18,5 +18,4 @@ export default async function handler(req: any, res: any) {
     res.status(201).json({ message: 'Success!', article: req.body });
   }
 
-  // client.close();
 }
