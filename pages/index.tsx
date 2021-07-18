@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import ArticleList from '@/components/MainPage/ArticleList';
-import { NewsWrap } from 'components/ArticleStyles';
+import { NewsWrap } from '@/components/Styles/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 
 interface Props {

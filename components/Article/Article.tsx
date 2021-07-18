@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ArticleWrap } from '../ArticleStyles';
+import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 
 interface Props {

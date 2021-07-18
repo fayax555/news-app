@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { NewsWrap, FormWrap } from 'components/ArticleStyles';
+import { NewsWrap, FormWrap } from '@/components/Styles/ArticleStyles';
 import { useRouter } from 'next/router';
 
 interface Props {}

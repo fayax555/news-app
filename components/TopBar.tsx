@@ -28,6 +28,11 @@ const Bar = styled.div`
 
     a {
       font-size: 0.8rem;
+      padding-left: 1rem;
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 `;
@@ -41,9 +46,14 @@ const TopBar: FC<Props> = () => {
         <Link href='/' passHref>
           <h1>Newz</h1>
         </Link>
-        <Link href='/login' passHref>
-          <a>Sign In</a>
-        </Link>
+        <div>
+          <Link href='/register' passHref>
+            <a>Register</a>
+          </Link>
+          <Link href='/login' passHref>
+            <a>Sign In</a>
+          </Link>
+        </div>
       </div>
     </Bar>
   );
