@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import TopBar from 'components/TopBar';
 
 interface LayoutProps {
   title?: string;
@@ -12,6 +13,7 @@ export default function Layout({ title, children }: LayoutProps) {
       <Head>
         <title>{title}</title>
       </Head>
+      <TopBar />
       {children}
     </>
   );

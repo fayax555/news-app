@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import ArticleList from '@/components/MainPage/ArticleList';
-import { NewsWrap } from '@/components/Styles/ArticleStyles';
+import Layout from 'components/Layout/Layout';
+import ArticleList from 'components/MainPage/ArticleList';
+import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 
 interface Props {
@@ -10,9 +11,11 @@ interface Props {
 
 const Home: FC<Props> = ({ articles }) => {
   return (
-    <NewsWrap>
-      <ArticleList />
-    </NewsWrap>
+    <Layout>
+      <NewsWrap>
+        <ArticleList />
+      </NewsWrap>
+    </Layout>
   );
 };
 

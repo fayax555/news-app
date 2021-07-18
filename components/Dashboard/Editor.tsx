@@ -1,17 +1,12 @@
 import { FC, useRef, useState } from 'react';
-import Link from 'next/link';
-import styled from 'styled-components';
-import { NewsWrap, FormWrap } from '@/components/Styles/ArticleStyles';
-import { useRouter } from 'next/router';
+import { FormWrap } from 'components/Styles/ArticleStyles';
 
 interface Props {}
 
-const Write: FC<Props> = () => {
+const Editor: FC<Props> = () => {
   const titleInputRef = useRef<any>();
   const bodyInputRef = useRef<any>();
   const [isSubmit, setIsSubmit] = useState(false);
-
-  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     console.log('form submitted');
@@ -39,14 +34,7 @@ const Write: FC<Props> = () => {
   };
 
   return (
-    <NewsWrap>
-      <h1
-        onClick={() => {
-          router.push('/');
-        }}
-      >
-        News
-      </h1>
+    <div>
       <FormWrap>
         <form onSubmit={handleSubmit}>
           <div>
@@ -68,8 +56,8 @@ const Write: FC<Props> = () => {
           </button>
         </form>
       </FormWrap>
-    </NewsWrap>
+    </div>
   );
 };
 
-export default Write;
+export default Editor;
