@@ -20,5 +20,5 @@ export default function Layout({ title, children }: LayoutProps) {
 }
 
 Layout.defaultProps = {
-  title: 'Mealu | Restaurant Reservation System',
+  title: 'Newz',
 };

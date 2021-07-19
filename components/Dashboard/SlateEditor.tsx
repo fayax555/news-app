@@ -11,7 +11,7 @@ import {
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 
 type CustomElement = {
-  bold?: boolean | null;
+  bold?: boolean;
   type: 'paragraph' | 'code' | null;
   children: CustomText[];
 };
@@ -38,18 +38,19 @@ const CustomEditor = {
 
   isCodeBlockActive(editor: Editor) {
     const [match] = Editor.nodes(editor, {
-      match: (n) => Element.isElement(n) && n.type === 'code',
+      match: (n: any) => n.type === 'code',
     });
 
     return !!match;
   },
 
-  toggleBoldMark(editor: Editor) {
+  toggleBoldMark(editor: any) {
     const isActive = CustomEditor.isBoldMarkActive(editor);
+    const selectedText = Editor.string(editor, editor.selection);
     Transforms.setNodes(
       editor,
-      { bold: isActive ? null : true },
-      { match: (n) => Text.isText(n), split: true }
+      { bold: isActive ? false : true },
+      { match: () => !!selectedText, split: true }
     );
   },
 
@@ -88,35 +89,46 @@ const SlateEditor: FC = () => {
   }, []);
 
   return (
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-    >
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        onKeyDown={(event) => {
-          if (!event.ctrlKey) {
-            return;
-          }
-
-          switch (event.key) {
-            case '`': {
-              event.preventDefault();
-              CustomEditor.toggleCodeBlock(editor);
-              break;
-            }
-
-            case 'b': {
-              event.preventDefault();
-              CustomEditor.toggleBoldMark(editor);
-              break;
-            }
-          }
+    <>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          CustomEditor.toggleBoldMark(editor);
         }}
-      />
-    </Slate>
+      >
+        Bold
+      </button>
+      <Slate
+        editor={editor}
+        value={value}
+        onChange={(newValue) => setValue(newValue)}
+      >
+        <Editable
+          style={{ backgroundColor: '#ccc' }}
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          onKeyDown={(event) => {
+            if (!event.ctrlKey) {
+              return;
+            }
+
+            switch (event.key) {
+              case '`': {
+                event.preventDefault();
+                CustomEditor.toggleCodeBlock(editor);
+                break;
+              }
+
+              case 'b': {
+                event.preventDefault();
+                CustomEditor.toggleBoldMark(editor);
+                break;
+              }
+            }
+          }}
+        />
+      </Slate>
+    </>
   );
 };
 

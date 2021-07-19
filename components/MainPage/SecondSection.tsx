@@ -46,8 +46,8 @@ const SecondSection: FC<Props> = () => {
 
   return (
     <SecondSectionWrap>
-      {data.map(({ title, img }) => (
-        <Link key={title} href='' passHref>
+      {data.map(({ title, img }, index) => (
+        <Link key={title + index} href='/news/id' passHref>
           <a>
             <Image width={400} src={img} alt='' />
             <h2>{title}</h2>
