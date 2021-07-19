@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
-import { PageHeading } from '@/components/Styles/Styles';
+import { PageHeading } from 'components/Styles/Styles';
 
 const Login: FC = () => {
   const [email, setEmail] = useState('');

@@ -6,10 +6,10 @@ export default async function handler(req: any, res: any) {
   const { db } = await connectToDatabase();
 
   if (req.method === 'POST') {
-    const { title } = req.body;
+    const { headline } = req.body;
 
     const result = await db.collection('articles').insertOne({
-      nid: `${title.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
+      nid: `${headline.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
       ...req.body,
     });
     console.log(result);

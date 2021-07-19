@@ -17,7 +17,7 @@ const Editor: FC<Props> = () => {
     const inputTitle = titleInputRef.current.value.trim();
     const inputBody = bodyInputRef.current.value.trim();
 
-    const reqBody = { title: inputTitle, body: inputBody };
+    const reqBody = { headline: inputTitle, bodyText: inputBody };
 
     const res = await fetch('/api/articles', {
       method: 'POST',
