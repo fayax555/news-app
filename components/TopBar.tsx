@@ -5,7 +5,6 @@ import Link from 'next/link';
 const Bar = styled.div`
   background-color: #111;
   max-height: 40px;
-  margin-bottom: 1rem;
 
   > div {
     display: flex;

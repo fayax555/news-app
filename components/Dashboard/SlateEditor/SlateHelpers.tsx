@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 
 export const CustomEditor = {
@@ -20,6 +20,15 @@ export const CustomEditor = {
     return !!match;
   },
 
+  isUnderlineMarkActive(editor: Editor) {
+    const [match] = Editor.nodes(editor, {
+      match: (n: any) => n.underline === true,
+      universal: true,
+    });
+
+    return !!match;
+  },
+
   isCodeBlockActive(editor: Editor) {
     const [match] = Editor.nodes(editor, {
       match: (n: any) => n.type === 'code',
@@ -33,7 +42,7 @@ export const CustomEditor = {
     const selectedText = Editor.string(editor, editor.selection);
     Transforms.setNodes(
       editor,
-      { bold: isActive ? false : true },
+      { bold: isActive ? undefined : true },
       { match: () => !!selectedText, split: true }
     );
   },
@@ -43,7 +52,17 @@ export const CustomEditor = {
     const selectedText = Editor.string(editor, editor.selection);
     Transforms.setNodes(
       editor,
-      { italic: isActive ? false : true },
+      { italic: isActive ? undefined : true },
+      { match: () => !!selectedText, split: true }
+    );
+  },
+
+  toggleUnderlineMark(editor: any) {
+    const isActive = CustomEditor.isUnderlineMarkActive(editor);
+    const selectedText = Editor.string(editor, editor.selection);
+    Transforms.setNodes(
+      editor,
+      { underline: isActive ? undefined : true },
       { match: () => !!selectedText, split: true }
     );
   },
@@ -58,7 +77,13 @@ export const CustomEditor = {
   },
 };
 
-export const Leaf: FC<any> = ({ attributes, children, leaf }) => {
+interface LeafProps {
+  attributes: any;
+  children: ReactNode;
+  leaf: any;
+}
+
+export const Leaf: FC<LeafProps> = ({ attributes, children, leaf }) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -67,10 +92,14 @@ export const Leaf: FC<any> = ({ attributes, children, leaf }) => {
     children = <em>{children}</em>;
   }
 
+  if (leaf.underline) {
+    children = <u>{children}</u>;
+  }
+
   return <span {...attributes}>{children}</span>;
 };
 
-export const CodeElement: FC<any> = (props) => {
+export const CodeElement: FC<LeafProps> = (props) => {
   return (
     <pre {...props.attributes}>
       <code>{props.children}</code>
@@ -78,6 +107,6 @@ export const CodeElement: FC<any> = (props) => {
   );
 };
 
-export const DefaultElement: FC<any> = (props) => {
+export const DefaultElement: FC<LeafProps> = (props) => {
   return <p {...props.attributes}>{props.children}</p>;
 };

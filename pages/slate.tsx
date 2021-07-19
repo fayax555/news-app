@@ -2,6 +2,10 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import Layout from 'components/Layout/Layout';
 
+const EditorFormWrap = styled.div`
+  background-color: #f3f3f3;
+`;
+
 const EditorForm = styled.div`
   max-width: 670px;
   padding: 0 1rem;
@@ -12,7 +16,7 @@ const EditorForm = styled.div`
 
     input {
       width: 100%;
-      font-size: 0.95rem;
+      font-size: 1.2rem;
       display: block;
       padding: 0.5rem;
     }
@@ -27,13 +31,15 @@ const SlateWithNoSSR = dynamic(
 const IndexPage = () => {
   return (
     <Layout>
-      <EditorForm>
-        <div>
-          <label htmlFor='heading'>Heading</label>
-          <input id='heading' type='text' />
-        </div>
-        <SlateWithNoSSR />
-      </EditorForm>
+      <EditorFormWrap>
+        <EditorForm>
+          <div>
+            <h2>Add New Article</h2>
+            <input type='text' placeholder='Enter title here' />
+          </div>
+          <SlateWithNoSSR />
+        </EditorForm>
+      </EditorFormWrap>
     </Layout>
   );
 };

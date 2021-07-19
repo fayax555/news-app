@@ -9,10 +9,12 @@ import {
 } from './SlateHelpers';
 import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
+import { withHistory } from 'slate-history';
 
 type CustomElement = {
   bold?: boolean;
   italic?: boolean;
+  underline?: boolean;
   type: 'paragraph' | 'code' | null;
   children: CustomText[];
 };
@@ -28,7 +30,7 @@ declare module 'slate' {
 }
 
 const SlateEditor: FC = () => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   const [value, setValue] = useState<Descendant[]>([
     {
@@ -83,6 +85,11 @@ const SlateEditor: FC = () => {
                 case 'i': {
                   event.preventDefault();
                   CustomEditor.toggleItalicMark(editor);
+                  break;
+                }
+                case 'u': {
+                  event.preventDefault();
+                  CustomEditor.toggleUnderlineMark(editor);
                   break;
                 }
               }

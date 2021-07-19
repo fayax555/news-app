@@ -6,8 +6,10 @@ export const EditorWrap = styled.div`
 
 export const Wrap = styled.div`
   > * {
-    background-color: #fefefe;
+    background-color: #fff;
+    border: 1px solid #aaa;
     height: 500px;
     padding: 0.5rem;
+    font-size: 1.2rem;
   }
 `;

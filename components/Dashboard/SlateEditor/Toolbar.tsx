@@ -1,23 +1,27 @@
 import { FC } from 'react';
 import { CustomEditor } from './SlateHelpers';
 import styled from 'styled-components';
-import { BiBold, BiItalic, BiUnderline } from 'react-icons/bi';
+import {
+  MdFormatBold,
+  MdFormatItalic,
+  MdFormatUnderlined,
+} from 'react-icons/md';
 import { BsTypeH1, BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 
 const ToolbarWrap = styled.div`
   /* padding: 0.25rem; */
-  padding-top: 0.25rem;
-  background-color: #f4f4f4;
+  padding-top: 0.55rem;
+  background-color: #ddd;
 
   > * {
     cursor: pointer;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin: 0 0.5rem;
+    opacity: 0.6;
 
     &:hover {
-      background: #f4f4f4;
-      opacity: 0.7;
+      opacity: 1;
     }
   }
 `;
@@ -29,17 +33,27 @@ interface Props {
 const Toolbar: FC<Props> = ({ editor }) => {
   return (
     <ToolbarWrap>
-      <BiBold
+      <MdFormatBold
         onMouseDown={(e) => {
           e.preventDefault();
           CustomEditor.toggleBoldMark(editor);
         }}
       />
-      <BiItalic />
-      <BiUnderline />
-      <BsTypeH1 />
+      <MdFormatItalic
+        onMouseDown={(e) => {
+          e.preventDefault();
+          CustomEditor.toggleItalicMark(editor);
+        }}
+      />
+      <MdFormatUnderlined
+        onMouseDown={(e) => {
+          e.preventDefault();
+          CustomEditor.toggleUnderlineMark(editor);
+        }}
+      />
+      {/* <BsTypeH1 />
       <BsTypeH2 />
-      <BsTypeH3 />
+      <BsTypeH3 /> */}
     </ToolbarWrap>
   );
 };
