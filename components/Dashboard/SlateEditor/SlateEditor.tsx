@@ -30,6 +30,7 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const [activeMarks, setActiveMarks] = useState<string[]>([]);
   const [value, setValue] = useState<Descendant[]>([
     {
       type: 'paragraph',
@@ -37,15 +38,25 @@ const SlateEditor: FC = () => {
     },
   ]);
 
+
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   }, []);
 
+  const handleActiveMarks = (e: any) => {
+    // e.preventDefault() prevents editing
+    const marks: any = Editor.marks(editor);
+    if (marks !== null) {
+      setActiveMarks(Object.keys(marks));
+    }
+  };
 
   return (
-    <EditorWrap>
+    <EditorWrap onClick={handleActiveMarks} onKeyDown={handleActiveMarks}>
       <Toolbar
         editor={editor}
+        activeMarks={activeMarks}
+        // elementType={elementType}
       />
       <Slate
         editor={editor}

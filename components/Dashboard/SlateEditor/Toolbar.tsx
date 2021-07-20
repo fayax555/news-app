@@ -27,20 +27,22 @@ const ToolbarWrap = styled.div`
 
 interface Props {
   editor: any;
+  activeMarks: string[];
+  elementType?: string | undefined;
 }
 
-const Toolbar: FC<Props> = ({ editor }) => {
-  const { isMarkActive, isBlockActive, toggleBlock, toggleMark } = CustomEditor;
+const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
+  const { isBlockActive, toggleBlock, toggleMark } = CustomEditor;
   return (
     <ToolbarWrap
       onMouseDown={(e) => {
-        // retain focus on the editor when the toolbar is clicked
+        // retain focus on the editor even when the toolbar is clicked
         e.preventDefault();
       }}
     >
       <MdFormatBold
         style={{
-          opacity: isMarkActive(editor, 'bold') ? 1 : 0.5,
+          opacity: activeMarks.includes('bold') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -49,7 +51,7 @@ const Toolbar: FC<Props> = ({ editor }) => {
       />
       <MdFormatItalic
         style={{
-          opacity: isMarkActive(editor, 'italic') ? 1 : 0.5,
+          opacity: activeMarks.includes('italic') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -58,7 +60,7 @@ const Toolbar: FC<Props> = ({ editor }) => {
       />
       <MdFormatUnderlined
         style={{
-          opacity: isMarkActive(editor, 'underline') ? 1 : 0.5,
+          opacity: activeMarks.includes('underline') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -87,6 +89,7 @@ const Toolbar: FC<Props> = ({ editor }) => {
           toggleBlock(editor, 'h3');
         }}
       />
+      <i>{BsTypeH3}</i>
     </ToolbarWrap>
   );
 };
