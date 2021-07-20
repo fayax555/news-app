@@ -32,7 +32,12 @@ interface Props {
 
 const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
   return (
-    <ToolbarWrap>
+    <ToolbarWrap
+      onMouseDown={(e) => {
+        // retain focus on the editor even when the toolbar is clicked
+        e.preventDefault();
+      }}
+    >
       <MdFormatBold
         style={{
           opacity: activeMarks.includes('bold') ? 1 : 0.6,

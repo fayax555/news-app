@@ -1,5 +1,11 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { createEditor, BaseEditor, Descendant, Editor } from 'slate';
+import {
+  createEditor,
+  BaseEditor,
+  Descendant,
+  Editor,
+  Transforms,
+} from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import {
   CustomEditor,
@@ -11,12 +17,14 @@ import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
 
+type TextFormat = 'bold' | 'italic' | 'underline';
+
 type CustomElement = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
   active?: boolean;
-  format?: 'bold' | 'italic' | 'underline';
+  format?: TextFormat;
   type: 'paragraph' | 'code' | null;
   children: CustomText[];
 };
@@ -33,7 +41,6 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-
   const [activeMarks, setActiveMarks] = useState<string[]>([]);
   const [value, setValue] = useState<Descendant[]>([
     {
@@ -55,7 +62,8 @@ const SlateEditor: FC = () => {
     return <Leaf {...props} />;
   }, []);
 
-  const handleActiveMarks = () => {
+  const handleActiveMarks = (e: any) => {
+    e.preventDefault();
     const marks: any = Editor.marks(editor);
     if (marks !== null) {
       setActiveMarks(Object.keys(marks));
@@ -86,7 +94,6 @@ const SlateEditor: FC = () => {
                   CustomEditor.toggleCodeBlock(editor);
                   break;
                 }
-
                 case 'b': {
                   event.preventDefault();
                   CustomEditor.toggleMark(editor, 'bold');

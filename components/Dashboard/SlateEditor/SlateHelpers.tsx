@@ -15,12 +15,16 @@ export const CustomEditor = {
 
   toggleMark(editor: any, textFormat: TextFormat) {
     const isActive = CustomEditor.isMarkActive(editor, textFormat);
-    const selectedText = Editor.string(editor, editor.selection);
-    Transforms.setNodes(
-      editor,
-      { [textFormat]: isActive ? undefined : true },
-      { match: () => !!selectedText, split: true }
-    );
+
+    // format text only if the editor is focused to prevent error
+    if (editor.selection !== null) {
+      const selectedText = Editor.string(editor, editor.selection);
+      Transforms.setNodes(
+        editor,
+        { [textFormat]: isActive ? undefined : true },
+        { match: () => !!selectedText, split: true }
+      );
+    }
   },
 
   isCodeBlockActive(editor: Editor) {
@@ -33,6 +37,7 @@ export const CustomEditor = {
 
   toggleCodeBlock(editor: Editor) {
     const isActive = CustomEditor.isCodeBlockActive(editor);
+    
     Transforms.setNodes(
       editor,
       { type: isActive ? null : 'code' },
