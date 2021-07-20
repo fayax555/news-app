@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 
-type TextFormat = 'bold' | 'italic' | 'underline';
-type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
+export type TextFormat = 'bold' | 'italic' | 'underline';
+export type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {

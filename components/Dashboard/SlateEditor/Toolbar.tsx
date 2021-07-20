@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CustomEditor } from './SlateHelpers';
+import { CustomEditor, TextFormat, BlockType } from './SlateHelpers';
 import styled from 'styled-components';
 import {
   MdFormatBold,
@@ -33,6 +33,18 @@ interface Props {
 
 const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
   const { isBlockActive, toggleBlock, toggleMark } = CustomEditor;
+  const formatInlineData = [
+    { icon: <MdFormatBold />, formatType: 'bold' },
+    { icon: <MdFormatItalic />, formatType: 'italic' },
+    { icon: <MdFormatUnderlined />, formatType: 'underline' },
+  ];
+
+  const formatBlockData = [
+    { icon: <BsTypeH1 />, formatType: 'h1' },
+    { icon: <BsTypeH2 />, formatType: 'h2' },
+    { icon: <BsTypeH3 />, formatType: 'h3' },
+  ];
+
   return (
     <ToolbarWrap
       onMouseDown={(e) => {
@@ -40,56 +52,37 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
         e.preventDefault();
       }}
     >
-      <MdFormatBold
-        style={{
-          opacity: activeMarks.includes('bold') ? 1 : 0.5,
-        }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleMark(editor, 'bold');
-        }}
-      />
-      <MdFormatItalic
-        style={{
-          opacity: activeMarks.includes('italic') ? 1 : 0.5,
-        }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleMark(editor, 'italic');
-        }}
-      />
-      <MdFormatUnderlined
-        style={{
-          opacity: activeMarks.includes('underline') ? 1 : 0.5,
-        }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleMark(editor, 'underline');
-        }}
-      />
+      {formatInlineData.map((data) => (
+        <i
+          key={data.formatType}
+          style={{
+            opacity: activeMarks.includes(data.formatType) ? 1 : 0.5,
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            toggleMark(editor, data.formatType as TextFormat);
+          }}
+        >
+          {data.icon}
+        </i>
+      ))}
 
-      <BsTypeH1
-        style={{ opacity: isBlockActive(editor, 'h1') ? 1 : 0.5 }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleBlock(editor, 'h1');
-        }}
-      />
-      <BsTypeH2
-        style={{ opacity: isBlockActive(editor, 'h2') ? 1 : 0.5 }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleBlock(editor, 'h2');
-        }}
-      />
-      <BsTypeH3
-        style={{ opacity: isBlockActive(editor, 'h3') ? 1 : 0.5 }}
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleBlock(editor, 'h3');
-        }}
-      />
-      <i>{BsTypeH3}</i>
+      {formatBlockData.map((data) => (
+        <i
+          key={data.formatType}
+          style={{
+            opacity: isBlockActive(editor, data.formatType as BlockType)
+              ? 1
+              : 0.5,
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            toggleBlock(editor, data.formatType as BlockType);
+          }}
+        >
+          {data.icon}
+        </i>
+      ))}
     </ToolbarWrap>
   );
 };
