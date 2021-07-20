@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { createEditor, BaseEditor, Descendant, Editor, Element } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
-import { CustomEditor, Leaf } from './SlateHelpers';
+import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
 import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
@@ -30,7 +30,6 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [activeMarks, setActiveMarks] = useState<string[]>([]);
   const [value, setValue] = useState<Descendant[]>([
     {
       type: 'paragraph',
@@ -38,41 +37,16 @@ const SlateEditor: FC = () => {
     },
   ]);
 
-  const renderElement = useCallback(({ element, attributes, children }) => {
-    switch (element.type) {
-      case 'code':
-        return (
-          <pre {...attributes}>
-            <code>{children}</code>
-          </pre>
-        );
-      case 'h1':
-        return <h1 {...attributes}>{children}</h1>;
-      case 'h2':
-        return <h2 {...attributes}>{children}</h2>;
-      case 'h3':
-        return <h3 {...attributes}>{children}</h3>;
-      default:
-        return <p {...attributes}>{children}</p>;
-    }
-  }, []);
-
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   }, []);
 
-  const handleActiveMarks = (e: any) => {
-    // e.preventDefault() prevents editing
-    console.log(editor);
-    const marks: any = Editor.marks(editor);
-    if (marks !== null) {
-      setActiveMarks(Object.keys(marks));
-    }
-  };
 
   return (
-    <EditorWrap onClick={handleActiveMarks} onKeyDown={handleActiveMarks}>
-      <Toolbar editor={editor} activeMarks={activeMarks} />
+    <EditorWrap>
+      <Toolbar
+        editor={editor}
+      />
       <Slate
         editor={editor}
         value={value}

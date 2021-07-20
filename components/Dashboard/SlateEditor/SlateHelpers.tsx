@@ -67,3 +67,22 @@ export const Leaf: FC<LeafProps> = ({ attributes, children, leaf }) => {
 
   return <span {...attributes}>{children}</span>;
 };
+
+export const renderElement = ({ element, attributes, children }: any) => {
+  switch (element.type) {
+    case 'code':
+      return (
+        <pre {...attributes}>
+          <code>{children}</code>
+        </pre>
+      );
+    case 'h1':
+      return <h1 {...attributes}>{children}</h1>;
+    case 'h2':
+      return <h2 {...attributes}>{children}</h2>;
+    case 'h3':
+      return <h3 {...attributes}>{children}</h3>;
+    default:
+      return <p {...attributes}>{children}</p>;
+  }
+};

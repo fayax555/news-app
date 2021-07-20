@@ -17,7 +17,7 @@ const ToolbarWrap = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0 0.5rem;
-    opacity: 0.6;
+    opacity: 0.5;
 
     &:hover {
       opacity: 1;
@@ -27,58 +27,66 @@ const ToolbarWrap = styled.div`
 
 interface Props {
   editor: any;
-  activeMarks: string[];
 }
 
-const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
+const Toolbar: FC<Props> = ({ editor }) => {
+  const { isMarkActive, isBlockActive, toggleBlock, toggleMark } = CustomEditor;
   return (
     <ToolbarWrap
       onMouseDown={(e) => {
-        // retain focus on the editor even when the toolbar is clicked
+        // retain focus on the editor when the toolbar is clicked
         e.preventDefault();
       }}
     >
       <MdFormatBold
         style={{
-          opacity: activeMarks.includes('bold') ? 1 : 0.6,
+          opacity: isMarkActive(editor, 'bold') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleMark(editor, 'bold');
+          toggleMark(editor, 'bold');
         }}
       />
       <MdFormatItalic
         style={{
-          opacity: activeMarks.includes('italic') ? 1 : 0.6,
+          opacity: isMarkActive(editor, 'italic') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleMark(editor, 'italic');
+          toggleMark(editor, 'italic');
         }}
       />
       <MdFormatUnderlined
         style={{
-          opacity: activeMarks.includes('underline') ? 1 : 0.6,
+          opacity: isMarkActive(editor, 'underline') ? 1 : 0.5,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleMark(editor, 'underline');
+          toggleMark(editor, 'underline');
         }}
       />
+
       <BsTypeH1
+        style={{ opacity: isBlockActive(editor, 'h1') ? 1 : 0.5 }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleBlock(editor, 'h1');
+          toggleBlock(editor, 'h1');
         }}
       />
-      <BsTypeH2 onMouseDown={(e) => {
+      <BsTypeH2
+        style={{ opacity: isBlockActive(editor, 'h2') ? 1 : 0.5 }}
+        onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleBlock(editor, 'h2');
-        }}/>
-      <BsTypeH3 onMouseDown={(e) => {
+          toggleBlock(editor, 'h2');
+        }}
+      />
+      <BsTypeH3
+        style={{ opacity: isBlockActive(editor, 'h3') ? 1 : 0.5 }}
+        onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleBlock(editor, 'h3');
-        }}/>
+          toggleBlock(editor, 'h3');
+        }}
+      />
     </ToolbarWrap>
   );
 };
