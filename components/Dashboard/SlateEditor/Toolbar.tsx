@@ -9,7 +9,6 @@ import {
 import { BsTypeH1, BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 
 const ToolbarWrap = styled.div`
-  /* padding: 0.25rem; */
   padding-top: 0.55rem;
   background-color: #ddd;
 
@@ -28,18 +27,15 @@ const ToolbarWrap = styled.div`
 
 interface Props {
   editor: any;
-  activeMarks: any;
+  activeMarks: string[];
 }
 
-const Toolbar: FC<Props> = ({
-  editor,
-  activeMarks: { isBold, isItalic, isUnderline },
-}) => {
+const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
   return (
     <ToolbarWrap>
       <MdFormatBold
         style={{
-          opacity: isBold ? 1 : 0.6,
+          opacity: activeMarks.includes('bold') ? 1 : 0.6,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -48,7 +44,7 @@ const Toolbar: FC<Props> = ({
       />
       <MdFormatItalic
         style={{
-          opacity: isItalic ? 1 : 0.6,
+          opacity: activeMarks.includes('italic') ? 1 : 0.6,
         }}
         onMouseDown={(e) => {
           e.preventDefault();
@@ -57,7 +53,7 @@ const Toolbar: FC<Props> = ({
       />
       <MdFormatUnderlined
         style={{
-          opacity: isUnderline ? 1 : 0.6,
+          opacity: activeMarks.includes('underline') ? 1 : 0.6,
         }}
         onMouseDown={(e) => {
           e.preventDefault();

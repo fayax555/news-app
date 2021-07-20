@@ -4,7 +4,7 @@ import { Editor, Transforms } from 'slate';
 export const CustomEditor = {
   isBoldMarkActive(editor: Editor) {
     const [match] = Editor.nodes(editor, {
-      match: (n: any) => n.bold === true,
+      match: (n: any) => n['bold'] === true,
       universal: true,
     });
 
@@ -45,7 +45,6 @@ export const CustomEditor = {
       { bold: isActive ? undefined : true },
       { match: () => !!selectedText, split: true }
     );
-    // console.log(isActive, selectedText);
   },
 
   toggleItalicMark(editor: any) {

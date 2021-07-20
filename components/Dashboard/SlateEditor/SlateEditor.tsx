@@ -31,9 +31,10 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [isBold, setIsBold] = useState(false);
-  const [isItalic, setIsItalic] = useState(false);
-  const [isUnderline, setIsUnderline] = useState(false);
+  // const [isBold, setIsBold] = useState(false);
+  // const [isItalic, setIsItalic] = useState(false);
+  // const [isUnderline, setIsUnderline] = useState(false);
+  const [activeMarks, setActiveMarks] = useState<string[]>([]);
 
   const [value, setValue] = useState<Descendant[]>([
     {
@@ -41,7 +42,6 @@ const SlateEditor: FC = () => {
       children: [{ text: 'A line of text in a paragraph.' }],
     },
   ]);
-  // console.log(value);
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -56,19 +56,16 @@ const SlateEditor: FC = () => {
     return <Leaf {...props} />;
   }, []);
 
+  const handleActiveMarks = () => {
+    const marks: any = Editor.marks(editor);
+    if (marks !== null) {
+      setActiveMarks(Object.keys(marks));
+    }
+  };
+
   return (
-    <EditorWrap
-      onClick={() => {
-        const marks: any = Editor.marks(editor);
-        setIsBold(Object.keys(marks).includes('bold'));
-        setIsItalic(Object.keys(marks).includes('italic'));
-        setIsUnderline(Object.keys(marks).includes('underline'));
-      }}
-    >
-      <Toolbar
-        editor={editor}
-        activeMarks={{ isBold, isItalic, isUnderline }}
-      />
+    <EditorWrap onClick={handleActiveMarks} onKeyDown={handleActiveMarks}>
+      <Toolbar editor={editor} activeMarks={activeMarks} />
       <Slate
         editor={editor}
         value={value}
@@ -76,6 +73,7 @@ const SlateEditor: FC = () => {
       >
         <Wrap>
           <Editable
+            className='editorbox'
             renderElement={renderElement}
             renderLeaf={renderLeaf}
             onKeyDown={(event) => {
