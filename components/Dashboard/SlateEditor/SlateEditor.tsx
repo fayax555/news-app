@@ -15,6 +15,8 @@ type CustomElement = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
+  active?: boolean;
+  format?: 'bold' | 'italic' | 'underline';
   type: 'paragraph' | 'code' | null;
   children: CustomText[];
 };
@@ -31,11 +33,8 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  // const [isBold, setIsBold] = useState(false);
-  // const [isItalic, setIsItalic] = useState(false);
-  // const [isUnderline, setIsUnderline] = useState(false);
-  const [activeMarks, setActiveMarks] = useState<string[]>([]);
 
+  const [activeMarks, setActiveMarks] = useState<string[]>([]);
   const [value, setValue] = useState<Descendant[]>([
     {
       type: 'paragraph',
@@ -90,17 +89,17 @@ const SlateEditor: FC = () => {
 
                 case 'b': {
                   event.preventDefault();
-                  CustomEditor.toggleBoldMark(editor);
+                  CustomEditor.toggleMark(editor, 'bold');
                   break;
                 }
                 case 'i': {
                   event.preventDefault();
-                  CustomEditor.toggleItalicMark(editor);
+                  CustomEditor.toggleMark(editor, 'italic');
                   break;
                 }
                 case 'u': {
                   event.preventDefault();
-                  CustomEditor.toggleUnderlineMark(editor);
+                  CustomEditor.toggleMark(editor, 'underline');
                   break;
                 }
               }

@@ -39,7 +39,7 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleBoldMark(editor);
+          CustomEditor.toggleMark(editor, 'bold');
         }}
       />
       <MdFormatItalic
@@ -48,7 +48,7 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleItalicMark(editor);
+          CustomEditor.toggleMark(editor, 'italic');
         }}
       />
       <MdFormatUnderlined
@@ -57,7 +57,7 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
         }}
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleUnderlineMark(editor);
+          CustomEditor.toggleMark(editor, 'underline');
         }}
       />
       {/* <BsTypeH1 />

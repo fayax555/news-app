@@ -1,32 +1,26 @@
 import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 
+type TextFormat = 'bold' | 'italic' | 'underline';
+
 export const CustomEditor = {
-  isBoldMarkActive(editor: Editor) {
+  isMarkActive(editor: Editor, textFormat: TextFormat) {
     const [match] = Editor.nodes(editor, {
-      match: (n: any) => n['bold'] === true,
+      match: (n: any) => n[textFormat] === true,
       universal: true,
     });
 
     return !!match;
   },
 
-  isItalicMarkActive(editor: Editor) {
-    const [match] = Editor.nodes(editor, {
-      match: (n: any) => n.italic === true,
-      universal: true,
-    });
-
-    return !!match;
-  },
-
-  isUnderlineMarkActive(editor: Editor) {
-    const [match] = Editor.nodes(editor, {
-      match: (n: any) => n.underline === true,
-      universal: true,
-    });
-
-    return !!match;
+  toggleMark(editor: any, textFormat: TextFormat) {
+    const isActive = CustomEditor.isMarkActive(editor, textFormat);
+    const selectedText = Editor.string(editor, editor.selection);
+    Transforms.setNodes(
+      editor,
+      { [textFormat]: isActive ? undefined : true },
+      { match: () => !!selectedText, split: true }
+    );
   },
 
   isCodeBlockActive(editor: Editor) {
@@ -35,36 +29,6 @@ export const CustomEditor = {
     });
 
     return !!match;
-  },
-
-  toggleBoldMark(editor: any) {
-    const isActive = CustomEditor.isBoldMarkActive(editor);
-    const selectedText = Editor.string(editor, editor.selection);
-    Transforms.setNodes(
-      editor,
-      { bold: isActive ? undefined : true },
-      { match: () => !!selectedText, split: true }
-    );
-  },
-
-  toggleItalicMark(editor: any) {
-    const isActive = CustomEditor.isItalicMarkActive(editor);
-    const selectedText = Editor.string(editor, editor.selection);
-    Transforms.setNodes(
-      editor,
-      { italic: isActive ? undefined : true },
-      { match: () => !!selectedText, split: true }
-    );
-  },
-
-  toggleUnderlineMark(editor: any) {
-    const isActive = CustomEditor.isUnderlineMarkActive(editor);
-    const selectedText = Editor.string(editor, editor.selection);
-    Transforms.setNodes(
-      editor,
-      { underline: isActive ? undefined : true },
-      { match: () => !!selectedText, split: true }
-    );
   },
 
   toggleCodeBlock(editor: Editor) {
