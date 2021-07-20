@@ -45,6 +45,7 @@ export const CustomEditor = {
       { bold: isActive ? undefined : true },
       { match: () => !!selectedText, split: true }
     );
+    // console.log(isActive, selectedText);
   },
 
   toggleItalicMark(editor: any) {

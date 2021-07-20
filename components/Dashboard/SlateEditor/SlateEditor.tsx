@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { createEditor, BaseEditor, Descendant } from 'slate';
+import { createEditor, BaseEditor, Descendant, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import {
   CustomEditor,
@@ -31,6 +31,9 @@ declare module 'slate' {
 
 const SlateEditor: FC = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
 
   const [value, setValue] = useState<Descendant[]>([
     {
@@ -38,7 +41,7 @@ const SlateEditor: FC = () => {
       children: [{ text: 'A line of text in a paragraph.' }],
     },
   ]);
-  console.log(value);
+  // console.log(value);
 
   const renderElement = useCallback((props) => {
     switch (props.element.type) {
@@ -54,8 +57,18 @@ const SlateEditor: FC = () => {
   }, []);
 
   return (
-    <EditorWrap>
-      <Toolbar editor={editor} />
+    <EditorWrap
+      onClick={() => {
+        const marks: any = Editor.marks(editor);
+        setIsBold(Object.keys(marks).includes('bold'));
+        setIsItalic(Object.keys(marks).includes('italic'));
+        setIsUnderline(Object.keys(marks).includes('underline'));
+      }}
+    >
+      <Toolbar
+        editor={editor}
+        activeMarks={{ isBold, isItalic, isUnderline }}
+      />
       <Slate
         editor={editor}
         value={value}

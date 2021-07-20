@@ -28,24 +28,37 @@ const ToolbarWrap = styled.div`
 
 interface Props {
   editor: any;
+  activeMarks: any;
 }
 
-const Toolbar: FC<Props> = ({ editor }) => {
+const Toolbar: FC<Props> = ({
+  editor,
+  activeMarks: { isBold, isItalic, isUnderline },
+}) => {
   return (
     <ToolbarWrap>
       <MdFormatBold
+        style={{
+          opacity: isBold ? 1 : 0.6,
+        }}
         onMouseDown={(e) => {
           e.preventDefault();
           CustomEditor.toggleBoldMark(editor);
         }}
       />
       <MdFormatItalic
+        style={{
+          opacity: isItalic ? 1 : 0.6,
+        }}
         onMouseDown={(e) => {
           e.preventDefault();
           CustomEditor.toggleItalicMark(editor);
         }}
       />
       <MdFormatUnderlined
+        style={{
+          opacity: isUnderline ? 1 : 0.6,
+        }}
         onMouseDown={(e) => {
           e.preventDefault();
           CustomEditor.toggleUnderlineMark(editor);

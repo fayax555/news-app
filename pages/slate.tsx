@@ -4,11 +4,12 @@ import Layout from 'components/Layout/Layout';
 
 const EditorFormWrap = styled.div`
   background-color: #f3f3f3;
+  min-height: 100vh;
 `;
 
 const EditorForm = styled.div`
   max-width: 670px;
-  padding: 0 1rem;
+  padding: 1rem;
   margin: auto;
 
   > div:first-child {
