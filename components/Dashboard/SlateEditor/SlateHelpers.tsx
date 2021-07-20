@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 
 type TextFormat = 'bold' | 'italic' | 'underline';
+type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
@@ -27,7 +28,7 @@ export const CustomEditor = {
     }
   },
 
-  isBlockActive(editor: Editor, blockType: 'code' | 'h1') {
+  isBlockActive(editor: Editor, blockType: BlockType) {
     const [match] = Editor.nodes(editor, {
       match: (n: any) => n.type === blockType,
     });
@@ -35,7 +36,7 @@ export const CustomEditor = {
     return !!match;
   },
 
-  toggleBlock(editor: Editor, blockType: 'code' | 'h1') {
+  toggleBlock(editor: Editor, blockType: BlockType) {
     const isActive = CustomEditor.isBlockActive(editor, blockType);
     Transforms.setNodes(
       editor,

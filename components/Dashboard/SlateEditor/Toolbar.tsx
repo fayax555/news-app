@@ -65,14 +65,20 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
           CustomEditor.toggleMark(editor, 'underline');
         }}
       />
-      {/* <BsTypeH1
+      <BsTypeH1
         onMouseDown={(e) => {
           e.preventDefault();
-          CustomEditor.toggleH1Block(editor);
+          CustomEditor.toggleBlock(editor, 'h1');
         }}
-      /> */}
-      <BsTypeH2 />
-      <BsTypeH3 />
+      />
+      <BsTypeH2 onMouseDown={(e) => {
+          e.preventDefault();
+          CustomEditor.toggleBlock(editor, 'h2');
+        }}/>
+      <BsTypeH3 onMouseDown={(e) => {
+          e.preventDefault();
+          CustomEditor.toggleBlock(editor, 'h3');
+        }}/>
     </ToolbarWrap>
   );
 };
