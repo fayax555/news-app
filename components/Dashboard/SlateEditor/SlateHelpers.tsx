@@ -27,20 +27,19 @@ export const CustomEditor = {
     }
   },
 
-  isCodeBlockActive(editor: Editor) {
+  isBlockActive(editor: Editor, blockType: 'code' | 'h1') {
     const [match] = Editor.nodes(editor, {
-      match: (n: any) => n.type === 'code',
+      match: (n: any) => n.type === blockType,
     });
 
     return !!match;
   },
 
-  toggleCodeBlock(editor: Editor) {
-    const isActive = CustomEditor.isCodeBlockActive(editor);
-    
+  toggleBlock(editor: Editor, blockType: 'code' | 'h1') {
+    const isActive = CustomEditor.isBlockActive(editor, blockType);
     Transforms.setNodes(
       editor,
-      { type: isActive ? null : 'code' },
+      { type: isActive ? null : blockType },
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },
@@ -66,16 +65,4 @@ export const Leaf: FC<LeafProps> = ({ attributes, children, leaf }) => {
   }
 
   return <span {...attributes}>{children}</span>;
-};
-
-export const CodeElement: FC<LeafProps> = (props) => {
-  return (
-    <pre {...props.attributes}>
-      <code>{props.children}</code>
-    </pre>
-  );
-};
-
-export const DefaultElement: FC<LeafProps> = (props) => {
-  return <p {...props.attributes}>{props.children}</p>;
 };

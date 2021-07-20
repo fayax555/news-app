@@ -1,18 +1,7 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import {
-  createEditor,
-  BaseEditor,
-  Descendant,
-  Editor,
-  Transforms,
-} from 'slate';
+import { createEditor, BaseEditor, Descendant, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
-import {
-  CustomEditor,
-  Leaf,
-  CodeElement,
-  DefaultElement,
-} from './SlateHelpers';
+import { CustomEditor, Leaf } from './SlateHelpers';
 import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
@@ -25,9 +14,11 @@ type CustomElement = {
   underline?: boolean;
   active?: boolean;
   format?: TextFormat;
-  type: 'paragraph' | 'code' | null;
+  type: BlockType;
   children: CustomText[];
 };
+
+type BlockType = 'paragraph' | 'code' | 'h1' | null;
 
 type CustomText = { text: string };
 
@@ -49,12 +40,22 @@ const SlateEditor: FC = () => {
     },
   ]);
 
-  const renderElement = useCallback((props) => {
-    switch (props.element.type) {
+  const renderElement = useCallback(({ element, attributes, children }) => {
+    switch (element.type) {
       case 'code':
-        return <CodeElement {...props} />;
+        return (
+          <pre {...attributes}>
+            <code>{children}</code>
+          </pre>
+        );
+      case 'h1':
+        return <h1 {...attributes}>{children}</h1>;
+      case 'h2':
+        return <h2 {...attributes}>{children}</h2>;
+      case 'h3':
+        return <h3 {...attributes}>{children}</h3>;
       default:
-        return <DefaultElement {...props} />;
+        return <p {...attributes}>{children}</p>;
     }
   }, []);
 
@@ -91,7 +92,7 @@ const SlateEditor: FC = () => {
               switch (event.key) {
                 case '`': {
                   event.preventDefault();
-                  CustomEditor.toggleCodeBlock(editor);
+                  CustomEditor.toggleBlock(editor, 'code');
                   break;
                 }
                 case 'b': {
@@ -107,6 +108,11 @@ const SlateEditor: FC = () => {
                 case 'u': {
                   event.preventDefault();
                   CustomEditor.toggleMark(editor, 'underline');
+                  break;
+                }
+                case 'h': {
+                  event.preventDefault();
+                  CustomEditor.toggleBlock(editor, 'h1');
                   break;
                 }
               }
