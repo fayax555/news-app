@@ -10,18 +10,18 @@ import { BsTypeH1, BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 
 const ToolbarWrap = styled.div`
   padding-top: 0.55rem;
-  background-color: #ddd;
+  background-color: #ebdbdb;
+`;
 
-  > * {
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0 0.5rem;
-    opacity: 0.5;
+const Icon = styled.i<{ isActive: boolean }>`
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
 
-    &:hover {
-      opacity: 1;
-    }
+  &:hover {
+    opacity: 1;
   }
 `;
 
@@ -53,35 +53,29 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
       }}
     >
       {formatInlineData.map((data) => (
-        <i
+        <Icon
           key={data.formatType}
-          style={{
-            opacity: activeMarks.includes(data.formatType) ? 1 : 0.5,
-          }}
+          isActive={activeMarks.includes(data.formatType)}
           onMouseDown={(e) => {
             e.preventDefault();
             toggleMark(editor, data.formatType as TextFormat);
           }}
         >
           {data.icon}
-        </i>
+        </Icon>
       ))}
 
       {formatBlockData.map((data) => (
-        <i
+        <Icon
           key={data.formatType}
-          style={{
-            opacity: isBlockActive(editor, data.formatType as BlockType)
-              ? 1
-              : 0.5,
-          }}
+          isActive={isBlockActive(editor, data.formatType as BlockType)}
           onMouseDown={(e) => {
             e.preventDefault();
             toggleBlock(editor, data.formatType as BlockType);
           }}
         >
           {data.icon}
-        </i>
+        </Icon>
       ))}
     </ToolbarWrap>
   );
