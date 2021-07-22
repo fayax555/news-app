@@ -20,7 +20,7 @@ export const ArticleWrap = styled.div`
   p {
     font-size: 1.2rem;
     max-width: 670px;
-    margin-bottom: -0.25rem;
+    margin-bottom: -0.5rem;
 
     &:empty:before {
       content: ' ';

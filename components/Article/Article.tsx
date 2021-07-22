@@ -15,7 +15,7 @@ interface Props {
 const Article: FC<Props> = ({ article: { headline, content } }) => {
   console.log(content);
 
-  const data = content.map((c: any, i: number) => {
+  const contentData = content.map((c: any, i: number) => {
     const text = c.children[0].text;
 
     return <p key={i}>{text}</p>;
@@ -24,7 +24,7 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
   return (
     <ArticleWrap>
       <h1>{headline}</h1>
-      {data}
+      {contentData}
       {/* <ArticleInfo name={article.name} date={article.date} /> */}
       {/* <p>{article.body}</p> */}
     </ArticleWrap>
