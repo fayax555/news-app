@@ -12,10 +12,28 @@ export const ArticleWrap = styled.div`
   padding-top: 4rem;
   max-width: 760px;
 
+  h1 {
+    line-height: 1.4;
+    padding-bottom: 2rem;
+  }
+
   p {
     font-size: 1.2rem;
     max-width: 670px;
+    margin-bottom: -0.25rem;
+
+    &:empty:before {
+      content: ' ';
+      white-space: pre;
+    }
   }
+
+  /* 
+  p:empty:before {
+    content: ' ';
+    white-space: break-spaces;
+    line-height: 0.1 !important;
+  } */
 `;
 
 //write.tsx

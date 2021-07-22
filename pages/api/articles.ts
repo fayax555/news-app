@@ -12,10 +12,8 @@ export default async function handler(req: any, res: any) {
       nid: `${headline.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
       ...req.body,
     });
-    console.log(result);
     // req.body.id = result.insertedId;
 
     res.status(201).json({ message: 'Success!', article: req.body });
   }
-
 }
