@@ -54,6 +54,7 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
         if (underline) {
           return (
             <span
+              className='underlineStyle'
               style={{ textDecoration: 'underline' }}
               key={underline + text}
             >
@@ -65,15 +66,14 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
         return text;
       };
 
-      const text = children.map(({ text, bold, italic, underline }) => {
+      const textContent = children.map(({ text, bold, italic, underline }) => {
         return inlineFormatTypes(text, bold, italic, underline);
       });
 
-      console.log(text);
-
-      // if (type === 'h3') return <h3 key={type + i}>{children[0].text}</h3>;
-
-      if (type === 'paragraph') return <p key={type + i}>{text}</p>;
+      if (type === 'h1') return <h1 key={type + i}>{textContent}</h1>;
+      if (type === 'h2') return <h2 key={type + i}>{textContent}</h2>;
+      if (type === 'h3') return <h3 key={type + i}>{textContent}</h3>;
+      if (type === 'paragraph') return <p key={type + i}>{textContent}</p>;
     }
   );
 

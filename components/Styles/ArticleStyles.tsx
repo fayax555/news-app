@@ -26,14 +26,12 @@ export const ArticleWrap = styled.div`
       content: ' ';
       white-space: pre;
     }
-  }
 
-  /* 
-  p:empty:before {
-    content: ' ';
-    white-space: break-spaces;
-    line-height: 0.1 !important;
-  } */
+    span.underlineStyle {
+      padding-right: 5px;
+      display: inline-block;
+    }
+  }
 `;
 
 //write.tsx
