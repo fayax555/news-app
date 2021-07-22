@@ -14,24 +14,59 @@ interface Props {
 
 const Article: FC<Props> = ({ article: { headline, content } }) => {
   console.log(content);
+
   interface contentProps {
     children: [
-      { text: string; bold?: boolean; italic?: boolean; underline?: boolean }
+      {
+        text?: any;
+        bold?: any;
+        italic?: any;
+        underline?: any;
+      }
     ];
     type: string;
   }
 
   const contentData = content.map(
     ({ children, type }: contentProps, i: number) => {
-      let result = '';
-      const text = children.map((c) => {
-        if (c.bold) {
+      const inlineFormatTypes = (
+        text: string,
+        bold: boolean,
+        italic: boolean,
+        underline: boolean
+      ) => {
+        if (bold) {
           return (
-            <span style={{ fontWeight: 'bold' }} key={c.bold + c.text}>
-              {c.text}
+            <span style={{ fontWeight: 'bold' }} key={bold + text}>
+              {text}
             </span>
           );
-        } else return c.text;
+        }
+
+        if (italic) {
+          return (
+            <span style={{ fontStyle: 'italic' }} key={italic + text}>
+              {text}
+            </span>
+          );
+        }
+
+        if (underline) {
+          return (
+            <span
+              style={{ textDecoration: 'underline' }}
+              key={underline + text}
+            >
+              {text}
+            </span>
+          );
+        }
+
+        return text;
+      };
+
+      const text = children.map(({ text, bold, italic, underline }) => {
+        return inlineFormatTypes(text, bold, italic, underline);
       });
 
       console.log(text);
