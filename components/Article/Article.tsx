@@ -14,12 +14,33 @@ interface Props {
 
 const Article: FC<Props> = ({ article: { headline, content } }) => {
   console.log(content);
+  interface contentProps {
+    children: [
+      { text: string; bold?: boolean; italic?: boolean; underline?: boolean }
+    ];
+    type: string;
+  }
 
-  const contentData = content.map((c: any, i: number) => {
-    const text = c.children[0].text;
+  const contentData = content.map(
+    ({ children, type }: contentProps, i: number) => {
+      let result = '';
+      const text = children.map((c) => {
+        if (c.bold) {
+          return (
+            <span style={{ fontWeight: 'bold' }} key={c.bold + c.text}>
+              {c.text}
+            </span>
+          );
+        } else return c.text;
+      });
 
-    return <p key={i}>{text}</p>;
-  });
+      console.log(text);
+
+      // if (type === 'h3') return <h3 key={type + i}>{children[0].text}</h3>;
+
+      if (type === 'paragraph') return <p key={type + i}>{text}</p>;
+    }
+  );
 
   return (
     <ArticleWrap>

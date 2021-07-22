@@ -9,6 +9,7 @@ const ListWrap = styled.div`
 
   font-size: 0.6rem;
   gap: 3rem;
+  padding-top: 3rem;
 
   a {
     border: 1px solid #aaa;
