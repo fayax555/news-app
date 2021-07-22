@@ -10,6 +10,6 @@ export const Wrap = styled.div`
     border: 1px solid #eee;
     min-height: 500px;
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 `;

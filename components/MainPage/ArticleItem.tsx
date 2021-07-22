@@ -4,15 +4,15 @@ import Link from 'next/link';
 interface Props {
   newsId: number;
   title: string;
-  description: string;
+  // description: string;
 }
 
-const ArticleItem: FC<Props> = ({ newsId, title, description }) => {
+const ArticleItem: FC<Props> = ({ newsId, title }) => {
   return (
     <Link href={`/news/${newsId}`} passHref>
       <a>
         <h1>{title}</h1>
-        <p>{description} ...</p>
+        {/* <p>{description} ...</p> */}
       </a>
     </Link>
   );

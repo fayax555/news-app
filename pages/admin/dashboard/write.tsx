@@ -1,54 +1,92 @@
+import { FC, useRef, useState } from 'react';
+import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import Layout from 'components/Layout/Layout';
+import { Button } from 'components/Styles/Styles';
 
-const EditorFormWrap = styled.div`
+const EditorFormWrap = styled.section`
   background-color: #f3f3f3;
   min-height: 100vh;
 `;
 
-const EditorForm = styled.div`
-  max-width: 670px;
+const EditorForm = styled.form`
+  max-width: 750px;
   padding: 1rem;
   margin: auto;
+  display: flex;
 
   > div:first-child {
+    min-width: 670px;
+    max-width: 670px;
     padding: 1rem 0;
+    width: 100%;
 
     input {
       width: 100%;
       font-size: 1.2rem;
       display: block;
       padding: 0.5rem;
+      margin-bottom: 1rem;
     }
+  }
+
+  button {
+    margin-left: 2rem;
+    margin-top: 3.6rem;
   }
 `;
 
-const SlateWithNoSSR = dynamic(
+const SlateEditor = dynamic(
   () => import('components/Dashboard/SlateEditor/SlateEditor'),
   { ssr: false }
 );
 
-const fileInputHandler = (e: any) => {
-  console.log(e.target.files[0]);
-};
+const IndexPage: FC = () => {
+  const titleInputRef = useRef<any>();
 
-const fileUploadHandler = (e: any) => {
-  console.log('');
-};
+  // value contains the text inside the slte editor
+  const [value, setValue] = useState<Descendant[]>([
+    {
+      type: 'paragraph',
+      children: [{ text: 'A line of text in a paragraph.' }],
+    },
+  ]);
 
-const IndexPage = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const inputTitle = titleInputRef.current.value;
+    const reqBody = { headline: inputTitle, content: value };
+
+    fetch('/api/articles', {
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <Layout title='Add New Article'>
       <EditorFormWrap>
-        <EditorForm>
+        <EditorForm onSubmit={handleSubmit}>
           <div>
             <h2>Add New Article</h2>
-            <input type='text' placeholder='Enter title here' />
-            <input type='file' onChange={fileInputHandler} />
-            <button onClick={fileUploadHandler}>Upload</button>
+            <input
+              ref={titleInputRef}
+              type='text'
+              placeholder='Enter title here'
+              required
+            />
+            <SlateEditor value={value} setValue={setValue} />
           </div>
-          <SlateWithNoSSR />
+          <div>
+            <Button type='submit'>Publish</Button>
+          </div>
         </EditorForm>
       </EditorFormWrap>
     </Layout>
