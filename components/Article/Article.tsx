@@ -22,7 +22,9 @@ interface Props {
 interface contentProps {
   children: [
     {
-      text?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+      text?:
+        | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+        | string;
       bold?: boolean;
       italic?: boolean;
       underline?: boolean;
@@ -44,11 +46,14 @@ const Article: FC<Props> = ({
         markIndex: number,
         text:
           | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+          | string
           | undefined,
         bold: boolean | undefined,
         italic: boolean | undefined,
         underline: boolean | undefined
       ) => {
+        text = String(text).trim();
+
         if (bold) {
           text = <strong>{text}</strong>;
         }
@@ -61,7 +66,7 @@ const Article: FC<Props> = ({
           text = <u>{text}</u>;
         }
 
-        return <span key={markIndex}>{text}</span>;
+        return text;
       };
 
       const textContent = children.map(

@@ -18,6 +18,14 @@ const EditorForm = styled.form`
   margin: auto;
   display: flex;
 
+  .filepond--panel-root {
+    background-color: #ccc;
+  }
+
+  .filepond--label-action {
+    text-decoration-color: #555;
+}
+
   > div:first-child {
     min-width: 670px;
     max-width: 670px;

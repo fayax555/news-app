@@ -34,16 +34,14 @@ export const ArticleWrap = styled.div`
     font-size: 1.15rem;
     max-width: 670px;
     margin-bottom: -0.5rem;
+  }
 
-    &:empty:before {
-      content: ' ';
-      white-space: pre;
-    }
-
-    /* span.underlineStyle {
-      padding-right: 5px;
-      display: inline-block;
-    } */
+  p:empty:before,
+  strong:empty:before,
+  em:empty:before,
+  u:empty:before {
+    content: ' ';
+    white-space: pre;
   }
 `;
 

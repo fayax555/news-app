@@ -3,6 +3,14 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('1234567890', 4);
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
