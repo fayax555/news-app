@@ -6,7 +6,7 @@ export const PageHeading = styled.h1`
 `;
 
 // Form Button
-export const Button = styled.button<{ isSubmit: boolean }>`
+export const Button = styled.button<{ isSubmit?: boolean }>`
   background-color: #333;
   color: #fff;
   padding: 0.75rem 1rem;
