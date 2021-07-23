@@ -13,12 +13,17 @@ export const ArticleWrap = styled.div`
   max-width: 760px;
 
   h1 {
-    line-height: 1.4;
+    line-height: 1.2;
+    font-size: 2.2rem;
     padding-bottom: 2rem;
   }
 
+  h2 {
+    font-size: 1.6rem;
+  }
+
   p {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     max-width: 670px;
     margin-bottom: -0.5rem;
 
@@ -27,10 +32,10 @@ export const ArticleWrap = styled.div`
       white-space: pre;
     }
 
-    span.underlineStyle {
+    /* span.underlineStyle {
       padding-right: 5px;
       display: inline-block;
-    }
+    } */
   }
 `;
 

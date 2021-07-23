@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
@@ -28,7 +29,7 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
   }
 
   const contentData = content.map(
-    ({ children, type }: contentProps, i: number) => {
+    ({ children, type }: contentProps, index: number) => {
       const inlineFormatTypes = (
         text: string,
         bold: boolean,
@@ -37,7 +38,7 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
       ) => {
         if (bold) {
           return (
-            <span style={{ fontWeight: 'bold' }} key={bold + text}>
+            <span key={bold + text + index} style={{ fontWeight: 'bold' }}>
               {text}
             </span>
           );
@@ -45,7 +46,7 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
 
         if (italic) {
           return (
-            <span style={{ fontStyle: 'italic' }} key={italic + text}>
+            <span key={italic + text + index} style={{ fontStyle: 'italic' }}>
               {text}
             </span>
           );
@@ -54,9 +55,9 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
         if (underline) {
           return (
             <span
+              key={underline + text + index}
               className='underlineStyle'
               style={{ textDecoration: 'underline' }}
-              key={underline + text}
             >
               {text}
             </span>
@@ -70,10 +71,10 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
         return inlineFormatTypes(text, bold, italic, underline);
       });
 
-      if (type === 'h1') return <h1 key={type + i}>{textContent}</h1>;
-      if (type === 'h2') return <h2 key={type + i}>{textContent}</h2>;
-      if (type === 'h3') return <h3 key={type + i}>{textContent}</h3>;
-      if (type === 'paragraph') return <p key={type + i}>{textContent}</p>;
+      // if (type === 'h1') return <h1>{textContent}</h1>;
+      if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
+      if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
+      if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;
     }
   );
 

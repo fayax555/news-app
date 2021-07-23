@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { FC, FormEventHandler, useRef, useState } from 'react';
 import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
@@ -43,7 +43,7 @@ const SlateEditor = dynamic(
 );
 
 const IndexPage: FC = () => {
-  const titleInputRef = useRef<any>();
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   // value contains the text inside the slte editor
   const [value, setValue] = useState<Descendant[]>([
@@ -53,10 +53,10 @@ const IndexPage: FC = () => {
     },
   ]);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    const inputTitle = titleInputRef.current.value;
+    const inputTitle = titleInputRef.current!.value;
     const reqBody = { headline: inputTitle, content: value };
 
     fetch('/api/articles', {

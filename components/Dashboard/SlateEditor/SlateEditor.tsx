@@ -60,9 +60,9 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
     return <Leaf {...props} />;
   }, []);
 
-  const handleActiveMarks = (e: any) => {
+  const handleActiveMarks = () => {
     // e.preventDefault() prevents editing
-    const marks: any = Editor.marks(editor);
+    const marks = Editor.marks(editor);
     if (marks !== null) {
       setActiveMarks(Object.keys(marks));
     }
@@ -109,7 +109,7 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
                 }
                 case 'h': {
                   event.preventDefault();
-                  CustomEditor.toggleBlock(editor, 'h1');
+                  CustomEditor.toggleBlock(editor, 'h2');
                   break;
                 }
               }

@@ -40,7 +40,7 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
   ];
 
   const formatBlockData = [
-    { icon: <BsTypeH1 />, formatType: 'h1' },
+    // { icon: <BsTypeH1 />, formatType: 'h1' },
     { icon: <BsTypeH2 />, formatType: 'h2' },
     { icon: <BsTypeH3 />, formatType: 'h3' },
   ];
