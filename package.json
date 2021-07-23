@@ -10,13 +10,18 @@
     "bs": "next build && next start"
   },
   "dependencies": {
-    "@types/formidable": "^1.2.3",
     "babel-plugin-styled-components": "^1.13.2",
+    "filepond": "^4.28.2",
+    "filepond-plugin-file-encode": "^2.1.10",
+    "filepond-plugin-image-exif-orientation": "^1.0.11",
+    "filepond-plugin-image-preview": "^4.6.7",
+    "formidable": "^1.2.2",
     "mongodb": "^4.0.0",
     "nanoid": "^3.1.23",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-filepond": "^7.1.1",
     "react-icons": "^4.2.0",
     "slate": "^0.63.0",
     "slate-history": "^0.62.0",
@@ -25,6 +30,7 @@
     "typescript-plugin-styled-components": "^2.0.0"
   },
   "devDependencies": {
+    "@types/formidable": "^1.2.3",
     "@types/react": "17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/slate": "^0.47.9",

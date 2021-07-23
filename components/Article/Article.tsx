@@ -71,7 +71,6 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
         return inlineFormatTypes(text, bold, italic, underline);
       });
 
-      // if (type === 'h1') return <h1>{textContent}</h1>;
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
       if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;

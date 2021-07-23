@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
+import FilePondComponent from 'components/Dashboard/FilePond';
+import { FilePond, registerPlugin } from 'filepond';
 
 const EditorFormWrap = styled.section`
   background-color: #f3f3f3;
@@ -45,6 +47,8 @@ const SlateEditor = dynamic(
 const IndexPage: FC = () => {
   const titleInputRef = useRef<HTMLInputElement>(null);
 
+  // cover image from filepond
+  const [files, setFiles] = useState<any[]>([]);
   // value contains the text inside the slte editor
   const [value, setValue] = useState<Descendant[]>([
     {
@@ -52,12 +56,20 @@ const IndexPage: FC = () => {
       children: [{ text: 'A line of text in a paragraph.' }],
     },
   ]);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
+    setIsSubmit(true);
+
     const inputTitle = titleInputRef.current!.value;
-    const reqBody = { headline: inputTitle, content: value };
+
+    const reqBody = {
+      headline: inputTitle,
+      content: value,
+      image: files[0].getFileEncodeBase64String(),
+    };
 
     fetch('/api/articles', {
       method: 'POST',
@@ -82,10 +94,13 @@ const IndexPage: FC = () => {
               placeholder='Enter title here'
               required
             />
+            <FilePondComponent files={files} setFiles={setFiles} />
             <SlateEditor value={value} setValue={setValue} />
           </div>
           <div>
-            <Button type='submit'>Publish</Button>
+            <Button isSubmit={isSubmit} disabled={isSubmit} type='submit'>
+              Publish
+            </Button>
           </div>
         </EditorForm>
       </EditorFormWrap>

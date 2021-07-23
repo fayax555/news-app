@@ -22,6 +22,10 @@ export const ArticleWrap = styled.div`
     font-size: 1.6rem;
   }
 
+  h3 {
+    font-size: 1.2rem;
+  }
+
   p {
     font-size: 1.15rem;
     max-width: 670px;

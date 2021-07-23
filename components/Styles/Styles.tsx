@@ -6,7 +6,7 @@ export const PageHeading = styled.h1`
 `;
 
 // Form Button
-export const Button = styled.button`
+export const Button = styled.button<{ isSubmit: boolean }>`
   background-color: #333;
   color: #fff;
   padding: 0.75rem 1rem;
@@ -14,6 +14,7 @@ export const Button = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
+  opacity: ${(props) => (props.isSubmit ? 0.6 : 1)};
 
   &:hover {
     opacity: 0.8;
