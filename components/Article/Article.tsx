@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
+import Image from 'next/image';
 
 interface Props {
   article: {
@@ -10,23 +11,36 @@ interface Props {
     date?: string;
     headline: string;
     content: any;
+    coverImage: {
+      name: string;
+      size: number;
+      type: string;
+      encodeData: string;
+    };
   };
 }
 
-const Article: FC<Props> = ({ article: { headline, content } }) => {
-  console.log(content);
+interface contentProps {
+  children: [
+    {
+      text?: any;
+      bold?: any;
+      italic?: any;
+      underline?: any;
+    }
+  ];
+  type: string;
+}
 
-  interface contentProps {
-    children: [
-      {
-        text?: any;
-        bold?: any;
-        italic?: any;
-        underline?: any;
-      }
-    ];
-    type: string;
-  }
+const Article: FC<Props> = ({
+  article: {
+    headline,
+    content,
+    coverImage: { name, size, type, encodeData },
+  },
+}) => {
+  console.log(type);
+  console.log(encodeData);
 
   const contentData = content.map(
     ({ children, type }: contentProps, index: number) => {
@@ -80,6 +94,14 @@ const Article: FC<Props> = ({ article: { headline, content } }) => {
   return (
     <ArticleWrap>
       <h1>{headline}</h1>
+      <div>
+        <Image
+          src={`data:${type};base64,${encodeData}`}
+          height={350}
+          width={700}
+          alt=''
+        />
+      </div>
       {contentData}
       {/* <ArticleInfo name={article.name} date={article.date} /> */}
       {/* <p>{article.body}</p> */}

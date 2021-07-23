@@ -26,6 +26,10 @@ export const ArticleWrap = styled.div`
     font-size: 1.2rem;
   }
 
+  div {
+    padding: 1rem 0;
+  }
+
   p {
     font-size: 1.15rem;
     max-width: 670px;

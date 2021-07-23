@@ -58,6 +58,8 @@ const IndexPage: FC = () => {
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  if (files[0]) console.log(files[0].file.size);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -65,10 +67,20 @@ const IndexPage: FC = () => {
 
     const inputTitle = titleInputRef.current!.value;
 
+    const {
+      getFileEncodeBase64String,
+      file: { name, size, type },
+    } = files[0];
+
     const reqBody = {
       headline: inputTitle,
       content: value,
-      image: files[0].getFileEncodeBase64String(),
+      coverImage: {
+        name,
+        size,
+        type,
+        encodeData: getFileEncodeBase64String(),
+      },
     };
 
     fetch('/api/articles', {
