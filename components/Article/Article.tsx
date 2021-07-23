@@ -39,9 +39,6 @@ const Article: FC<Props> = ({
     coverImage: { name, size, type, encodeData },
   },
 }) => {
-  console.log(type);
-  console.log(encodeData);
-
   const contentData = content.map(
     ({ children, type }: contentProps, index: number) => {
       const inlineFormatTypes = (
@@ -51,30 +48,18 @@ const Article: FC<Props> = ({
         underline: boolean
       ) => {
         if (bold) {
-          return (
-            <span key={bold + text + index} style={{ fontWeight: 'bold' }}>
-              {text}
-            </span>
-          );
+          return <strong key={bold + text + index}>{text}</strong>;
         }
 
         if (italic) {
-          return (
-            <span key={italic + text + index} style={{ fontStyle: 'italic' }}>
-              {text}
-            </span>
-          );
+          return <em key={italic + text + index}>{text}</em>;
         }
 
         if (underline) {
           return (
-            <span
-              key={underline + text + index}
-              className='underlineStyle'
-              style={{ textDecoration: 'underline' }}
-            >
+            <u key={underline + text + index} className='underlineStyle'>
               {text}
-            </span>
+            </u>
           );
         }
 

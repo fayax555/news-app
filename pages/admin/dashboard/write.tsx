@@ -58,8 +58,6 @@ const IndexPage: FC = () => {
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
 
-  if (files[0]) console.log(files[0].file.size);
-
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
