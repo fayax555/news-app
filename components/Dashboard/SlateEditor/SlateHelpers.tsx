@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Editor, Transforms } from 'slate';
+import { Editor, Transforms, Text } from 'slate';
 
 export type TextFormat = 'bold' | 'italic' | 'underline';
 export type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
@@ -17,14 +17,10 @@ export const CustomEditor = {
   toggleMark(editor: any, textFormat: TextFormat) {
     const isActive = CustomEditor.isMarkActive(editor, textFormat);
 
-    // format text only if the editor is focused to prevent error
-    if (editor.selection !== null) {
-      const selectedText = Editor.string(editor, editor.selection);
-      Transforms.setNodes(
-        editor,
-        { [textFormat]: isActive ? undefined : true },
-        { match: () => !!selectedText, split: true }
-      );
+    if (isActive) {
+      Editor.removeMark(editor, textFormat);
+    } else {
+      Editor.addMark(editor, textFormat, true);
     }
   },
 

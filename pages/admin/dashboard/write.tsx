@@ -62,6 +62,7 @@ const IndexPage: FC = () => {
     e.preventDefault();
 
     setIsSubmit(true);
+    console.log('submit button clicked');
 
     const inputTitle = titleInputRef.current!.value;
 
@@ -108,7 +109,7 @@ const IndexPage: FC = () => {
             <SlateEditor value={value} setValue={setValue} />
           </div>
           <div>
-            <Button isSubmit={isSubmit} disabled={isSubmit} type='submit'>
+            <Button isSubmit={isSubmit} disabled={false} type='submit'>
               Publish
             </Button>
           </div>

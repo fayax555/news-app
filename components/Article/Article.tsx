@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid';
-import { FC } from 'react';
+import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
@@ -23,10 +22,10 @@ interface Props {
 interface contentProps {
   children: [
     {
-      text?: any;
-      bold?: any;
-      italic?: any;
-      underline?: any;
+      text?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+      bold?: boolean;
+      italic?: boolean;
+      underline?: boolean;
     }
   ];
   type: string;
@@ -42,33 +41,34 @@ const Article: FC<Props> = ({
   const contentData = content.map(
     ({ children, type }: contentProps, index: number) => {
       const inlineFormatTypes = (
-        text: string,
-        bold: boolean,
-        italic: boolean,
-        underline: boolean
+        markIndex: number,
+        text:
+          | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+          | undefined,
+        bold: boolean | undefined,
+        italic: boolean | undefined,
+        underline: boolean | undefined
       ) => {
         if (bold) {
-          return <strong key={bold + text + index}>{text}</strong>;
+          text = <strong>{text}</strong>;
         }
 
         if (italic) {
-          return <em key={italic + text + index}>{text}</em>;
+          text = <em>{text}</em>;
         }
 
         if (underline) {
-          return (
-            <u key={underline + text + index} className='underlineStyle'>
-              {text}
-            </u>
-          );
+          text = <u>{text}</u>;
         }
 
-        return text;
+        return <span key={markIndex}>{text}</span>;
       };
 
-      const textContent = children.map(({ text, bold, italic, underline }) => {
-        return inlineFormatTypes(text, bold, italic, underline);
-      });
+      const textContent = children.map(
+        ({ text, bold, italic, underline }, markIndex) => {
+          return inlineFormatTypes(markIndex, text, bold, italic, underline);
+        }
+      );
 
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
