@@ -81,6 +81,8 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
             className='editorbox'
             renderElement={renderElement}
             renderLeaf={renderLeaf}
+            spellCheck
+            autoFocus
             onKeyDown={(event) => {
               if (!event.ctrlKey) {
                 return;
