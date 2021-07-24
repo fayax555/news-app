@@ -18,6 +18,14 @@ import {
 import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
+import isHotkey from 'is-hotkey';
+
+const HOTKEYS = {
+  'mod+b': 'bold',
+  'mod+i': 'italic',
+  'mod+u': 'underline',
+  'mod+`': 'code',
+};
 
 type CustomElement = {
   bold?: boolean;
@@ -84,35 +92,12 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
             spellCheck
             autoFocus
             onKeyDown={(event) => {
-              if (!event.ctrlKey) {
-                return;
-              }
-
-              switch (event.key) {
-                case '`': {
+              for (const hotkey in HOTKEYS) {
+                if (isHotkey(hotkey, event as any)) {
                   event.preventDefault();
-                  CustomEditor.toggleBlock(editor, 'code');
-                  break;
-                }
-                case 'b': {
-                  event.preventDefault();
-                  CustomEditor.toggleMark(editor, 'bold');
-                  break;
-                }
-                case 'i': {
-                  event.preventDefault();
-                  CustomEditor.toggleMark(editor, 'italic');
-                  break;
-                }
-                case 'u': {
-                  event.preventDefault();
-                  CustomEditor.toggleMark(editor, 'underline');
-                  break;
-                }
-                case 'h': {
-                  event.preventDefault();
-                  CustomEditor.toggleBlock(editor, 'h2');
-                  break;
+                  //@ts-ignore
+                  const mark = HOTKEYS[hotkey];
+                  CustomEditor.toggleMark(editor, mark);
                 }
               }
             }}
