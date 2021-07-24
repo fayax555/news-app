@@ -1,17 +1,14 @@
 import { FC, ReactNode } from 'react';
-import { Editor, Transforms, Text } from 'slate';
+import { Editor, Transforms, Element as SlateElement } from 'slate';
 
 export type TextFormat = 'bold' | 'italic' | 'underline';
 export type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
-    const [match] = Editor.nodes(editor, {
-      match: (n: any) => n[textFormat] === true,
-      universal: true,
-    });
+    const marks: any = Editor.marks(editor);
 
-    return !!match;
+    return marks ? marks[textFormat] === true : false;
   },
 
   toggleMark(editor: any, textFormat: TextFormat) {

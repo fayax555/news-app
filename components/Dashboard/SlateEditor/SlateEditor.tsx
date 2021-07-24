@@ -57,12 +57,6 @@ interface Props {
 const SlateEditor: FC<Props> = ({ value, setValue }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   const [activeMarks, setActiveMarks] = useState<string[]>([]);
-  // const [value, setValue] = useState<Descendant[]>([
-  //   {
-  //     type: 'paragraph',
-  //     children: [{ text: 'A line of text in a paragraph.' }],
-  //   },
-  // ]);
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
