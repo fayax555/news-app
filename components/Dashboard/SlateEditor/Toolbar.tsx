@@ -7,6 +7,7 @@ import {
   MdFormatUnderlined,
 } from 'react-icons/md';
 import { BsTypeH1, BsTypeH2, BsTypeH3 } from 'react-icons/bs';
+import { useSlate } from 'slate-react';
 
 const ToolbarWrap = styled.div`
   padding-top: 0.55rem;
@@ -26,13 +27,14 @@ const Icon = styled.i<{ isActive: boolean }>`
 `;
 
 interface Props {
-  editor: any;
   activeMarks: string[];
   elementType?: string | undefined;
 }
 
-const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
+const Toolbar: FC<Props> = ({ activeMarks }) => {
   const { isBlockActive, toggleBlock, toggleMark } = CustomEditor;
+  const editor = useSlate();
+
   const formatInlineData = [
     { icon: <MdFormatBold />, formatType: 'bold' },
     { icon: <MdFormatItalic />, formatType: 'italic' },
@@ -55,7 +57,10 @@ const Toolbar: FC<Props> = ({ editor, activeMarks }) => {
       {formatInlineData.map((data) => (
         <Icon
           key={data.formatType}
-          isActive={activeMarks.includes(data.formatType)}
+          isActive={CustomEditor.isMarkActive(
+            editor,
+            data.formatType as TextFormat
+          )}
           onMouseDown={(e) => {
             e.preventDefault();
             toggleMark(editor, data.formatType as TextFormat);

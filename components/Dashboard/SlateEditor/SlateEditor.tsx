@@ -72,12 +72,12 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
 
   return (
     <EditorWrap>
-      <Toolbar editor={editor} activeMarks={activeMarks} />
       <Slate
         editor={editor}
         value={value}
         onChange={(newValue) => setValue(newValue)}
       >
+        <Toolbar activeMarks={activeMarks} />
         <Wrap>
           <Editable
             className='editorbox'
