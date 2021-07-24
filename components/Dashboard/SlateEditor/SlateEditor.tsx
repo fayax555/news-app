@@ -71,33 +71,29 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
   };
 
   return (
-    <EditorWrap onClick={handleActiveMarks} onKeyDown={handleActiveMarks}>
-      <Toolbar editor={editor} activeMarks={activeMarks} />
       <Slate
         editor={editor}
         value={value}
         onChange={(newValue) => setValue(newValue)}
       >
-        <Wrap>
-          <Editable
-            className='editorbox'
-            renderLeaf={renderLeaf}
-            spellCheck
-            autoFocus
-            onKeyDown={(event) => {
-              for (const hotkey in HOTKEYS) {
-                if (isHotkey(hotkey, event as any)) {
-                  event.preventDefault();
-                  //@ts-ignore
-                  const mark = HOTKEYS[hotkey];
-                  CustomEditor.toggleMark(editor, mark);
-                }
+        <Toolbar editor={editor} activeMarks={activeMarks} />
+        <Editable
+          className='editorbox'
+          renderLeaf={renderLeaf}
+          spellCheck
+          autoFocus
+          onKeyDown={(event) => {
+            for (const hotkey in HOTKEYS) {
+              if (isHotkey(hotkey, event as any)) {
+                event.preventDefault();
+                //@ts-ignore
+                const mark = HOTKEYS[hotkey];
+                CustomEditor.toggleMark(editor, mark);
               }
-            }}
-          />
-        </Wrap>
+            }
+          }}
+        />
       </Slate>
-    </EditorWrap>
   );
 };
 
