@@ -81,7 +81,6 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
         <Wrap>
           <Editable
             className='editorbox'
-            renderElement={renderElement}
             renderLeaf={renderLeaf}
             spellCheck
             autoFocus
