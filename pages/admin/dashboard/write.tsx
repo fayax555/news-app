@@ -24,12 +24,12 @@ const EditorForm = styled.form`
 
   .filepond--label-action {
     text-decoration-color: #555;
-}
+  }
 
   > div:first-child {
-    min-width: 670px;
+    /* min-width: 670px; */
     max-width: 670px;
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     width: 100%;
 
     input {
@@ -106,6 +106,11 @@ const IndexPage: FC = () => {
       <EditorFormWrap>
         <EditorForm onSubmit={handleSubmit}>
           <div>
+            <div>
+              <Button isSubmit={isSubmit} disabled={false} type='submit'>
+                Publish
+              </Button>
+            </div>
             <h2>Add New Article</h2>
             <input
               ref={titleInputRef}
@@ -115,11 +120,6 @@ const IndexPage: FC = () => {
             />
             <FilePondComponent files={files} setFiles={setFiles} />
             <SlateEditor value={value} setValue={setValue} />
-          </div>
-          <div>
-            <Button isSubmit={isSubmit} disabled={false} type='submit'>
-              Publish
-            </Button>
           </div>
         </EditorForm>
       </EditorFormWrap>

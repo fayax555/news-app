@@ -52,18 +52,17 @@ const Article: FC<Props> = ({
         italic: boolean | undefined,
         underline: boolean | undefined
       ) => {
-        text = String(text).trim();
 
         if (bold) {
-          text = <strong>{text}</strong>;
+          text = <strong key={markIndex}>{text}</strong>;
         }
 
         if (italic) {
-          text = <em>{text}</em>;
+          text = <em key={markIndex}>{text}</em>;
         }
 
         if (underline) {
-          text = <u>{text}</u>;
+          text = <u key={markIndex}>{text}</u>;
         }
 
         return text;
