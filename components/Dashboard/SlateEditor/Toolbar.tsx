@@ -6,12 +6,12 @@ import {
   MdFormatItalic,
   MdFormatUnderlined,
 } from 'react-icons/md';
-import { BsTypeH1, BsTypeH2, BsTypeH3 } from 'react-icons/bs';
+import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
 
 const ToolbarWrap = styled.div`
-  padding-top: 0.55rem;
-  background-color: #ebdbdb;
+  padding-top: 0.2rem;
+  background-color: #ddd;
 `;
 
 const Icon = styled.i<{ isActive: boolean }>`
@@ -19,10 +19,13 @@ const Icon = styled.i<{ isActive: boolean }>`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0.5rem;
-  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
+  padding: 0.2rem 0.2rem 0rem 0.2rem;
+  color: ${(props) => (props.isActive ? '#1A73E8' : '#444')};
+  background-color: ${(props) => (props.isActive ? '#adabab83' : '#ddd')};
 
   &:hover {
-    opacity: 1;
+    background-color: #bbb;
+    /* opacity: 1; */
   }
 `;
 
@@ -41,7 +44,6 @@ const Toolbar: FC<Props> = () => {
   ];
 
   const formatBlockData = [
-    // { icon: <BsTypeH1 />, formatType: 'h1' },
     { icon: <BsTypeH2 />, formatType: 'h2' },
     { icon: <BsTypeH3 />, formatType: 'h3' },
   ];

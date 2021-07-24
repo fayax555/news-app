@@ -39,7 +39,9 @@ export const ArticleWrap = styled.div`
   p:empty:before,
   strong:empty:before,
   em:empty:before,
-  u:empty:before {
+  u:empty:before,
+  h2:empty:before,
+  h3:empty:before {
     content: ' ';
     white-space: pre;
   }

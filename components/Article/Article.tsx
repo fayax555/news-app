@@ -44,14 +44,12 @@ const Article: FC<Props> = ({
     ({ children, type }: contentProps, index: number) => {
       const inlineFormatTypes = (
         markIndex: number,
-        text:
-          | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-          | string
-          | undefined,
+        text: any,
         bold: boolean | undefined,
         italic: boolean | undefined,
         underline: boolean | undefined
       ) => {
+        text = text.replace(/  +/g, '');
 
         if (bold) {
           text = <strong key={markIndex}>{text}</strong>;

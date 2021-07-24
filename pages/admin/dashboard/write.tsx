@@ -27,7 +27,7 @@ const EditorForm = styled.form`
   }
 
   > div:first-child {
-    /* min-width: 670px; */
+    min-width: 670px;
     max-width: 670px;
     padding: 1rem 1rem;
     width: 100%;
@@ -98,7 +98,7 @@ const IndexPage: FC = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => alert(data.message));
   };
 
   return (
@@ -106,11 +106,6 @@ const IndexPage: FC = () => {
       <EditorFormWrap>
         <EditorForm onSubmit={handleSubmit}>
           <div>
-            <div>
-              <Button isSubmit={isSubmit} disabled={false} type='submit'>
-                Publish
-              </Button>
-            </div>
             <h2>Add New Article</h2>
             <input
               ref={titleInputRef}
@@ -120,6 +115,11 @@ const IndexPage: FC = () => {
             />
             <FilePondComponent files={files} setFiles={setFiles} />
             <SlateEditor value={value} setValue={setValue} />
+          </div>
+          <div>
+            <Button isSubmit={isSubmit} disabled={false} type='submit'>
+              Publish
+            </Button>
           </div>
         </EditorForm>
       </EditorFormWrap>
