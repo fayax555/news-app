@@ -56,19 +56,10 @@ interface Props {
 
 const SlateEditor: FC<Props> = ({ value, setValue }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
-  const [activeMarks, setActiveMarks] = useState<string[]>([]);
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   }, []);
-
-  const handleActiveMarks = () => {
-    // e.preventDefault() prevents editing
-    const marks = Editor.marks(editor);
-    if (marks !== null) {
-      setActiveMarks(Object.keys(marks));
-    }
-  };
 
   return (
     <EditorWrap>
@@ -77,7 +68,7 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
         value={value}
         onChange={(newValue) => setValue(newValue)}
       >
-        <Toolbar activeMarks={activeMarks} />
+        <Toolbar />
         <Wrap>
           <Editable
             className='editorbox'

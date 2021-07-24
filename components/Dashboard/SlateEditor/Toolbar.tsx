@@ -27,11 +27,10 @@ const Icon = styled.i<{ isActive: boolean }>`
 `;
 
 interface Props {
-  activeMarks: string[];
   elementType?: string | undefined;
 }
 
-const Toolbar: FC<Props> = ({ activeMarks }) => {
+const Toolbar: FC<Props> = () => {
   const { isBlockActive, toggleBlock, toggleMark } = CustomEditor;
   const editor = useSlate();
 
