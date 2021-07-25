@@ -11,7 +11,7 @@ export const CustomEditor = {
     return marks ? marks[textFormat] === true : false;
   },
 
-  toggleMark(editor: any, textFormat: TextFormat) {
+  toggleMark(editor: Editor, textFormat: TextFormat) {
     const isActive = CustomEditor.isMarkActive(editor, textFormat);
 
     if (isActive) {

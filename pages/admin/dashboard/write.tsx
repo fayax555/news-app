@@ -117,7 +117,7 @@ const IndexPage: FC = () => {
             <SlateEditor value={value} setValue={setValue} />
           </div>
           <div>
-            <Button isSubmit={isSubmit} disabled={false} type='submit'>
+            <Button fs='1rem' isSubmit={isSubmit} disabled={false} type='submit'>
               Publish
             </Button>
           </div>

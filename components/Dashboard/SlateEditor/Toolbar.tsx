@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { CustomEditor, TextFormat, BlockType } from './SlateHelpers';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   MdFormatBold,
   MdFormatItalic,
@@ -14,18 +14,23 @@ const ToolbarWrap = styled.div`
   background-color: #ddd;
 `;
 
-const Icon = styled.i<{ isActive: boolean }>`
+const active = (color: string, bgColor: string) => css`
+  color: ${color};
+  background-color: ${bgColor};
+`;
+
+const Icon = styled.i<{ active: boolean }>`
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0 0.5rem;
   padding: 0.2rem 0.2rem 0rem 0.2rem;
-  color: ${(props) => (props.isActive ? '#1A73E8' : '#444')};
-  background-color: ${(props) => (props.isActive ? '#adabab83' : '#ddd')};
+
+  ${(props) =>
+    props.active ? active('#1a73e8', '#adabab83') : active('#444', '#ddd')};
 
   &:hover {
     background-color: #bbb;
-    /* opacity: 1; */
   }
 `;
 
@@ -58,7 +63,7 @@ const Toolbar: FC<Props> = () => {
       {formatInlineData.map((data) => (
         <Icon
           key={data.formatType}
-          isActive={CustomEditor.isMarkActive(
+          active={CustomEditor.isMarkActive(
             editor,
             data.formatType as TextFormat
           )}
@@ -74,7 +79,7 @@ const Toolbar: FC<Props> = () => {
       {formatBlockData.map((data) => (
         <Icon
           key={data.formatType}
-          isActive={isBlockActive(editor, data.formatType as BlockType)}
+          active={isBlockActive(editor, data.formatType as BlockType)}
           onMouseDown={(e) => {
             e.preventDefault();
             toggleBlock(editor, data.formatType as BlockType);

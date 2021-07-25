@@ -6,11 +6,15 @@ export const PageHeading = styled.h1`
 `;
 
 // Form Button
-export const Button = styled.button<{ isSubmit?: boolean }>`
+export const Button = styled.button<{
+  isSubmit?: boolean;
+  p?: string;
+  fs?: string;
+}>`
   background-color: #333;
   color: #fff;
-  padding: 0.75rem 1rem;
-  font-size: 1.2rem;
+  padding: ${(props) => props.p || '0.75rem 1rem'};
+  font-size: ${(props) => props.fs || '1.2rem'};
   cursor: pointer;
   border: none;
   outline: none;

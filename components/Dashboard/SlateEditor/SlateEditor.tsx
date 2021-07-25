@@ -2,11 +2,10 @@ import {
   FC,
   useCallback,
   useMemo,
-  useState,
   Dispatch,
   SetStateAction,
 } from 'react';
-import { createEditor, BaseEditor, Descendant, Editor } from 'slate';
+import { createEditor, BaseEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import {
   CustomEditor,
@@ -77,6 +76,11 @@ const SlateEditor: FC<Props> = ({ value, setValue }) => {
             spellCheck
             autoFocus
             onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                CustomEditor.toggleBlock(editor, 'h2');
+                console.log('enter key pressed');
+              }
+
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {
                   event.preventDefault();
