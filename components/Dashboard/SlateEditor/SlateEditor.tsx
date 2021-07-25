@@ -7,6 +7,7 @@ import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
 import { CustomElement, SlateEditorProps, CustomText } from './SlateTypes';
+import { withImages } from './SlateImage';
 
 const HOTKEYS = {
   'mod+b': 'bold',
@@ -24,7 +25,10 @@ declare module 'slate' {
 }
 
 const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const editor = useMemo(
+    () => withImages(withHistory(withReact(createEditor()))),
+    []
+  );
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
@@ -46,11 +50,6 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
             spellCheck
             autoFocus
             onKeyDown={(event) => {
-              if (event.key === 'Enter') {
-                CustomEditor.toggleBlock(editor, 'h2');
-                console.log('enter key pressed');
-              }
-
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {
                   event.preventDefault();

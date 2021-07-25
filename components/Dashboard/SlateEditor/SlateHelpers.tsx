@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Editor, Transforms, Element as SlateElement } from 'slate';
+import { Editor, Transforms } from 'slate';
 import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
 

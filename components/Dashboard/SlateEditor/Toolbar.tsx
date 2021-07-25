@@ -9,6 +9,7 @@ import {
 import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
 import { Icon, ToolbarWrap } from './ToolbarStyles';
+import { InsertImageButton } from './SlateImage';
 
 interface Props {
   elementType?: string | undefined;
@@ -36,6 +37,9 @@ const Toolbar: FC<Props> = () => {
         e.preventDefault();
       }}
     >
+      <Icon active={isBlockActive(editor, 'image')}>
+        <InsertImageButton />
+      </Icon>
       {formatInlineData.map((data) => (
         <Icon
           key={data.formatType}

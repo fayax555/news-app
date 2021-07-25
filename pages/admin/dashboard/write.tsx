@@ -66,6 +66,8 @@ const IndexPage: FC = () => {
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  console.log(value);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -117,7 +119,12 @@ const IndexPage: FC = () => {
             <SlateEditor value={value} setValue={setValue} />
           </div>
           <div>
-            <Button fs='1rem' isSubmit={isSubmit} disabled={false} type='submit'>
+            <Button
+              fs='1rem'
+              isSubmit={isSubmit}
+              disabled={false}
+              type='submit'
+            >
               Publish
             </Button>
           </div>

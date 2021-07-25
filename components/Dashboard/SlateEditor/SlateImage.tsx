@@ -1,16 +1,9 @@
-import { Transforms, createEditor, Descendant, Editor } from 'slate';
-import {
-  Slate,
-  Editable,
-  useSlateStatic,
-  useSelected,
-  useFocused,
-  withReact,
-} from 'slate-react';
+import { Transforms, Editor } from 'slate';
+import { useSlateStatic, useSelected, useFocused } from 'slate-react';
 import imageExtensions from 'image-extensions';
 import isUrl from 'is-url';
-import NextImage from 'next/image';
 import { ImageElement, Url } from './SlateTypes';
+import { MdImage } from 'react-icons/md';
 
 export const withImages = (editor: Editor) => {
   const { insertData, isVoid } = editor;
@@ -60,16 +53,17 @@ export const Image = ({ attributes, children, element }: any) => {
   return (
     <div {...attributes}>
       <div contentEditable={false}>
-        <div
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           style={{
             display: 'block',
             maxWidth: '100%',
             maxHeight: '20em',
             boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
           }}
-        >
-          <NextImage src={element.url} alt='' />
-        </div>
+          src={element.url}
+          alt=''
+        />
       </div>
       {children}
     </div>
@@ -79,23 +73,22 @@ export const Image = ({ attributes, children, element }: any) => {
 export const InsertImageButton = () => {
   const editor = useSlateStatic();
   return (
-    <button
+    <MdImage
       onMouseDown={(event) => {
         event.preventDefault();
+
         const url = window.prompt('Enter the URL of the image:');
-        if (url && !isImageUrl(url)) {
+        if (!url && !isImageUrl(url)) {
           alert('URL is not an image');
           return;
         }
         insertImage(editor, url);
       }}
-    >
-      <i>image</i>
-    </button>
+    />
   );
 };
 
-const isImageUrl = (url: string) => {
+const isImageUrl = (url: string | null) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
   const ext: any = new URL(url).pathname.split('.').pop();
