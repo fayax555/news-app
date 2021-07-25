@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { CustomEditor, TextFormat, BlockType } from './SlateHelpers';
-import styled, { css } from 'styled-components';
+import { CustomEditor } from './SlateHelpers';
+import { TextFormat, BlockType } from './SlateTypes';
 import {
   MdFormatBold,
   MdFormatItalic,
@@ -8,31 +8,7 @@ import {
 } from 'react-icons/md';
 import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
-
-const ToolbarWrap = styled.div`
-  padding-top: 0.2rem;
-  background-color: #ddd;
-`;
-
-const active = (color: string, bgColor: string) => css`
-  color: ${color};
-  background-color: ${bgColor};
-`;
-
-const Icon = styled.i<{ active: boolean }>`
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0 0.5rem;
-  padding: 0.2rem 0.2rem 0rem 0.2rem;
-
-  ${(props) =>
-    props.active ? active('#1a73e8', '#adabab83') : active('#444', '#ddd')};
-
-  &:hover {
-    background-color: #bbb;
-  }
-`;
+import { Icon, ToolbarWrap } from './ToolbarStyles';
 
 interface Props {
   elementType?: string | undefined;

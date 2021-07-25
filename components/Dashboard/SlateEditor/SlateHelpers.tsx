@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { Editor, Transforms, Element as SlateElement } from 'slate';
-
-export type TextFormat = 'bold' | 'italic' | 'underline';
-export type BlockType = 'paragraph' | 'code' | 'h1' | 'h2' | 'h3' | null;
+import { Image } from './SlateImage';
+import { TextFormat, BlockType } from './SlateTypes';
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
@@ -61,7 +60,9 @@ export const Leaf: FC<LeafProps> = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>;
 };
 
-export const renderElement = ({ element, attributes, children }: any) => {
+export const renderElement = (props: any) => {
+  const { element, attributes, children } = props;
+
   switch (element.type) {
     case 'code':
       return (
@@ -75,6 +76,8 @@ export const renderElement = ({ element, attributes, children }: any) => {
       return <h2 {...attributes}>{children}</h2>;
     case 'h3':
       return <h3 {...attributes}>{children}</h3>;
+    case 'image':
+      return <Image {...props} alt='' />;
     default:
       return <p {...attributes}>{children}</p>;
   }

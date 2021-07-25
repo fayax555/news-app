@@ -1,43 +1,18 @@
-import {
-  FC,
-  useCallback,
-  useMemo,
-  Dispatch,
-  SetStateAction,
-} from 'react';
-import { createEditor, BaseEditor, Descendant } from 'slate';
+import { FC, useCallback, useMemo } from 'react';
+import { createEditor, BaseEditor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
-import {
-  CustomEditor,
-  Leaf,
-  renderElement,
-  TextFormat,
-  BlockType,
-} from './SlateHelpers';
+import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
 import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
+import { CustomElement, SlateEditorProps, CustomText } from './SlateTypes';
 
 const HOTKEYS = {
   'mod+b': 'bold',
   'mod+i': 'italic',
   'mod+u': 'underline',
   'mod+`': 'code',
-};
-
-type CustomElement = {
-  bold?: boolean;
-  italic?: boolean;
-  underline?: boolean;
-  active?: boolean;
-  format?: TextFormat;
-  type: BlockType;
-  children: CustomText[];
-};
-
-type CustomText = {
-  text: string;
 };
 
 declare module 'slate' {
@@ -48,12 +23,7 @@ declare module 'slate' {
   }
 }
 
-interface Props {
-  value: Descendant[];
-  setValue: Dispatch<SetStateAction<Descendant[]>>;
-}
-
-const SlateEditor: FC<Props> = ({ value, setValue }) => {
+const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   const renderLeaf = useCallback((props) => {
