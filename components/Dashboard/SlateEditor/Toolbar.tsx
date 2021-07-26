@@ -5,6 +5,7 @@ import {
   MdFormatBold,
   MdFormatItalic,
   MdFormatUnderlined,
+  MdClosedCaption,
 } from 'react-icons/md';
 import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
@@ -28,6 +29,7 @@ const Toolbar: FC<Props> = () => {
   const formatBlockData = [
     { icon: <BsTypeH2 />, formatType: 'h2' },
     { icon: <BsTypeH3 />, formatType: 'h3' },
+    { icon: <MdClosedCaption />, formatType: 'cc' },
   ];
 
   return (
@@ -37,9 +39,6 @@ const Toolbar: FC<Props> = () => {
         e.preventDefault();
       }}
     >
-      <Icon active={isBlockActive(editor, 'image')}>
-        <InsertImageButton />
-      </Icon>
       {formatInlineData.map((data) => (
         <Icon
           key={data.formatType}
@@ -68,6 +67,10 @@ const Toolbar: FC<Props> = () => {
           {data.icon}
         </Icon>
       ))}
+
+      <Icon active={isBlockActive(editor, 'image')}>
+        <InsertImageButton />
+      </Icon>
     </ToolbarWrap>
   );
 };

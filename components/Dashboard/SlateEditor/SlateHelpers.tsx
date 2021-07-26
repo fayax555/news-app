@@ -65,12 +65,6 @@ export const renderElement = (props: any) => {
   const { element, attributes, children } = props;
 
   switch (element.type) {
-    case 'code':
-      return (
-        <pre {...attributes}>
-          <code>{children}</code>
-        </pre>
-      );
     case 'h1':
       return <h1 {...attributes}>{children}</h1>;
     case 'h2':
@@ -79,6 +73,8 @@ export const renderElement = (props: any) => {
       return <h3 {...attributes}>{children}</h3>;
     case 'image':
       return <Image {...props} alt='' />;
+    case 'cc':
+      return <CaptionBox {...attributes}>{children}</CaptionBox>;
     default:
       return <p {...attributes}>{children}</p>;
   }

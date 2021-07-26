@@ -15,5 +15,6 @@ export const Wrap = styled.div`
 `;
 
 export const CaptionBox = styled.div`
-  border: 1px solid #444;
-`
+  font-size: 1rem;
+  color: #555;
+`;

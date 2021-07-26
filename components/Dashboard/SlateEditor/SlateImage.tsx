@@ -51,7 +51,6 @@ const insertImage = (editor: Editor, url: Url) => {
 export const Image = ({ attributes, children, element }: any) => {
   const selected = useSelected();
   const focused = useFocused();
-  console.log(children);
 
   return (
     <div {...attributes}>
@@ -60,7 +59,6 @@ export const Image = ({ attributes, children, element }: any) => {
         <img
           style={{
             display: 'block',
-            margin: 'auto',
             maxWidth: '100%',
             maxHeight: '20em',
             boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
