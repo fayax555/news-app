@@ -43,22 +43,15 @@ export const withImages = (editor: Editor) => {
 
 const insertImage = (editor: Editor, url: Url) => {
   const text = { text: '' };
-  const image: ImageElement[] = [
-    { type: 'image', url, children: [text] },
-    {
-      type: 'caption',
-      children: [text],
-    },
-  ];
+  const image: ImageElement = { type: 'image', url, children: [text] };
+
   Transforms.insertNodes(editor, image);
 };
 
 export const Image = ({ attributes, children, element }: any) => {
-  const [isEditingCaption, setEditingCaption] = useState(false);
-  const [caption, setCaption] = useState(element.caption);
-
   const selected = useSelected();
   const focused = useFocused();
+  console.log(children);
 
   return (
     <div {...attributes}>

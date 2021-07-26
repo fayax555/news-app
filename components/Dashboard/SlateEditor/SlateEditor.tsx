@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo } from 'react';
-import { createEditor, BaseEditor } from 'slate';
+import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
 import Toolbar from './Toolbar';

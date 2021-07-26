@@ -78,13 +78,7 @@ export const renderElement = (props: any) => {
     case 'h3':
       return <h3 {...attributes}>{children}</h3>;
     case 'image':
-      return (
-        <div>
-          <Image {...props} alt='' />
-        </div>
-      );
-    case 'caption':
-      return <CaptionBox {...attributes}>{children}</CaptionBox>;
+      return <Image {...props} alt='' />;
     default:
       return <p {...attributes}>{children}</p>;
   }
