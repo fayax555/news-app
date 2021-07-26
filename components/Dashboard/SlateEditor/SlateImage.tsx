@@ -4,6 +4,7 @@ import imageExtensions from 'image-extensions';
 import isUrl from 'is-url';
 import { ImageElement, Url } from './SlateTypes';
 import { MdImage } from 'react-icons/md';
+import { useState } from 'react';
 
 export const withImages = (editor: Editor) => {
   const { insertData, isVoid } = editor;
@@ -42,11 +43,20 @@ export const withImages = (editor: Editor) => {
 
 const insertImage = (editor: Editor, url: Url) => {
   const text = { text: '' };
-  const image: ImageElement = { type: 'image', url, children: [text] };
+  const image: ImageElement[] = [
+    { type: 'image', url, children: [text] },
+    {
+      type: 'caption',
+      children: [text],
+    },
+  ];
   Transforms.insertNodes(editor, image);
 };
 
 export const Image = ({ attributes, children, element }: any) => {
+  const [isEditingCaption, setEditingCaption] = useState(false);
+  const [caption, setCaption] = useState(element.caption);
+
   const selected = useSelected();
   const focused = useFocused();
 
@@ -57,6 +67,7 @@ export const Image = ({ attributes, children, element }: any) => {
         <img
           style={{
             display: 'block',
+            margin: 'auto',
             maxWidth: '100%',
             maxHeight: '20em',
             boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
@@ -78,7 +89,9 @@ export const InsertImageButton = () => {
         event.preventDefault();
 
         const url = window.prompt('Enter the URL of the image:');
-        if (!url && !isImageUrl(url)) {
+
+        if (!url) return false;
+        if (!isImageUrl(url)) {
           alert('URL is not an image');
           return;
         }

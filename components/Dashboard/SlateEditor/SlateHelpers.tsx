@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
+import { CaptionBox } from './EditorStyles';
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
@@ -77,7 +78,13 @@ export const renderElement = (props: any) => {
     case 'h3':
       return <h3 {...attributes}>{children}</h3>;
     case 'image':
-      return <Image {...props} alt='' />;
+      return (
+        <div>
+          <Image {...props} alt='' />
+        </div>
+      );
+    case 'caption':
+      return <CaptionBox {...attributes}>{children}</CaptionBox>;
     default:
       return <p {...attributes}>{children}</p>;
   }

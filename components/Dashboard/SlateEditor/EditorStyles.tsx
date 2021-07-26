@@ -13,3 +13,7 @@ export const Wrap = styled.div`
     font-size: 1.1rem;
   }
 `;
+
+export const CaptionBox = styled.div`
+  border: 1px solid #444;
+`

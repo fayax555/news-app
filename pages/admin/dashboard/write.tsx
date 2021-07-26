@@ -103,35 +103,40 @@ const IndexPage: FC = () => {
       .then((data) => alert(data.message));
   };
 
-  return (
-    <Layout title='Add New Article'>
-      <EditorFormWrap>
-        <EditorForm onSubmit={handleSubmit}>
-          <div>
-            <h2>Add New Article</h2>
-            <input
-              ref={titleInputRef}
-              type='text'
-              placeholder='Enter title here'
-              required
-            />
-            <FilePondComponent files={files} setFiles={setFiles} />
-            <SlateEditor value={value} setValue={setValue} />
-          </div>
-          <div>
-            <Button
-              fs='1rem'
-              isSubmit={isSubmit}
-              disabled={false}
-              type='submit'
-            >
-              Publish
-            </Button>
-          </div>
-        </EditorForm>
-      </EditorFormWrap>
-    </Layout>
-  );
+  try {
+    return (
+      <Layout title='Add New Article'>
+        <EditorFormWrap>
+          <EditorForm onSubmit={handleSubmit}>
+            <div>
+              <h2>Add New Article</h2>
+              <input
+                ref={titleInputRef}
+                type='text'
+                placeholder='Enter title here'
+                required
+              />
+              <FilePondComponent files={files} setFiles={setFiles} />
+              <SlateEditor value={value} setValue={setValue} />
+            </div>
+            <div>
+              <Button
+                fs='1rem'
+                isSubmit={isSubmit}
+                disabled={false}
+                type='submit'
+              >
+                Publish
+              </Button>
+            </div>
+          </EditorForm>
+        </EditorFormWrap>
+      </Layout>
+    );
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
 };
 
 export default IndexPage;
