@@ -43,7 +43,14 @@ export const withImages = (editor: Editor) => {
 
 const insertImage = (editor: Editor, url: Url) => {
   const text = { text: '' };
-  const image: ImageElement = { type: 'image', url, children: [text] };
+  const image: any = [
+    {
+      type: 'image',
+      url,
+      children: [text],
+    },
+    { type: 'paragraph', children: [{ text: '' }] },
+  ];
 
   Transforms.insertNodes(editor, image);
 };
@@ -51,6 +58,7 @@ const insertImage = (editor: Editor, url: Url) => {
 export const Image = ({ attributes, children, element }: any) => {
   const selected = useSelected();
   const focused = useFocused();
+  // console.log(children);
 
   return (
     <div {...attributes}>
@@ -58,7 +66,6 @@ export const Image = ({ attributes, children, element }: any) => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           style={{
-            display: 'block',
             maxWidth: '100%',
             maxHeight: '20em',
             boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
@@ -82,10 +89,10 @@ export const InsertImageButton = () => {
         const url = window.prompt('Enter the URL of the image:');
 
         if (!url) return false;
-        if (!isImageUrl(url)) {
-          alert('URL is not an image');
-          return;
-        }
+        // if (!isImageUrl(url)) {
+        //   alert('URL is not an image');
+        //   return;
+        // }
         insertImage(editor, url);
       }}
     />
@@ -95,6 +102,6 @@ export const InsertImageButton = () => {
 const isImageUrl = (url: string | null) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
-  const ext: any = new URL(url).pathname.split('.').pop();
+  const ext: string = String(new URL(url).pathname.split('.').pop());
   return imageExtensions.includes(ext);
 };

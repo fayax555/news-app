@@ -28,11 +28,10 @@ export type BlockType =
   | 'h2'
   | 'h3'
   | 'image'
-  | 'caption'
   | null;
 
 export type ImageElement = {
-  type: 'image' | 'paragraph' | 'caption';
+  type: 'image' | 'paragraph';
   url?: Url;
   children: EmptyText[];
 };

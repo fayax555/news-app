@@ -23,7 +23,6 @@ registerPlugin(
   FilePondPluginFileValidateType
 );
 
-// @ts-ignore
 const FilePondComponent = ({ files, setFiles }) => {
   return (
     <FilePondWrap>
@@ -36,7 +35,6 @@ const FilePondComponent = ({ files, setFiles }) => {
         allowPaste={false}
         acceptedFileTypes={['image/png', 'image/jpeg']}
         labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
-        // @ts-ignore
         credits={false}
       />
     </FilePondWrap>
