@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo, useRef } from 'react';
 import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
@@ -6,14 +6,13 @@ import Toolbar from './Toolbar';
 import { EditorWrap, Wrap } from './EditorStyles';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
-import { CustomElement, SlateEditorProps, CustomText } from './SlateTypes';
+import {
+  CustomElement,
+  SlateEditorProps,
+  CustomText,
+  TextFormat,
+} from './SlateTypes';
 import { withImages } from './SlateImage';
-
-const HOTKEYS = {
-  'mod+b': 'bold',
-  'mod+i': 'italic',
-  'mod+u': 'underline',
-};
 
 declare module 'slate' {
   interface CustomTypes {
@@ -23,11 +22,18 @@ declare module 'slate' {
   }
 }
 
+const HOTKEYS: Record<string, TextFormat> = {
+  'mod+b': 'bold',
+  'mod+i': 'italic',
+  'mod+u': 'underline',
+};
+
 const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
-  const editor = useMemo(
-    () => withImages(withHistory(withReact(createEditor()))),
-    []
-  );
+  const editorRef = useRef<Editor>();
+
+  if (!editorRef.current)
+    editorRef.current = withImages(withHistory(withReact(createEditor())));
+  const editor = editorRef.current;
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
@@ -52,7 +58,6 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {
                   event.preventDefault();
-                  //@ts-ignore
                   const mark = HOTKEYS[hotkey];
                   CustomEditor.toggleMark(editor, mark);
                 }
