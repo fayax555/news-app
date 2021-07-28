@@ -12,6 +12,7 @@ import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
 import { Icon, ToolbarWrap } from './ToolbarStyles';
 import { insertImage } from './SlateImage';
+import { LinkButton, RemoveLinkButton, isLinkActive } from './SlateLinks';
 
 interface Props {
   elementType?: string | undefined;
@@ -30,6 +31,8 @@ const Toolbar: FC<Props> = () => {
   const formatBlockData = [
     { icon: <BsTypeH2 />, formatType: 'h2' },
     { icon: <BsTypeH3 />, formatType: 'h3' },
+    { icon: <LinkButton />, formatType: 'link' },
+    { icon: <RemoveLinkButton />, formatType: 'link' },
     { icon: <MdClosedCaption />, formatType: 'cc' },
   ];
 
@@ -67,23 +70,29 @@ const Toolbar: FC<Props> = () => {
         </Icon>
       ))}
 
-      {formatBlockData.map((data) => (
-        <Icon
-          key={data.formatType}
-          active={isBlockActive(editor, data.formatType as BlockType)}
-          onMouseDown={(e) => {
-            e.preventDefault();
-            toggleBlock(editor, data.formatType as BlockType);
-          }}
-        >
-          {data.icon}
-        </Icon>
-      ))}
+      {formatBlockData.map(({ formatType, icon }, index) =>
+        formatType !== 'link' ? (
+          <Icon
+            key={formatType}
+            active={isBlockActive(editor, formatType as BlockType)}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              toggleBlock(editor, formatType as BlockType);
+            }}
+          >
+            {icon}
+          </Icon>
+        ) : (
+          <Icon key={formatType + index} active={isLinkActive(editor)}>
+            {icon}
+          </Icon>
+        )
+      )}
 
       <Icon active={isBlockActive(editor, 'image')}>
         <input
           style={{ display: 'none' }}
-          accept='image/*'
+          accept='image/png, image/jpeg, image/gif'
           id='upload-image'
           type='file'
           onChange={fileUploadHandler}

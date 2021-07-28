@@ -7,7 +7,7 @@ export type CustomElement = {
   underline?: boolean;
   active?: boolean;
   format?: TextFormat;
-  type: BlockType;
+  type: BlockType | 'link';
   children: CustomText[];
 };
 
@@ -41,3 +41,5 @@ export type Url = string | ArrayBuffer | null;
 export type EmptyText = {
   text: string;
 };
+
+export type LinkElement = { type: 'link'; url: Url; children: Descendant[] };

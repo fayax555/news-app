@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef } from 'react';
+import { FC, useCallback, useRef } from 'react';
 import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
@@ -13,6 +13,7 @@ import {
   TextFormat,
 } from './SlateTypes';
 import { withImages } from './SlateImage';
+import { withLinks } from './SlateLinks';
 
 declare module 'slate' {
   interface CustomTypes {
@@ -32,7 +33,9 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
   const editorRef = useRef<Editor>();
 
   if (!editorRef.current)
-    editorRef.current = withImages(withHistory(withReact(createEditor())));
+    editorRef.current = withLinks(
+      withImages(withHistory(withReact(createEditor())))
+    );
   const editor = editorRef.current;
 
   const renderLeaf = useCallback((props) => {

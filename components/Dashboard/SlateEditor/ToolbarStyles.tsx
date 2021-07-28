@@ -10,7 +10,7 @@ const active = (color: string, bgColor: string) => css`
   background-color: ${bgColor};
 `;
 
-export const Icon = styled.i<{ active: boolean }>`
+export const Icon = styled.i<{ active?: boolean }>`
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;

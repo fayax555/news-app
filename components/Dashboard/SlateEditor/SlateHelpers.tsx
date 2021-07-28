@@ -75,6 +75,16 @@ export const renderElement = (props: any) => {
       return <Image {...props} alt='' />;
     case 'cc':
       return <CaptionBox {...attributes}>{children}</CaptionBox>;
+    case 'link':
+      return (
+        <a
+          style={{ textDecoration: 'underline', color: 'blue' }}
+          {...attributes}
+          href={element.url}
+        >
+          {children}
+        </a>
+      );
     default:
       return <p {...attributes}>{children}</p>;
   }
