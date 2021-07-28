@@ -6,12 +6,12 @@ import {
   MdFormatItalic,
   MdFormatUnderlined,
   MdClosedCaption,
-  MdFileUpload,
+  MdImage,
 } from 'react-icons/md';
 import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
 import { Icon, ToolbarWrap } from './ToolbarStyles';
-import { InsertImageButton, insertImage } from './SlateImage';
+import { insertImage } from './SlateImage';
 
 interface Props {
   elementType?: string | undefined;
@@ -33,9 +33,7 @@ const Toolbar: FC<Props> = () => {
     { icon: <MdClosedCaption />, formatType: 'cc' },
   ];
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const fileSelectHandler = (e: any) => {
+  const fileUploadHandler = (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -53,13 +51,6 @@ const Toolbar: FC<Props> = () => {
         e.preventDefault();
       }}
     >
-      <input
-        accept='image/*'
-        id='upload-image'
-        type='file'
-        onChange={fileSelectHandler}
-        ref={fileInputRef}
-      />
       {formatInlineData.map((data) => (
         <Icon
           key={data.formatType}
@@ -90,7 +81,16 @@ const Toolbar: FC<Props> = () => {
       ))}
 
       <Icon active={isBlockActive(editor, 'image')}>
-        <InsertImageButton />
+        <input
+          style={{ display: 'none' }}
+          accept='image/*'
+          id='upload-image'
+          type='file'
+          onChange={fileUploadHandler}
+        />
+        <label htmlFor='upload-image'>
+          <MdImage />
+        </label>
       </Icon>
     </ToolbarWrap>
   );

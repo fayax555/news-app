@@ -17,6 +17,10 @@ export const Icon = styled.i<{ active: boolean }>`
   margin: 0 0.5rem;
   padding: 0.2rem 0.2rem 0rem 0.2rem;
 
+  label {
+    cursor: pointer;
+  }
+
   ${(props) =>
     props.active ? active('#1a73e8', '#adabab83') : active('#444', '#ddd')};
 

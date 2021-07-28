@@ -1,22 +1,19 @@
 import { Transforms, Editor } from 'slate';
-import { useSlateStatic, useSelected, useFocused } from 'slate-react';
+import { useSelected, useFocused } from 'slate-react';
+import { Url } from './SlateTypes';
 import imageExtensions from 'image-extensions';
 import isUrl from 'is-url';
-import { Url } from './SlateTypes';
-import { MdImage } from 'react-icons/md';
 
 export const withImages = (editor: Editor) => {
-  const { isVoid } = editor;
+  const { insertData, isVoid } = editor;
 
   editor.isVoid = (element) => {
     return element.type === 'image' ? true : isVoid(element);
   };
 
   editor.insertData = (data) => {
+    const text = data.getData('text/plain');
     const { files } = data;
-
-    console.log(files[0]);
-    console.log(data);
 
     if (files && files.length > 0) {
       for (const file of files) {
@@ -32,6 +29,10 @@ export const withImages = (editor: Editor) => {
           reader.readAsDataURL(file);
         }
       }
+    } else if (isImageUrl(text)) {
+      insertImage(editor, text);
+    } else {
+      insertData(data);
     }
   };
 
@@ -72,26 +73,6 @@ export const Image = ({ attributes, children, element }: any) => {
       </div>
       {children}
     </div>
-  );
-};
-
-export const InsertImageButton = () => {
-  const editor = useSlateStatic();
-  return (
-    <MdImage
-      onMouseDown={(event) => {
-        event.preventDefault();
-
-        const url = window.prompt('Enter the URL of the image:');
-
-        if (!url) return false;
-        // if (!isImageUrl(url)) {
-        //   alert('URL is not an image');
-        //   return;
-        // }
-        insertImage(editor, url);
-      }}
-    />
   );
 };
 
