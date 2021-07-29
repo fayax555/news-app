@@ -14,6 +14,7 @@ import {
 } from './SlateTypes';
 import { withImages } from './SlateImage';
 import { withLinks } from './SlateLinks';
+import { YoutubeEmbed } from './Embeds';
 
 declare module 'slate' {
   interface CustomTypes {
@@ -38,11 +39,7 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
     );
   const editor = editorRef.current;
 
-  // editor.isVoid = (el) => {
-  //   return el.type === 'youtube';
-  // };
-  const youtubeRegex =
-    /^(?:(?:https?:)?\/\/)?(?:(?:www|m)\.)?(?:(?:youtube\.com|youtu.be))(?:\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(?:\S+)?$/;
+  editor.isVoid = (el) => el.type === 'youtube';
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
@@ -72,26 +69,7 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
                 }
               }
             }}
-            onPaste={(event) => {
-              const pastedText = event.clipboardData?.getData('text')?.trim();
-              const matches = pastedText.match(youtubeRegex);
-              if (matches != null) {
-                const [_, videoId] = matches;
-                event.preventDefault();
-                Transforms.insertNodes(editor, [
-                  {
-                    type: 'youtube',
-                    videoId,
-                    children: [
-                      {
-                        text: '',
-                      },
-                    ],
-                  },
-                  { type: 'paragraph', children: [{ text: '' }] },
-                ]);
-              }
-            }}
+            onPaste={(e) => YoutubeEmbed(e, editor)}
           />
         </Wrap>
       </Slate>
