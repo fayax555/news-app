@@ -85,6 +85,18 @@ export const renderElement = (props: any) => {
           {children}
         </a>
       );
+    case 'youtube':
+      return (
+        <div {...attributes}>
+          <iframe
+            contentEditable={false}
+            title='Youtube video'
+            src={`https://www.youtube.com/embed/${element?.videoId}`}
+            frameBorder='0'
+          ></iframe>
+          {children}
+        </div>
+      );
     default:
       return <p {...attributes}>{children}</p>;
   }

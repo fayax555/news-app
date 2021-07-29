@@ -1,5 +1,5 @@
 import { FC, useCallback, useRef } from 'react';
-import { createEditor, BaseEditor, Editor } from 'slate';
+import { createEditor, BaseEditor, Editor, Transforms } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
 import Toolbar from './Toolbar';
@@ -38,6 +38,12 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
     );
   const editor = editorRef.current;
 
+  // editor.isVoid = (el) => {
+  //   return el.type === 'youtube';
+  // };
+  const youtubeRegex =
+    /^(?:(?:https?:)?\/\/)?(?:(?:www|m)\.)?(?:(?:youtube\.com|youtu.be))(?:\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(?:\S+)?$/;
+
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   }, []);
@@ -64,6 +70,26 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
                   const mark = HOTKEYS[hotkey];
                   CustomEditor.toggleMark(editor, mark);
                 }
+              }
+            }}
+            onPaste={(event) => {
+              const pastedText = event.clipboardData?.getData('text')?.trim();
+              const matches = pastedText.match(youtubeRegex);
+              if (matches != null) {
+                const [_, videoId] = matches;
+                event.preventDefault();
+                Transforms.insertNodes(editor, [
+                  {
+                    type: 'youtube',
+                    videoId,
+                    children: [
+                      {
+                        text: '',
+                      },
+                    ],
+                  },
+                  { type: 'paragraph', children: [{ text: '' }] },
+                ]);
               }
             }}
           />

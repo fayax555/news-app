@@ -1,40 +1,9 @@
-import React, { useState, useMemo } from 'react';
 import isUrl from 'is-url';
-import { Slate, Editable, withReact, useSlate } from 'slate-react';
-import {
-  Transforms,
-  Editor,
-  Range,
-  createEditor,
-  Element as SlateElement,
-  Descendant,
-} from 'slate';
+import { useSlate } from 'slate-react';
+import { Transforms, Editor, Range, Element as SlateElement } from 'slate';
 import { LinkElement, Url } from './SlateTypes';
 import { MdInsertLink } from 'react-icons/md';
 import { BiUnlink } from 'react-icons/bi';
-
-// import { Button, Icon, Toolbar } from '../components';
-
-// const LinkExample = () => {
-//   const [value, setValue] = useState<Descendant[]>(initialValue);
-//   const editor = useMemo(
-//     () => withLinks(withHistory(withReact(createEditor()))),
-//     []
-//   );
-
-//   return (
-//     <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
-//       <Toolbar>
-//         <LinkButton />
-//         <RemoveLinkButton />
-//       </Toolbar>
-//       <Editable
-//         renderElement={(props) => <Element {...props} />}
-//         placeholder='Enter some text...'
-//       />
-//     </Slate>
-//   );
-// };
 
 export const withLinks = (editor: Editor) => {
   const { insertData, insertText, isInline } = editor;

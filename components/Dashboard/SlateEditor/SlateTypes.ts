@@ -9,6 +9,7 @@ export type CustomElement = {
   format?: TextFormat;
   type: BlockType | 'link';
   children: CustomText[];
+  videoId?: string;
 };
 
 export type CustomText = {
@@ -28,6 +29,7 @@ export type BlockType =
   | 'h2'
   | 'h3'
   | 'image'
+  | 'youtube'
   | null;
 
 export type ImageElement = {
