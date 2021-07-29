@@ -15,7 +15,7 @@ export const Wrap = styled.div`
   }
 `;
 
-export const CaptionBox = styled.p`
+export const CaptionBox = styled.blockquote`
   font-size: 0.9rem !important;
   color: #555;
 `;
