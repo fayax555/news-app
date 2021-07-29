@@ -10,6 +10,7 @@ export type CustomElement = {
   type: BlockType | 'link';
   children: CustomText[];
   videoId?: string;
+  tweetId?: string;
 };
 
 export type CustomText = {
@@ -30,6 +31,7 @@ export type BlockType =
   | 'h3'
   | 'image'
   | 'youtube'
+  | 'tweet'
   | null;
 
 export type ImageElement = {

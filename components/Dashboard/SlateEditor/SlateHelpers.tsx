@@ -3,6 +3,7 @@ import { Editor, Transforms } from 'slate';
 import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
 import { CaptionBox } from './EditorStyles';
+import { Tweet } from 'react-twitter-widgets';
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
@@ -94,6 +95,13 @@ export const renderElement = (props: any) => {
             src={`https://www.youtube.com/embed/${element?.videoId}`}
             frameBorder='0'
           ></iframe>
+          {children}
+        </div>
+      );
+    case 'tweet':
+      return (
+        <div {...attributes}>
+          <Tweet tweetId={element.tweetId} />
           {children}
         </div>
       );

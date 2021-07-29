@@ -1,5 +1,5 @@
 import { FC, useCallback, useRef } from 'react';
-import { createEditor, BaseEditor, Editor, Transforms } from 'slate';
+import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
 import Toolbar from './Toolbar';
@@ -14,7 +14,7 @@ import {
 } from './SlateTypes';
 import { withImages } from './SlateImage';
 import { withLinks } from './SlateLinks';
-import { YoutubeEmbed } from './Embeds';
+import { Embeds } from './Embeds';
 
 declare module 'slate' {
   interface CustomTypes {
@@ -38,8 +38,6 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
       withImages(withHistory(withReact(createEditor())))
     );
   const editor = editorRef.current;
-
-  editor.isVoid = (el) => el.type === 'youtube';
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
@@ -69,7 +67,7 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
                 }
               }
             }}
-            onPaste={(e) => YoutubeEmbed(e, editor)}
+            onPaste={(event) => Embeds(event, editor)}
           />
         </Wrap>
       </Slate>
