@@ -2,6 +2,11 @@ import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
+import { Tweet } from 'react-twitter-widgets';
+import {
+  CaptionBox,
+  TweetWrap,
+} from 'components/Dashboard/SlateEditor/EditorStyles';
 
 interface Props {
   article: {
@@ -31,6 +36,8 @@ interface contentProps {
     }
   ];
   type: string;
+  videoId: string;
+  tweetId: string;
 }
 
 const Article: FC<Props> = ({
@@ -40,8 +47,10 @@ const Article: FC<Props> = ({
     coverImage: { name, size, type, encodeData },
   },
 }) => {
+  console.log(content);
+
   const contentData = content.map(
-    ({ children, type }: contentProps, index: number) => {
+    ({ children, type, videoId, tweetId }: contentProps, index: number) => {
       const inlineFormatTypes = (
         markIndex: number,
         text: any,
@@ -75,6 +84,30 @@ const Article: FC<Props> = ({
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
       if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;
+      if (type === 'cc')
+        return <CaptionBox key={type + index}>{textContent}</CaptionBox>;
+      if (type === 'youtube') {
+        return (
+          <iframe
+            contentEditable={false}
+            title='Youtube video'
+            src={`https://www.youtube.com/embed/${videoId}`}
+            frameBorder='0'
+          ></iframe>
+        );
+      }
+
+      if (type === 'tweet')
+        return (
+          <TweetWrap>
+            <Tweet
+              tweetId={tweetId}
+              options={{
+                width: 300,
+              }}
+            />
+          </TweetWrap>
+        );
     }
   );
 

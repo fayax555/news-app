@@ -15,7 +15,14 @@ export const Wrap = styled.div`
   }
 `;
 
-export const CaptionBox = styled.div`
-  font-size: 1rem;
+export const CaptionBox = styled.p`
+  font-size: 0.9rem !important;
   color: #555;
+`;
+
+export const TweetWrap = styled.p`
+  * {
+    padding: 0 !important;
+    margin: 0.4rem 0 !important;
+  }
 `;
