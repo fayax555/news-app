@@ -20,9 +20,9 @@ export const CaptionBox = styled.blockquote`
   color: #555;
 `;
 
-export const TweetWrap = styled.p`
+export const TweetWrap = styled.blockquote`
   * {
     padding: 0 !important;
-    margin: 0.4rem 0 !important;
+    margin: 0.1rem 0 !important;
   }
 `;

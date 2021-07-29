@@ -107,12 +107,7 @@ const Article: FC<Props> = ({
       if (type === 'tweet')
         return (
           <TweetWrap>
-            <Tweet
-              tweetId={tweetId}
-              options={{
-                width: 300,
-              }}
-            />
+            <Tweet tweetId={tweetId} />
           </TweetWrap>
         );
     }
