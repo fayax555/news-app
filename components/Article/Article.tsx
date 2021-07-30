@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import { CSSProperties, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { ArticleWrap } from '../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
@@ -30,7 +30,9 @@ interface contentProps {
     {
       type: string;
       url: string;
-      children: [{ text: string }];
+      children: [
+        { text: any; bold: boolean; italic: boolean; underline: boolean }
+      ];
       text?:
         | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
         | string;
@@ -59,7 +61,9 @@ const Article: FC<Props> = ({
         markIndex: number,
         linkType: string,
         linkUrl: string,
-        linkChildren: [{ text: string }],
+        linkChildren: [
+          { text: any; bold: boolean; italic: boolean; underline: boolean }
+        ],
         text: any,
         bold: boolean | undefined,
         italic: boolean | undefined,
@@ -67,14 +71,35 @@ const Article: FC<Props> = ({
       ) => {
         if (!linkType) text = text.replace(/  +/g, '');
 
-        console.log(linkType);
         if (linkType === 'link') {
-          console.log(linkChildren[0]);
-          text = (
-            <Link href={linkUrl} key={markIndex + linkType}>
-              {linkChildren[0].text}
-            </Link>
-          );
+          text = linkChildren.map((link, linkIndex) => {
+            let linkText;
+            let linkStyle: CSSProperties | undefined;
+
+            if (link.bold) {
+              linkStyle = { fontWeight: 'bold', ...linkStyle };
+            }
+
+            if (link.italic) {
+              linkStyle = { fontStyle: 'italic', ...linkStyle };
+            }
+
+            if (link.underline) {
+              linkStyle = { textDecoration: 'underline', ...linkStyle };
+            }
+
+            linkText = (
+              <Link
+                style={linkStyle}
+                href={linkUrl}
+                key={'link' + String(linkIndex)}
+              >
+                {link.text}
+              </Link>
+            );
+
+            return linkText;
+          });
         }
 
         if (bold) {
@@ -121,6 +146,7 @@ const Article: FC<Props> = ({
       if (type === 'youtube') {
         return (
           <iframe
+            key={type + index}
             contentEditable={false}
             title='Youtube video'
             src={`https://www.youtube.com/embed/${videoId}`}

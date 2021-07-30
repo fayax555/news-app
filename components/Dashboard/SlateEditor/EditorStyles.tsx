@@ -28,11 +28,5 @@ export const TweetWrap = styled.blockquote`
 `;
 
 export const Link = styled.a`
-  text-decoration: underline !important;
-  color: blue !important;
-
-  > * {
-    text-decoration: underline !important;
-    color: blue !important;
-  }
+  color: blue;
 `;
