@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
-import { CaptionBox } from './EditorStyles';
+import { CaptionBox, Link } from './EditorStyles';
 import { Tweet } from 'react-twitter-widgets';
 
 export const CustomEditor = {
@@ -78,13 +78,9 @@ export const renderElement = (props: any) => {
       return <CaptionBox {...attributes}>{children}</CaptionBox>;
     case 'link':
       return (
-        <a
-          style={{ textDecoration: 'underline', color: 'blue' }}
-          {...attributes}
-          href={element.url}
-        >
+        <Link {...attributes} href={element.url}>
           {children}
-        </a>
+        </Link>
       );
     case 'youtube':
       return (

@@ -26,3 +26,13 @@ export const TweetWrap = styled.blockquote`
     margin: 0.1rem 0 !important;
   }
 `;
+
+export const Link = styled.a`
+  text-decoration: underline !important;
+  color: blue !important;
+
+  > * {
+    text-decoration: underline !important;
+    color: blue !important;
+  }
+`;

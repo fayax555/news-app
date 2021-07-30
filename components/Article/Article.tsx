@@ -6,6 +6,7 @@ import { Tweet } from 'react-twitter-widgets';
 import {
   CaptionBox,
   TweetWrap,
+  Link,
 } from 'components/Dashboard/SlateEditor/EditorStyles';
 
 interface Props {
@@ -27,6 +28,9 @@ interface Props {
 interface contentProps {
   children: [
     {
+      type: string;
+      url: string;
+      children: [{ text: string }];
       text?:
         | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
         | string;
@@ -53,12 +57,25 @@ const Article: FC<Props> = ({
     ({ children, type, videoId, tweetId }: contentProps, index: number) => {
       const inlineFormatTypes = (
         markIndex: number,
+        linkType: string,
+        linkUrl: string,
+        linkChildren: [{ text: string }],
         text: any,
         bold: boolean | undefined,
         italic: boolean | undefined,
         underline: boolean | undefined
       ) => {
-        text = text.replace(/  +/g, '');
+        if (!linkType) text = text.replace(/  +/g, '');
+
+        console.log(linkType);
+        if (linkType === 'link') {
+          console.log(linkChildren[0]);
+          text = (
+            <Link href={linkUrl} key={markIndex + linkType}>
+              {linkChildren[0].text}
+            </Link>
+          );
+        }
 
         if (bold) {
           text = <strong key={markIndex}>{text}</strong>;
@@ -76,9 +93,17 @@ const Article: FC<Props> = ({
       };
 
       const textContent = children.map(
-        ({ text, bold, italic, underline }, markIndex) => {
-          return inlineFormatTypes(markIndex, text, bold, italic, underline);
-        }
+        ({ type, url, children, text, bold, italic, underline }, markIndex) =>
+          inlineFormatTypes(
+            markIndex,
+            type,
+            url,
+            children,
+            text,
+            bold,
+            italic,
+            underline
+          )
       );
 
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
