@@ -33,9 +33,7 @@ interface contentProps {
       children: [
         { text: any; bold: boolean; italic: boolean; underline: boolean }
       ];
-      text?:
-        | DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-        | string;
+      text?: any;
       bold?: boolean;
       italic?: boolean;
       underline?: boolean;
@@ -57,78 +55,55 @@ const Article: FC<Props> = ({
 
   const contentData = content.map(
     ({ children, type, videoId, tweetId }: contentProps, index: number) => {
-      const inlineFormatTypes = (
-        markIndex: number,
-        linkType: string,
-        linkUrl: string,
-        linkChildren: [
-          { text: any; bold: boolean; italic: boolean; underline: boolean }
-        ],
-        text: any,
-        bold: boolean | undefined,
-        italic: boolean | undefined,
-        underline: boolean | undefined
-      ) => {
-        if (!linkType) text = text.replace(/  +/g, '');
-
-        if (linkType === 'link') {
-          text = linkChildren.map((link, linkIndex) => {
-            let linkText;
-            let linkStyle: CSSProperties | undefined;
-
-            if (link.bold) {
-              linkStyle = { fontWeight: 'bold', ...linkStyle };
-            }
-
-            if (link.italic) {
-              linkStyle = { fontStyle: 'italic', ...linkStyle };
-            }
-
-            if (link.underline) {
-              linkStyle = { textDecoration: 'underline', ...linkStyle };
-            }
-
-            linkText = (
-              <Link
-                style={linkStyle}
-                href={linkUrl}
-                key={'link' + String(linkIndex)}
-              >
-                {link.text}
-              </Link>
-            );
-
-            return linkText;
-          });
-        }
-
-        if (bold) {
-          text = <strong key={markIndex}>{text}</strong>;
-        }
-
-        if (italic) {
-          text = <em key={markIndex}>{text}</em>;
-        }
-
-        if (underline) {
-          text = <u key={markIndex}>{text}</u>;
-        }
-
-        return text;
-      };
-
       const textContent = children.map(
-        ({ type, url, children, text, bold, italic, underline }, markIndex) =>
-          inlineFormatTypes(
-            markIndex,
-            type,
-            url,
-            children,
-            text,
-            bold,
-            italic,
-            underline
-          )
+        ({ type, url, children, text, bold, italic, underline }, markIndex) => {
+          if (!type) text = text.replace(/  +/g, '');
+
+          if (type === 'link') {
+            text = children.map((link, linkIndex) => {
+              let linkText;
+              let linkStyle: CSSProperties | undefined;
+
+              if (link.bold) {
+                linkStyle = { fontWeight: 'bold', ...linkStyle };
+              }
+
+              if (link.italic) {
+                linkStyle = { fontStyle: 'italic', ...linkStyle };
+              }
+
+              if (link.underline) {
+                linkStyle = { textDecoration: 'underline', ...linkStyle };
+              }
+
+              linkText = (
+                <Link
+                  style={linkStyle}
+                  href={url}
+                  key={'link' + String(linkIndex)}
+                >
+                  {link.text}
+                </Link>
+              );
+
+              return linkText;
+            });
+          }
+
+          if (bold) {
+            text = <strong key={markIndex}>{text}</strong>;
+          }
+
+          if (italic) {
+            text = <em key={markIndex}>{text}</em>;
+          }
+
+          if (underline) {
+            text = <u key={markIndex}>{text}</u>;
+          }
+
+          return text;
+        }
       );
 
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
