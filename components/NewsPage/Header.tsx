@@ -75,8 +75,11 @@ interface Props {
 
 const Header: FC<Props> = ({ articles }) => {
   console.log(articles[0]);
-  const img = articles[0].coverImage!.encodeData;
-  console.log(img);
+  const {
+    nid,
+    coverImage: { encodeData, type },
+  } = articles[0];
+
   // first section of the main page
   return (
     <HeaderWrap>
@@ -107,9 +110,14 @@ const Header: FC<Props> = ({ articles }) => {
           </a>
         </Link>
       </HeaderLeft>
-      <Link href='/news/id' passHref>
+      <Link href={`/news/${nid}`} passHref>
         <LinkWrap>
-          <Image src={img} width={1100} height={700} alt='' />
+          <Image
+            src={`data:${type};base64,${encodeData}`}
+            width={1100}
+            height={700}
+            alt=''
+          />
           <div>
             <h1>{articles[0].headline}</h1>
           </div>

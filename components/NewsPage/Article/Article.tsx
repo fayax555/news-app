@@ -8,48 +8,9 @@ import {
   TweetWrap,
   Link,
 } from 'components/Dashboard/SlateEditor/EditorStyles';
+import { Article as ArticleProps, Content } from '../ArticleTypes';
 
-interface Props {
-  article: {
-    id?: number;
-    name?: string;
-    date?: string;
-    headline: string;
-    content: any;
-    coverImage: {
-      name: string;
-      size: number;
-      type: string;
-      encodeData: string;
-    };
-  };
-}
-
-interface contentProps {
-  children: [
-    {
-      type: string;
-      url: string;
-      children: [
-        {
-          text: ReactElement<any, any>;
-          bold: boolean;
-          italic: boolean;
-          underline: boolean;
-        }
-      ];
-      text?: any;
-      bold?: boolean;
-      italic?: boolean;
-      underline?: boolean;
-    }
-  ];
-  type: string;
-  videoId: string;
-  tweetId: string;
-}
-
-const Article: FC<Props> = ({
+const Article: FC<{ article: ArticleProps }> = ({
   article: {
     headline,
     content,
@@ -59,7 +20,7 @@ const Article: FC<Props> = ({
   console.log(content);
 
   const contentData = content.map(
-    ({ children, type, videoId, tweetId }: contentProps, index: number) => {
+    ({ children, type, videoId, tweetId }: Content, index: number) => {
       const textContent = children.map(
         ({ type, url, children, text, bold, italic, underline }, markIndex) => {
           if (text) text = text.replace(/  +/g, '');
