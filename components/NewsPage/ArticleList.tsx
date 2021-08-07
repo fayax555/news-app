@@ -29,14 +29,13 @@ const ArticleList: FC<Props> = ({ articles }) => {
       <Header articles={articles} />
       <SecondSection />
       <ListWrap>
-        {articles.map((article: any) => (
+        {/* {articles.map((article: any) => (
           <ArticleItem
             key={article._id}
             newsId={article.nid}
             title={article.headline}
-            // description={article.content.slice(0, 120)}
           />
-        ))}
+        ))} */}
       </ListWrap>
     </>
   );

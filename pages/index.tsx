@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import Layout from 'components/Layout/Layout';
 import ArticleList from 'components/NewsPage/ArticleList';
 import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
+import { Article } from 'components/NewsPage/ArticleTypes';
 
 interface Props {
-  articles: any;
+  articles: Article[];
 }
 
 const Home: FC<Props> = ({ articles }) => {
@@ -27,8 +27,6 @@ export async function getStaticProps() {
     .find({})
     .sort({ _id: -1 })
     .toArray();
-
-  // console.log(articles);
 
   return {
     props: {

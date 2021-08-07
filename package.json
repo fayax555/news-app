@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "^1.13.2",
+    "cloudinary": "^1.26.3",
     "filepond": "^4.28.2",
     "filepond-plugin-file-encode": "^2.1.10",
     "filepond-plugin-file-validate-size": "^2.2.4",

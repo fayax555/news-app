@@ -17,7 +17,7 @@ const Article: FC<{ article: ArticleProps }> = ({
     coverImage: { name, size, type, encodeData },
   },
 }) => {
-  console.log(content);
+  // console.log(content);
 
   const contentData = content.map(
     ({ children, type, videoId, tweetId }: Content, index: number) => {
@@ -77,14 +77,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
       if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;
       if (type === 'cc')
-        return (
-          <CaptionBox
-            style={{ fontSize: '0.9rem !important', color: '#555 !important' }}
-            key={type + index}
-          >
-            {textContent}
-          </CaptionBox>
-        );
+        return <CaptionBox key={type + index}>{textContent}</CaptionBox>;
       if (type === 'youtube') {
         return (
           <iframe
