@@ -3,6 +3,7 @@ import ArticleItem from './ArticleItem';
 import Header from './Header';
 import SecondSection from './SecondSection';
 import styled from 'styled-components';
+import { Article } from './ArticleTypes';
 
 const ListWrap = styled.div`
   display: flex;
@@ -19,14 +20,14 @@ const ListWrap = styled.div`
 `;
 
 interface Props {
-  articles: any;
+  articles: Article[];
 }
 
 const ArticleList: FC<Props> = ({ articles }) => {
   return (
     <>
-      {/* <Header />
-      <SecondSection /> */}
+      <Header articles={articles} />
+      <SecondSection />
       <ListWrap>
         {articles.map((article: any) => (
           <ArticleItem

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import Layout from 'components/Layout/Layout';
-import Article from 'components/Article/Article';
+import Article from 'components/NewsPage/Article/Article';
 import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { useRouter } from 'next/router';
 import { connectToDatabase } from 'util/mongodb';

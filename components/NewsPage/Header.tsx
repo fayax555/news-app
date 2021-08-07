@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import headerImg from 'assets/header.jpg';
 import Link from 'next/link';
+import { Article } from './ArticleTypes';
 
 const HeaderWrap = styled.div`
   display: grid;
@@ -68,9 +69,14 @@ const LinkWrap = styled.a`
   }
 `;
 
-interface Props {}
+interface Props {
+  articles: Article[];
+}
 
-const Header: FC<Props> = () => {
+const Header: FC<Props> = ({ articles }) => {
+  console.log(articles[0]);
+  const img = articles[0].coverImage!.encodeData;
+  console.log(img);
   // first section of the main page
   return (
     <HeaderWrap>
@@ -103,13 +109,9 @@ const Header: FC<Props> = () => {
       </HeaderLeft>
       <Link href='/news/id' passHref>
         <LinkWrap>
-          <Image src={headerImg} width={1100} height={700} alt='' />
+          <Image src={img} width={1100} height={700} alt='' />
           <div>
-            <h1>Create Device Mockups in Browser with DeviceMock</h1>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Temporibus nihil eos eum! Repellendus itaque quas quod.
-            </p>
+            <h1>{articles[0].headline}</h1>
           </div>
         </LinkWrap>
       </Link>

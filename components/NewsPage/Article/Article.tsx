@@ -1,5 +1,5 @@
-import { CSSProperties, DetailedHTMLProps, FC, HTMLAttributes } from 'react';
-import { ArticleWrap } from '../Styles/ArticleStyles';
+import { CSSProperties, FC, ReactElement } from 'react';
+import { ArticleWrap } from '../../Styles/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
 import { Tweet } from 'react-twitter-widgets';
@@ -31,7 +31,12 @@ interface contentProps {
       type: string;
       url: string;
       children: [
-        { text: any; bold: boolean; italic: boolean; underline: boolean }
+        {
+          text: ReactElement<any, any>;
+          bold: boolean;
+          italic: boolean;
+          underline: boolean;
+        }
       ];
       text?: any;
       bold?: boolean;
@@ -57,11 +62,11 @@ const Article: FC<Props> = ({
     ({ children, type, videoId, tweetId }: contentProps, index: number) => {
       const textContent = children.map(
         ({ type, url, children, text, bold, italic, underline }, markIndex) => {
-          if (!type) text = text.replace(/  +/g, '');
+          if (text) text = text.replace(/  +/g, '');
 
           if (type === 'link') {
             text = children.map((link, linkIndex) => {
-              let linkText;
+              let linkText: ReactElement<any, any>;
               let linkStyle: CSSProperties | undefined;
 
               if (link.bold) {
@@ -78,6 +83,7 @@ const Article: FC<Props> = ({
 
               linkText = (
                 <Link
+                  target='_blank'
                   style={linkStyle}
                   href={url}
                   key={'link' + String(linkIndex)}

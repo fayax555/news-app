@@ -77,6 +77,7 @@ const wrapLink = (editor: Editor, url: any) => {
 
 export const LinkButton = () => {
   const editor = useSlate();
+  
   return (
     <MdInsertLink
       // active={isLinkActive(editor)}
