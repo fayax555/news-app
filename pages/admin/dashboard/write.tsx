@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/FilePond';
-import { EditorForm, EditorFormWrap } from './AdminStyles';
+import { EditorForm, EditorFormWrap } from 'components/Styles/AdminStyles';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/SlateEditor/SlateEditor'),
