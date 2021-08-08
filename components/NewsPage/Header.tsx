@@ -16,35 +16,42 @@ const Header: FC<Props> = ({ articles }) => {
     coverImage: { encodeData, type },
   } = articles[0];
 
+  const latestNews = [
+    {
+      linkId: 'id1',
+      img: { headerImg, altText: 'img1' },
+      headline: 'Create Device Mockups in Browser with DeviceMock',
+    },
+    {
+      linkId: 'id2',
+      img: { headerImg, altText: 'img2' },
+      headline: 'Create Device Mockups in Browser with DeviceMock',
+    },
+    {
+      linkId: 'id3',
+      img: { headerImg, altText: 'img3' },
+      headline: 'Create Device Mockups in Browser with DeviceMock',
+    },
+    {
+      linkId: 'id4',
+      img: { headerImg, altText: 'img4' },
+      headline: 'Create Device Mockups in Browser with DeviceMock',
+    },
+  ];
+
   // first section of the main page
   return (
     <HeaderWrap>
       <HeaderLeft>
         <h1>Latest News</h1>
-        <Link href='/news/id' passHref>
-          <a>
-            <Image src={headerImg} alt='' />
-            <h2>Create Device Mockups in Browser with DeviceMock</h2>
-          </a>
-        </Link>
-        <Link href='/news/id' passHref>
-          <a>
-            <Image src={headerImg} alt='' />
-            <h2>Create Device Mockups in Browser with DeviceMock</h2>
-          </a>
-        </Link>
-        <Link href='/news/id' passHref>
-          <a>
-            <Image src={headerImg} alt='' />
-            <h2>Create Device Mockups in Browser with DeviceMock</h2>
-          </a>
-        </Link>
-        <Link href='/news/id' passHref>
-          <a>
-            <Image src={headerImg} alt='' />
-            <h2>Create Device Mockups in Browser with DeviceMock</h2>
-          </a>
-        </Link>
+        {latestNews.map(({ linkId, img, headline }) => (
+          <Link key={linkId} href={`/news/${linkId}`} passHref>
+            <a>
+              <Image src={img.headerImg} alt={img.altText} />
+              <h2>{headline}</h2>
+            </a>
+          </Link>
+        ))}
       </HeaderLeft>
       <Link href={`/news/${nid}`} passHref>
         <LinkWrap>
@@ -56,6 +63,10 @@ const Header: FC<Props> = ({ articles }) => {
           />
           <div>
             <h1>{articles[0].headline}</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
+              voluptatem.
+            </p>
           </div>
         </LinkWrap>
       </Link>

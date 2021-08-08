@@ -1,4 +1,11 @@
-import { FC, Dispatch, SetStateAction, memo } from 'react';
+import {
+  FC,
+  Dispatch,
+  SetStateAction,
+  memo,
+  ChangeEventHandler,
+  ChangeEvent,
+} from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
@@ -17,7 +24,7 @@ interface Props {
 }
 
 const FormEl: FC<Props> = ({ val, setVal, label, isRequired = true }) => {
-  const handleValue = (e: { target: { value: SetStateAction<string> } }) => {
+  const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value);
   };
 

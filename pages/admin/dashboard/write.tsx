@@ -15,7 +15,12 @@ const IndexPage: FC = () => {
   const titleInputRef = useRef<HTMLInputElement>(null);
 
   // cover image from filepond
-  const [files, setFiles] = useState<any[]>([]);
+  const [files, setFiles] = useState<
+    {
+      getFileEncodeBase64String: () => string;
+      file: { name: string; size: number; type: string };
+    }[]
+  >([]);
   // value contains the text inside the slte editor
   const [value, setValue] = useState<Descendant[]>([
     {
