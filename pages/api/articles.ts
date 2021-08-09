@@ -46,8 +46,7 @@ export default async function handler(
     const cloudinaryRes = await cloudinary.uploader.upload(
       `data:${type};base64,${encodeData}`,
       {
-        upload_preset: 'dev_setups',
-        public_id: name,
+        upload_preset: 'cover_image',
       }
     );
     console.log(cloudinaryRes);

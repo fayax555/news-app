@@ -31,8 +31,6 @@ const IndexPage: FC = () => {
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
 
-  // console.log(value);
-
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
@@ -46,7 +44,6 @@ const IndexPage: FC = () => {
       file: { size, type },
       filenameWithoutExtension,
     } = files[0];
-    console.log(filenameWithoutExtension);
 
     const reqBody = {
       headline: inputTitle,
@@ -67,43 +64,38 @@ const IndexPage: FC = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => alert(data.message));
   };
 
-  try {
-    return (
-      <Layout title='Add New Article'>
-        <EditorFormWrap>
-          <EditorForm onSubmit={handleSubmit}>
-            <div>
-              <h2>Add New Article</h2>
-              <input
-                ref={titleInputRef}
-                type='text'
-                placeholder='Enter title here'
-                required
-              />
-              <FilePondComponent files={files} setFiles={setFiles} />
-              <SlateEditor value={value} setValue={setValue} />
-            </div>
-            <div>
-              <Button
-                fs='1rem'
-                isSubmit={isSubmit}
-                disabled={false}
-                type='submit'
-              >
-                Publish
-              </Button>
-            </div>
-          </EditorForm>
-        </EditorFormWrap>
-      </Layout>
-    );
-  } catch (error) {
-    console.error(error);
-  }
-  return null;
+  return (
+    <Layout title='Add New Article'>
+      <EditorFormWrap>
+        <EditorForm onSubmit={handleSubmit}>
+          <div>
+            <h2>Add New Article</h2>
+            <input
+              ref={titleInputRef}
+              type='text'
+              placeholder='Enter title here'
+              required
+            />
+            <FilePondComponent files={files} setFiles={setFiles} />
+            <SlateEditor value={value} setValue={setValue} />
+          </div>
+          <div>
+            <Button
+              fs='1rem'
+              isSubmit={isSubmit}
+              disabled={false}
+              type='submit'
+            >
+              Publish
+            </Button>
+          </div>
+        </EditorForm>
+      </EditorFormWrap>
+    </Layout>
+  );
 };
 
 export default IndexPage;

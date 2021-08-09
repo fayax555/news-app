@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import ArticleItem from './ArticleItem';
-import Header from './Header';
+import Header from './Header/Header';
 import SecondSection from './SecondSection';
 import styled from 'styled-components';
 import { Article } from './ArticleTypes';

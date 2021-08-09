@@ -15,7 +15,7 @@ interface Props {}
 const Navbar: FC<Props> = () => {
   return (
     <DashboardWrap>
-      <h3>Dashbaord</h3>
+      <h3>Dashboard</h3>
       <List>
         <li>
           <Link href='/admin/dashboard/write'>
