@@ -1,8 +1,9 @@
 import { connectToDatabase } from 'util/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { customAlphabet } from 'nanoid';
-const nanoid = customAlphabet('1234567890', 4);
 import { v2 as cloudinary } from 'cloudinary';
+import { Descendant } from 'slate';
+const nanoid = customAlphabet('1234567890', 4);
 
 export const config = {
   api: {
@@ -18,6 +19,17 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+type ReqBody = {
+  headline: string;
+  content: Descendant[];
+  coverImage: {
+    name: string;
+    size: number;
+    type: string;
+    encodeData: string;
+  };
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -26,25 +38,37 @@ export default async function handler(
 
   const {
     headline,
-    coverImage: { encodeData, type },
-  } = req.body;
+    content,
+    coverImage: { encodeData, name, size, type },
+  } = req.body as ReqBody;
 
-  // console.log(encodeData);
   try {
-    const imgRes = await cloudinary.uploader.upload(
+    const cloudinaryRes = await cloudinary.uploader.upload(
       `data:${type};base64,${encodeData}`,
       {
         upload_preset: 'dev_setups',
+        public_id: name,
       }
     );
-    console.log(imgRes);
+    console.log(cloudinaryRes);
 
-    const result = await db.collection('articles').insertOne({
+    const updatedReqBody = {
       nid: `${headline.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
-      ...req.body,
-    });
+      headline,
+      content,
+      coverImage: {
+        name,
+        size,
+        type,
+        imgUrl: cloudinaryRes.secure_url,
+      },
+    };
 
-    res.status(201).json({ message: 'Success!', article: imgRes });
+    const result = await db
+      .collection('articles')
+      .insertOne({ ...updatedReqBody });
+
+    res.status(201).json({ message: 'Success!', article: updatedReqBody });
   } catch (error) {
     console.log(error);
   }

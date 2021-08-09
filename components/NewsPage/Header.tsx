@@ -13,8 +13,9 @@ const Header: FC<Props> = ({ articles }) => {
   console.log(articles[0]);
   const {
     nid,
-    coverImage: { encodeData, type },
+    coverImage: { imgUrl },
   } = articles[0];
+  console.log(imgUrl);
 
   const latestNews = [
     {
@@ -55,12 +56,7 @@ const Header: FC<Props> = ({ articles }) => {
       </HeaderLeft>
       <Link href={`/news/${nid}`} passHref>
         <LinkWrap>
-          <Image
-            src={`data:${type};base64,${encodeData}`}
-            width={1100}
-            height={700}
-            alt=''
-          />
+          <Image src={imgUrl} width={1100} height={700} alt='' />
           <div>
             <h1>{articles[0].headline}</h1>
             <p>

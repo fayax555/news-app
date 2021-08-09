@@ -18,7 +18,8 @@ const IndexPage: FC = () => {
   const [files, setFiles] = useState<
     {
       getFileEncodeBase64String: () => string;
-      file: { name: string; size: number; type: string };
+      filenameWithoutExtension: string;
+      file: { size: number; type: string };
     }[]
   >([]);
   // value contains the text inside the slte editor
@@ -42,14 +43,16 @@ const IndexPage: FC = () => {
 
     const {
       getFileEncodeBase64String,
-      file: { name, size, type },
+      file: { size, type },
+      filenameWithoutExtension,
     } = files[0];
+    console.log(filenameWithoutExtension);
 
     const reqBody = {
       headline: inputTitle,
       content: value,
       coverImage: {
-        name,
+        name: filenameWithoutExtension,
         size,
         type,
         encodeData: getFileEncodeBase64String(),

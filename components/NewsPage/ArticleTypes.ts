@@ -6,10 +6,10 @@ export interface Article {
   headline: string;
   content: any;
   coverImage: {
-    encodeData: string;
     name: string;
     size: number;
     type: string;
+    imgUrl: string;
   };
 }
 

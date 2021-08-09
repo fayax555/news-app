@@ -14,7 +14,7 @@ const Article: FC<{ article: ArticleProps }> = ({
   article: {
     headline,
     content,
-    coverImage: { name, size, type, encodeData },
+    coverImage: { name, size, type, imgUrl },
   },
 }) => {
   // console.log(content);
@@ -103,12 +103,7 @@ const Article: FC<{ article: ArticleProps }> = ({
     <ArticleWrap>
       <h1>{headline}</h1>
       <div>
-        <Image
-          src={`data:${type};base64,${encodeData}`}
-          height={350}
-          width={700}
-          alt=''
-        />
+        <Image src={imgUrl} height={350} width={700} alt='' />
       </div>
       {contentData}
       {/* <ArticleInfo name={article.name} date={article.date} /> */}
