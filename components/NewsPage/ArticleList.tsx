@@ -27,7 +27,7 @@ const ArticleList: FC<Props> = ({ articles }) => {
   return (
     <>
       <Header articles={articles} />
-      <SecondSection />
+      <SecondSection articles={articles} />
       <ListWrap>
         {/* {articles.map((article: any) => (
           <ArticleItem

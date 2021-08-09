@@ -140,13 +140,15 @@ export const LinkWrap = styled.a`
 
   > div {
     bottom: 0;
-    padding: 0.2rem 0.5rem;
+    padding: 0.75rem;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.75);
     width: 100%;
 
     h1 {
       font-size: 1.5rem;
+      line-height: 1.4;
+      padding-bottom: 0.5rem;
     }
   }
 `;

@@ -33,7 +33,7 @@ const FilePondComponent = ({ files, setFiles }) => {
         allowMultiple={false}
         maxFileSize='3MB'
         allowPaste={false}
-        acceptedFileTypes={['image/png', 'image/jpeg']}
+        acceptedFileTypes={['image/png', 'image/jpeg', 'image/webp']}
         labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'
         credits={false}
       />

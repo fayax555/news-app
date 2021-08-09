@@ -21,6 +21,8 @@ cloudinary.config({
 
 type ReqBody = {
   headline: string;
+  imageCaption?: string;
+  excerpt?: string;
   content: Descendant[];
   coverImage: {
     name: string;
@@ -39,6 +41,8 @@ export default async function handler(
   const {
     headline,
     content,
+    excerpt,
+    imageCaption,
     coverImage: { encodeData, name, size, type },
   } = req.body as ReqBody;
 
@@ -52,9 +56,17 @@ export default async function handler(
     console.log(cloudinaryRes);
 
     const updatedReqBody = {
-      nid: `${headline.trim().replace(/[ ]/g, '-')}-${nanoid()}`,
+      nid: `${headline
+        .trim()
+        .replace(/[ ]/g, '-')
+        .replace(
+          /[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi,
+          ''
+        )}-${nanoid()}`,
       headline,
       content,
+      imageCaption,
+      excerpt: excerpt!.slice(0, 15),
       coverImage: {
         name,
         size,

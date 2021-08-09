@@ -2,12 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
-import one from 'assets/sectionTwo/1.jpg';
-import two from 'assets/sectionTwo/2.jpg';
-import three from 'assets/sectionTwo/3.jpg';
-import four from 'assets/sectionTwo/4.jpg';
-import five from 'assets/sectionTwo/5.jpg';
-import six from 'assets/sectionTwo/6.jpg';
+import { Article } from './ArticleTypes';
 
 const SecondSectionWrap = styled.div`
   padding: 3rem 0;
@@ -32,29 +27,24 @@ const SecondSectionWrap = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  articles: Article[];
+}
 
-const SecondSection: FC<Props> = () => {
-  const data = [
-    { title: 'Is the Designer Facing Extinction?', img: one },
-    { title: 'Guide to WordPress Post Revisions', img: two },
-    { title: 'How To Choose The Right Hosting For Your Blog', img: three },
-    { title: 'Teach Your Kids to Code Playground with Tynker', img: four },
-    { title: 'Guide to WordPress Post Revisions', img: five },
-    { title: 'Guide to WordPress Post Revisions', img: six },
-  ];
-
+const SecondSection: FC<Props> = ({ articles }) => {
   return (
     <SecondSectionWrap>
-      {data.map(({ title, img }, index) => (
-        <Link key={title + index} href='/news/id' passHref>
-          <a>
-            <Image width={400} src={img} alt='' />
-            <h2>{title}</h2>
-            <p>Lorem ipsum nimi sequi perferendis commodi...</p>
-          </a>
-        </Link>
-      ))}
+      {articles
+        .slice(5)
+        .map(({ nid, headline, excerpt, coverImage: { imgUrl } }) => (
+          <Link key={nid} href={`/news/${nid}`} passHref>
+            <a>
+              <Image width={400} height={500} src={imgUrl} alt='' />
+              <h2>{headline}</h2>
+              <p>{excerpt}</p>
+            </a>
+          </Link>
+        ))}
     </SecondSectionWrap>
   );
 };

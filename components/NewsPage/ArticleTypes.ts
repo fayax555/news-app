@@ -1,10 +1,13 @@
 import { ReactElement } from 'react';
+import { Descendant } from 'slate';
 
 export interface Article {
   _id: string;
   nid: string;
   headline: string;
-  content: any;
+  imageCaption?: string;
+  excerpt?: string;
+  content: Descendant[];
   coverImage: {
     name: string;
     size: number;

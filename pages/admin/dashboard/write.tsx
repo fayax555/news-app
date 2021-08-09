@@ -12,7 +12,9 @@ const SlateEditor = dynamic(
 );
 
 const IndexPage: FC = () => {
-  const titleInputRef = useRef<HTMLInputElement>(null);
+  const headlineRef = useRef<HTMLInputElement>(null);
+  const imageCaptionRef = useRef<HTMLInputElement>(null);
+  const excerptRef = useRef<HTMLInputElement>(null);
 
   // cover image from filepond
   const [files, setFiles] = useState<
@@ -37,7 +39,9 @@ const IndexPage: FC = () => {
     setIsSubmit(true);
     console.log('submit button clicked');
 
-    const inputTitle = titleInputRef.current!.value;
+    const headline = headlineRef.current!.value;
+    const imageCaption = imageCaptionRef.current!.value;
+    const excerpt = excerptRef.current!.value;
 
     const {
       getFileEncodeBase64String,
@@ -46,7 +50,9 @@ const IndexPage: FC = () => {
     } = files[0];
 
     const reqBody = {
-      headline: inputTitle,
+      headline,
+      imageCaption,
+      excerpt,
       content: value,
       coverImage: {
         name: filenameWithoutExtension,
@@ -74,12 +80,18 @@ const IndexPage: FC = () => {
           <div>
             <h2>Add New Article</h2>
             <input
-              ref={titleInputRef}
+              ref={headlineRef}
               type='text'
-              placeholder='Enter title here'
+              placeholder='Headline'
               required
             />
             <FilePondComponent files={files} setFiles={setFiles} />
+            <input
+              ref={imageCaptionRef}
+              type='text'
+              placeholder='Image Caption'
+            />
+            <input ref={excerptRef} type='text' placeholder='Excerpt' />
             <SlateEditor value={value} setValue={setValue} />
           </div>
           <div>

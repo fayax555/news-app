@@ -20,10 +20,7 @@ const Header: FC<{ articles: Article[] }> = ({ articles }) => {
           />
           <div>
             <h1>{articles[0].headline}</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. In,
-              voluptatem.
-            </p>
+            <p>{articles[0].excerpt!.slice(0, 180)}</p>
           </div>
         </LinkWrap>
       </Link>
