@@ -2,7 +2,7 @@ import { connectToDatabase } from 'util/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { customAlphabet } from 'nanoid';
 import { v2 as cloudinary } from 'cloudinary';
-import { Descendant } from 'slate';
+import { Content } from 'components/NewsPage/ArticleTypes';
 const nanoid = customAlphabet('1234567890', 4);
 
 export const config = {
@@ -23,7 +23,7 @@ type ReqBody = {
   headline: string;
   imageCaption?: string;
   excerpt?: string;
-  content: Descendant[];
+  content: Content;
   coverImage: {
     name: string;
     size: number;

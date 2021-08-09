@@ -7,7 +7,7 @@ export interface Article {
   headline: string;
   imageCaption?: string;
   excerpt?: string;
-  content: Descendant[];
+  content: Content[];
   coverImage: {
     name: string;
     size: number;

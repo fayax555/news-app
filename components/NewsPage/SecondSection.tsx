@@ -39,7 +39,7 @@ const SecondSection: FC<Props> = ({ articles }) => {
         .map(({ nid, headline, excerpt, coverImage: { imgUrl } }) => (
           <Link key={nid} href={`/news/${nid}`} passHref>
             <a>
-              <Image width={400} height={500} src={imgUrl} alt='' />
+              <Image width={400} height={280} src={imgUrl} alt='' />
               <h2>{headline}</h2>
               <p>{excerpt}</p>
             </a>

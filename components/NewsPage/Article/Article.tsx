@@ -20,7 +20,7 @@ const Article: FC<{ article: ArticleProps }> = ({
   // console.log(content);
 
   const contentData = content.map(
-    ({ children, type, videoId, tweetId }: Content, index: number) => {
+    ({ children, type, videoId, tweetId }, index: number) => {
       const textContent = children.map(
         ({ type, url, children, text, bold, italic, underline }, markIndex) => {
           if (text) text = text.replace(/  +/g, '');
