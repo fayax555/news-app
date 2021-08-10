@@ -70,12 +70,11 @@ export default async function handler(
       },
     };
 
-    const result = await db
-      .collection('articles')
-      .insertOne({ ...updatedReqBody });
+    await db.collection('articles').insertOne({ ...updatedReqBody });
 
     res.status(201).json({ message: 'Success!', article: updatedReqBody });
   } catch (error) {
     console.log(error);
+    alert('An Error Occurred')
   }
 }

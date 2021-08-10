@@ -14,10 +14,11 @@ const Article: FC<{ article: ArticleProps }> = ({
   article: {
     headline,
     content,
+    imageCaption,
     coverImage: { name, size, type, imgUrl },
   },
 }) => {
-  // console.log(content);
+  console.log(content);
 
   const contentData = content.map(
     ({ children, type, videoId, tweetId }, index: number) => {
@@ -104,6 +105,9 @@ const Article: FC<{ article: ArticleProps }> = ({
       <h1>{headline}</h1>
       <div>
         <Image src={imgUrl} height={350} width={700} alt='' />
+        <p style={{ fontSize: '0.8rem', marginTop: '-0.2rem' }}>
+          {imageCaption}
+        </p>
       </div>
       {contentData}
       {/* <ArticleInfo name={article.name} date={article.date} /> */}

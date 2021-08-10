@@ -86,7 +86,6 @@ export const FormWrap = styled.div`
 `;
 
 // Header.tsx
-
 export const HeaderWrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -121,7 +120,24 @@ export const HeaderLeft = styled.div`
 `;
 
 export const LinkWrap = styled.a`
-  position: relative;
+  > div {
+    position: relative;
+
+    > div {
+      position: absolute;
+      bottom: 7px;
+      background-color: rgba(1, 100, 0, 0.75);
+      padding: 0.75rem 1rem;
+      color: #fff;
+      width: 100%;
+
+      > h1 {
+        font-size: 1.5rem;
+        line-height: 1.4;
+        padding-bottom: 0.5rem;
+      }
+    }
+  }
 
   &:hover {
     img {
@@ -130,25 +146,6 @@ export const LinkWrap = styled.a`
 
     h1 {
       text-decoration: underline;
-    }
-  }
-
-  > * {
-    position: absolute;
-    z-index: 10;
-  }
-
-  > div {
-    bottom: 0;
-    padding: 0.75rem 1rem;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.75);
-    width: 100%;
-
-    h1 {
-      font-size: 1.5rem;
-      line-height: 1.4;
-      padding-bottom: 0.5rem;
     }
   }
 `;

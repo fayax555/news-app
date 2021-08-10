@@ -7,7 +7,6 @@ import { Article } from './ArticleTypes';
 
 const ListWrap = styled.div`
   display: flex;
-
   font-size: 0.6rem;
   gap: 3rem;
   padding-top: 3rem;
