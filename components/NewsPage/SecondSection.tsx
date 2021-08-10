@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Article } from './ArticleTypes';
+import ArticleItem from './ArticleItem';
 
 const SecondSectionWrap = styled.div`
   padding: 3rem 0;
@@ -37,13 +38,10 @@ const SecondSection: FC<Props> = ({ articles }) => {
       {articles
         .slice(5)
         .map(({ nid, headline, excerpt, coverImage: { imgUrl } }) => (
-          <Link key={nid} href={`/news/${nid}`} passHref>
-            <a>
-              <Image width={400} height={280} src={imgUrl} alt='' />
-              <h2>{headline}</h2>
-              <p>{excerpt}</p>
-            </a>
-          </Link>
+          <ArticleItem
+            key={nid}
+            props={{ nid, headline, excerpt, imgUrl, height: 280, width: 400 }}
+          />
         ))}
     </SecondSectionWrap>
   );

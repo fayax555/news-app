@@ -139,9 +139,13 @@ export const LinkWrap = styled.a`
       color: #fff;
 
       > h1 {
-        font-size: 1.5rem;
+        font-size: clamp(0.8rem, 2.5vw, 1.75rem);
         line-height: 1.4;
         padding-bottom: 0.5rem;
+      }
+
+      > p {
+        font-size: clamp(0.6rem, 2vw, 1rem);
       }
     }
   }
