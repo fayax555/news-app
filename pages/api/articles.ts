@@ -1,9 +1,7 @@
 import { connectToDatabase } from 'util/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { customAlphabet } from 'nanoid';
 import { v2 as cloudinary } from 'cloudinary';
 import { Content } from 'components/NewsPage/ArticleTypes';
-const nanoid = customAlphabet('1234567890', 4);
 
 export const config = {
   api: {
@@ -54,15 +52,12 @@ export default async function handler(
       }
     );
     console.log(cloudinaryRes);
+    const d = (start: number, end: number) =>
+      new Date().toString().slice(start, end);
+    const dateString = d(13, 15) + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
 
     const updatedReqBody = {
-      nid: `${headline
-        .trim()
-        .replace(/[ ]/g, '-')
-        .replace(
-          /[`~!@#$%^&*()_|+\=?;:'",.<>\{\}\[\]\\\/]/gi,
-          ''
-        )}-${nanoid()}`,
+      nid: dateString,
       headline,
       content,
       imageCaption,
