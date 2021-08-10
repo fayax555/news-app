@@ -140,7 +140,7 @@ export const LinkWrap = styled.a`
 
   > div {
     bottom: 0;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     color: #fff;
     background-color: rgba(0, 0, 0, 0.75);
     width: 100%;

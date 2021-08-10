@@ -23,7 +23,7 @@ type ReqBody = {
   headline: string;
   imageCaption?: string;
   excerpt?: string;
-  content: Content;
+  content: Content[];
   coverImage: {
     name: string;
     size: number;
@@ -66,7 +66,7 @@ export default async function handler(
       headline,
       content,
       imageCaption,
-      excerpt: excerpt!.slice(0, 15),
+      excerpt,
       coverImage: {
         name,
         size,

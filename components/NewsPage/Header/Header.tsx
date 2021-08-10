@@ -20,7 +20,7 @@ const Header: FC<{ articles: Article[] }> = ({ articles }) => {
           />
           <div>
             <h1>{articles[0].headline}</h1>
-            <p>{articles[0].excerpt!.slice(0, 180)}</p>
+            <p>{articles[0].excerpt}</p>
           </div>
         </LinkWrap>
       </Link>
