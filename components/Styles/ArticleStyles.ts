@@ -93,15 +93,21 @@ export const HeaderWrap = styled.div`
 `;
 
 export const HeaderLeft = styled.div`
+  padding-right: 0.75rem;
+
   h1 {
     font-size: 1.5rem;
   }
 
   > a {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
     gap: 1rem;
     padding-top: 2rem;
+
+    div {
+      width: 100px;
+      height: 80px;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -112,7 +118,7 @@ export const HeaderLeft = styled.div`
     }
 
     h2 {
-      font-size: 1rem;
+      font-size: 0.9rem;
       line-height: 1.4;
       color: #444;
     }
@@ -122,14 +128,15 @@ export const HeaderLeft = styled.div`
 export const LinkWrap = styled.a`
   > div {
     position: relative;
+    padding-top: 1.25rem;
 
     > div {
       position: absolute;
-      bottom: 7px;
-      background-color: rgba(1, 100, 0, 0.75);
+      bottom: 10px;
+      background-color: rgba(0, 0, 0, 0.75);
       padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
       color: #fff;
-      width: 100%;
 
       > h1 {
         font-size: 1.5rem;

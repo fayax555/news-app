@@ -12,15 +12,13 @@ const Header: FC<{ articles: Article[] }> = ({ articles }) => {
       <LatestNews articles={articles} />
       <Link href={`/news/${articles[0].nid}`} passHref>
         <LinkWrap>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            style={{ width: '100%' }}
-            src={articles[0].coverImage.imgUrl}
-            // width={1100}
-            // height={700}
-            alt=''
-          />
           <div>
+            <Image
+              src={articles[0].coverImage.imgUrl}
+              width={1100}
+              height={800}
+              alt=''
+            />
             <div>
               <h1>{articles[0].headline}</h1>
               <p>{articles[0].excerpt}</p>

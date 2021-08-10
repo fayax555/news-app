@@ -15,8 +15,10 @@ const LatestNews: FC<Props> = ({ articles }) => {
       {articles.slice(1, 5).map(({ headline, nid, coverImage: { imgUrl } }) => (
         <Link key={nid} href={`/news/${nid}`} passHref>
           <a>
-            <Image src={imgUrl} width={450} height={400} alt='' />
-            <h2>{headline.slice(0,180)}</h2>
+            <div>
+              <Image src={imgUrl} width={100} height={80} alt='' />
+            </div>
+            <h2>{headline.slice(0, 180)}</h2>
           </a>
         </Link>
       ))}

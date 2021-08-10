@@ -52,12 +52,15 @@ export default async function handler(
       }
     );
     console.log(cloudinaryRes);
+    
     const d = (start: number, end: number) =>
       new Date().toString().slice(start, end);
-    const dateString = d(13, 15) + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
+    const month = new Date().toISOString().slice(5, 7);
+    const dateString =
+      d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
 
     const updatedReqBody = {
-      nid: dateString,
+      nid: String(Number(dateString) - 210810103833),
       headline,
       content,
       imageCaption,
@@ -75,6 +78,6 @@ export default async function handler(
     res.status(201).json({ message: 'Success!', article: updatedReqBody });
   } catch (error) {
     console.log(error);
-    alert('An Error Occurred')
+    alert('An Error Occurred');
   }
 }
