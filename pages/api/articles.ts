@@ -51,8 +51,26 @@ export default async function handler(
         upload_preset: 'cover_image',
       }
     );
-    console.log(cloudinaryRes);
-    
+
+    const contentCopy = Array.from(content);
+
+    const contentres = contentCopy.map(async (c) => {
+      if (c.type === 'image') {
+        const cloudinaryEditorImages = await cloudinary.uploader.upload(
+          String(c.url),
+          {
+            upload_preset: 'editor',
+          }
+        );
+        console.log(cloudinaryEditorImages.secure_url);
+
+        // cloudinaryEditorImages.then((res: any) => console.log(res));
+        // return cloudinaryEditorImages.secure_url;
+      }
+    });
+
+    // contentres[1].then((res) => console.log(res));
+
     const d = (start: number, end: number) =>
       new Date().toString().slice(start, end);
     const month = new Date().toISOString().slice(5, 7);
