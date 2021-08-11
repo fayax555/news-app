@@ -44,9 +44,7 @@ export default async function handler(
     coverImage: { encodeData, name, size, type },
   } = req.body as ReqBody;
 
-  const contentCopy = Array.from(content);
-
-  const contentres = contentCopy.map(async (c) => {
+  const contentRes = content.map(async (c) => {
     if (c.type === 'image') {
       const cloudinaryEditorImages = await cloudinary.uploader.upload(
         String(c.url),
@@ -57,6 +55,7 @@ export default async function handler(
 
       c.url = cloudinaryEditorImages.secure_url;
 
+      // probably would work without the return statement
       return cloudinaryEditorImages.secure_url;
     }
   });
@@ -76,9 +75,7 @@ export default async function handler(
     const dateString =
       d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
 
-    await Promise.all([...contentres]).then(async () => {
-      console.log(contentCopy);
-
+    await Promise.all([...contentRes]).then(async () => {
       const updatedReqBody = {
         nid: String(Number(dateString) - 210810103833),
         headline,
@@ -99,6 +96,6 @@ export default async function handler(
     });
   } catch (error) {
     console.log(error);
-    alert('An Error Occurred');
+    res.status(500).json({ message: 'An Error Occurred' });
   }
 }

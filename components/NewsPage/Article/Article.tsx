@@ -9,6 +9,7 @@ import {
   Link,
 } from 'components/Dashboard/SlateEditor/EditorStyles';
 import { Article as ArticleProps } from '../ArticleTypes';
+import { ContentImage } from '../../Styles/ArticleStyles';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
@@ -78,7 +79,11 @@ const Article: FC<{ article: ArticleProps }> = ({
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
       if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;
       if (type === 'image')
-        return <Image src={String(url)} width={600} height={340} alt='' />;
+        return (
+          <ContentImage key={type + index}>
+            <Image src={String(url)} width={600} height={340} alt='' />;
+          </ContentImage>
+        );
       if (type === 'cc')
         return <CaptionBox key={type + index}>{textContent}</CaptionBox>;
       if (type === 'youtube') {
