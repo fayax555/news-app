@@ -11,10 +11,15 @@ export type CustomElement = {
   children: CustomText[];
   videoId?: string;
   tweetId?: string;
+  url?: string;
+  copy?: string;
 };
 
 export type CustomText = {
   text: string;
+  type?: string;
+  url?: string;
+  copy?: string;
 };
 
 export interface SlateEditorProps {

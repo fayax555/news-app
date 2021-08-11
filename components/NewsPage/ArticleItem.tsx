@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import Image, { ImageProps } from 'next/image';
+import Image from 'next/image';
 
 interface Props {
   props: {

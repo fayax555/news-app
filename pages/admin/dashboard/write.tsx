@@ -33,6 +33,15 @@ const IndexPage: FC = () => {
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
 
+  // console.log(value);
+
+  // const getEditorImages = Array.from(value).map((val, index) => {
+  //   if (val.type === 'image') {
+  //     val.copy = `image${index}`;
+  //   }
+  // });
+  // console.log(getEditorImages);
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 

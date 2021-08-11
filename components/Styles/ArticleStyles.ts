@@ -15,7 +15,7 @@ export const ArticleWrap = styled.div`
   h1 {
     line-height: 1.2;
     font-size: 2.2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
   }
 
   h2 {
@@ -26,7 +26,7 @@ export const ArticleWrap = styled.div`
     font-size: 1.2rem;
   }
 
-  div {
+  > div {
     padding: 1rem 0;
   }
 

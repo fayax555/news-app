@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { Descendant } from 'slate';
 
 export interface Article {
   _id: string;
@@ -17,25 +16,26 @@ export interface Article {
 }
 
 export interface Content {
-  children: [
-    {
-      type: string;
-      url: string;
-      children: [
-        {
-          text: ReactElement<any, any>;
-          bold: boolean;
-          italic: boolean;
-          underline: boolean;
-        }
-      ];
-      text?: any;
-      bold?: boolean;
-      italic?: boolean;
-      underline?: boolean;
-    }
-  ];
+  url?: string;
+  children: ContentChildren[];
   type: string;
   videoId: string;
   tweetId: string;
+}
+
+export interface ContentChildren {
+  type: string;
+  url: string;
+  children: [
+    {
+      text: ReactElement<any, any>;
+      bold: boolean;
+      italic: boolean;
+      underline: boolean;
+    }
+  ];
+  text?: any;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
 }

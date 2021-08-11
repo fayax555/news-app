@@ -44,6 +44,23 @@ export default async function handler(
     coverImage: { encodeData, name, size, type },
   } = req.body as ReqBody;
 
+  const contentCopy = Array.from(content);
+
+  const contentres = contentCopy.map(async (c) => {
+    if (c.type === 'image') {
+      const cloudinaryEditorImages = await cloudinary.uploader.upload(
+        String(c.url),
+        {
+          upload_preset: 'editor',
+        }
+      );
+
+      c.url = cloudinaryEditorImages.secure_url;
+
+      return cloudinaryEditorImages.secure_url;
+    }
+  });
+
   try {
     const cloudinaryRes = await cloudinary.uploader.upload(
       `data:${type};base64,${encodeData}`,
@@ -52,48 +69,34 @@ export default async function handler(
       }
     );
 
-    const contentCopy = Array.from(content);
-
-    const contentres = contentCopy.map(async (c) => {
-      if (c.type === 'image') {
-        const cloudinaryEditorImages = await cloudinary.uploader.upload(
-          String(c.url),
-          {
-            upload_preset: 'editor',
-          }
-        );
-        console.log(cloudinaryEditorImages.secure_url);
-
-        // cloudinaryEditorImages.then((res: any) => console.log(res));
-        // return cloudinaryEditorImages.secure_url;
-      }
-    });
-
-    // contentres[1].then((res) => console.log(res));
-
     const d = (start: number, end: number) =>
       new Date().toString().slice(start, end);
+
     const month = new Date().toISOString().slice(5, 7);
     const dateString =
       d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
 
-    const updatedReqBody = {
-      nid: String(Number(dateString) - 210810103833),
-      headline,
-      content,
-      imageCaption,
-      excerpt,
-      coverImage: {
-        name,
-        size,
-        type,
-        imgUrl: cloudinaryRes.secure_url,
-      },
-    };
+    await Promise.all([...contentres]).then(async () => {
+      console.log(contentCopy);
 
-    await db.collection('articles').insertOne({ ...updatedReqBody });
+      const updatedReqBody = {
+        nid: String(Number(dateString) - 210810103833),
+        headline,
+        content,
+        imageCaption,
+        excerpt,
+        coverImage: {
+          name,
+          size,
+          type,
+          imgUrl: cloudinaryRes.secure_url,
+        },
+      };
 
-    res.status(201).json({ message: 'Success!', article: updatedReqBody });
+      await db.collection('articles').insertOne({ ...updatedReqBody });
+
+      res.status(201).json({ message: 'Success!', article: updatedReqBody });
+    });
   } catch (error) {
     console.log(error);
     alert('An Error Occurred');

@@ -8,7 +8,7 @@ import {
   TweetWrap,
   Link,
 } from 'components/Dashboard/SlateEditor/EditorStyles';
-import { Article as ArticleProps, Content } from '../ArticleTypes';
+import { Article as ArticleProps } from '../ArticleTypes';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
@@ -21,7 +21,7 @@ const Article: FC<{ article: ArticleProps }> = ({
   console.log(content);
 
   const contentData = content.map(
-    ({ children, type, videoId, tweetId }, index: number) => {
+    ({ children, type, url, videoId, tweetId }, index: number) => {
       const textContent = children.map(
         ({ type, url, children, text, bold, italic, underline }, markIndex) => {
           if (text) text = text.replace(/  +/g, '');
@@ -77,6 +77,8 @@ const Article: FC<{ article: ArticleProps }> = ({
       if (type === 'h2') return <h2 key={type + index}>{textContent}</h2>;
       if (type === 'h3') return <h3 key={type + index}>{textContent}</h3>;
       if (type === 'paragraph') return <p key={type + index}>{textContent}</p>;
+      if (type === 'image')
+        return <Image src={String(url)} width={600} height={340} alt='' />;
       if (type === 'cc')
         return <CaptionBox key={type + index}>{textContent}</CaptionBox>;
       if (type === 'youtube') {
@@ -104,10 +106,8 @@ const Article: FC<{ article: ArticleProps }> = ({
     <ArticleWrap>
       <h1>{headline}</h1>
       <div>
-        <Image src={imgUrl} height={350} width={700} alt='' />
-        <p style={{ fontSize: '0.8rem', marginTop: '-0.2rem' }}>
-          {imageCaption}
-        </p>
+        <Image src={imgUrl} height={400} width={700} alt='' />
+        <CaptionBox>{imageCaption}</CaptionBox>
       </div>
       {contentData}
       {/* <ArticleInfo name={article.name} date={article.date} /> */}
