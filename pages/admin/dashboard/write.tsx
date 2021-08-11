@@ -3,8 +3,8 @@ import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
-import FilePondComponent from 'components/Dashboard/FilePond';
-import { EditorForm, EditorFormWrap } from 'components/Styles/AdminStyles';
+import FilePondComponent from 'components/Dashboard/SlateEditor/FilePond';
+import { EditorForm, EditorFormWrap } from 'components/Styles/DashboardStyles';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/SlateEditor/SlateEditor'),
@@ -32,15 +32,6 @@ const IndexPage: FC = () => {
     },
   ]);
   const [isSubmit, setIsSubmit] = useState(false);
-
-  // console.log(value);
-
-  // const getEditorImages = Array.from(value).map((val, index) => {
-  //   if (val.type === 'image') {
-  //     val.copy = `image${index}`;
-  //   }
-  // });
-  // console.log(getEditorImages);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

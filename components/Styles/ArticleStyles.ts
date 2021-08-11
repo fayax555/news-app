@@ -33,6 +33,7 @@ export const ArticleWrap = styled.div`
   p {
     font-size: 1.15rem;
     max-width: 670px;
+    margin-bottom: -0.5rem;
   }
 
   p:empty:before,
@@ -47,7 +48,7 @@ export const ArticleWrap = styled.div`
 `;
 
 export const ContentImage = styled.div`
-  padding-top: 0.3rem !important;
+  padding-top: 1rem !important;
   padding-bottom: 0 !important;
 `;
 

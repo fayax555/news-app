@@ -1,13 +1,18 @@
 import { FC } from 'react';
-import Navbar from 'components/Dashboard/Navbar';
 import Layout from 'components/Layout/Layout';
+import Navbar from 'components/Dashboard/Navbar';
+import styled from 'styled-components';
+
+const DashBoardWrap = styled.div``;
 
 interface Props {}
 
 const Dashboard: FC<Props> = () => {
   return (
     <Layout>
-      <Navbar />
+      <DashBoardWrap>
+        <Navbar />
+      </DashBoardWrap>
     </Layout>
   );
 };
