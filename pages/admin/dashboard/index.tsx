@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Layout from 'components/Layout/Layout';
-import Navbar from 'components/Dashboard/Navbar';
+import Navbar from 'components/Dashboard/Navbar/Navbar';
 import styled from 'styled-components';
 
 const DashBoardWrap = styled.div``;

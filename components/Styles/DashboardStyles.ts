@@ -57,6 +57,7 @@ export const NavbarWrap = styled.section`
   h3 {
     padding: 1rem;
     padding-left: 1.5rem;
+    padding-right: 1.75rem;
   }
 `;
 
@@ -72,7 +73,7 @@ export const List = styled.ul`
 
     > ul {
       display: none;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       background-color: #444;
     }
 
@@ -82,10 +83,12 @@ export const List = styled.ul`
       li {
         a {
           padding: 0.25rem 1.75rem;
-          opacity: 0.5;
+          opacity: 0.8;
 
           &:hover {
             opacity: 1;
+            font-weight: bold;
+            color: #fff;
           }
         }
       }
