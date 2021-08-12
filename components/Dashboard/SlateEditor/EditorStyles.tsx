@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const EditorWrap = styled.div`
-  border: 1px solid #444;
-  padding-bottom: 5rem;
+  border: 1px solid #ddd;
+  /* padding-bottom: 5rem; */
 `;
 
 export const Wrap = styled.div`

@@ -8,41 +8,38 @@ interface Props {}
 const Navbar: FC<Props> = () => {
   const navItems = [
     {
-      link: '',
       name: 'Articles',
       subItems: [
-        { link: 'articles', name: 'All Articles' },
-        { link: 'write', name: 'Add New' },
-        { link: 'categories', name: 'Categories' },
+        { link: 'articles/all', name: 'All Articles' },
+        { link: 'articles/write', name: 'Add New' },
+        { link: 'articles/categories', name: 'Categories' },
       ],
     },
     {
-      link: '',
       name: 'Comments',
       subItems: [{ link: 'comments', name: 'All Comments' }],
     },
     {
-      link: '',
       name: 'Users',
       subItems: [
         { link: 'users', name: 'All users' },
         { link: 'addnewuser', name: 'Add New User' },
       ],
     },
-    { link: '', name: 'Appearance' },
-    { link: '', name: 'Settings' },
+    { name: 'Appearance' },
+    { name: 'Settings' },
   ];
 
   return (
     <NavbarWrap>
       <Link href='/admin/dashboard' passHref>
-        <h3>
-          <a>Dashboard</a>
-        </h3>
+        <a>
+          <h3>Dashboard</h3>
+        </a>
       </Link>
       <List>
-        {navItems.map(({ link, name, subItems }) => (
-          <NavbarItem key={name} props={{ link, name, subItems }} />
+        {navItems.map(({ name, subItems }) => (
+          <NavbarItem key={name} props={{ name, subItems }} />
         ))}
       </List>
     </NavbarWrap>

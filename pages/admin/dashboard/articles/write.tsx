@@ -4,7 +4,11 @@ import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/SlateEditor/FilePond';
-import { EditorForm, EditorFormWrap } from 'components/Styles/DashboardStyles';
+import {
+  DashboardWrap,
+  EditorForm,
+  EditorFormWrap,
+} from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 
 const SlateEditor = dynamic(
@@ -76,38 +80,40 @@ const IndexPage: FC = () => {
 
   return (
     <Layout title='Add New Article'>
-      <EditorFormWrap>
+      <DashboardWrap>
         <Navbar />
-        <EditorForm onSubmit={handleSubmit}>
-          <div>
-            <h2>Add New Article</h2>
-            <input
-              ref={headlineRef}
-              type='text'
-              placeholder='Headline'
-              required
-            />
-            <FilePondComponent files={files} setFiles={setFiles} />
-            <input
-              ref={imageCaptionRef}
-              type='text'
-              placeholder='Image Caption'
-            />
-            <input ref={excerptRef} type='text' placeholder='Excerpt' />
-            <SlateEditor value={value} setValue={setValue} />
-          </div>
-          <div>
-            <Button
-              fs='1rem'
-              isSubmit={isSubmit}
-              disabled={false}
-              type='submit'
-            >
-              Publish
-            </Button>
-          </div>
-        </EditorForm>
-      </EditorFormWrap>
+        <EditorFormWrap>
+          <EditorForm onSubmit={handleSubmit}>
+            <div>
+              <h2>Add New Article</h2>
+              <input
+                ref={headlineRef}
+                type='text'
+                placeholder='Headline'
+                required
+              />
+              <FilePondComponent files={files} setFiles={setFiles} />
+              <input
+                ref={imageCaptionRef}
+                type='text'
+                placeholder='Image Caption'
+              />
+              <input ref={excerptRef} type='text' placeholder='Excerpt' />
+              <SlateEditor value={value} setValue={setValue} />
+            </div>
+            <div>
+              <Button
+                fs='1rem'
+                isSubmit={isSubmit}
+                disabled={false}
+                type='submit'
+              >
+                Publish
+              </Button>
+            </div>
+          </EditorForm>
+        </EditorFormWrap>
+      </DashboardWrap>
     </Layout>
   );
 };

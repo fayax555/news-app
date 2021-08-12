@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Bar = styled.div`
   background-color: #111;
-  max-height: 40px;
+  min-height: 43px;
 
   > div {
     display: flex;
@@ -13,7 +13,7 @@ const Bar = styled.div`
     height: 100%;
     max-width: 1100px;
     padding: 0rem 2rem;
-    margin: -0.3rem auto;
+    margin: auto;
     color: #fff;
     text-align: right;
 

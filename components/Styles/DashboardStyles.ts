@@ -1,14 +1,22 @@
 import styled from 'styled-components';
 
-// pages/admin/dashboard
-export const EditorFormWrap = styled.section`
-  background-color: #f3f3f3;
-  min-height: 100vh;
+export const DashboardWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 1fr 11fr;
+  padding-bottom: 20rem;
+  background-color: #f3f3f3;
+
+  > div {
+    h2 {
+      text-align: center;
+    }
+  }
 `;
 
-// pages/admin/dashboard
+// pages/admin/dashboard/write
+export const EditorFormWrap = styled.section``;
+
+// pages/admin/dashboard/write
 export const EditorForm = styled.form`
   max-width: 750px;
   padding: 1rem;
@@ -51,6 +59,7 @@ export const NavbarWrap = styled.section`
   display: inline-block;
   font-weight: 600;
   min-height: 96.9vh;
+  width: 160px;
 
   a {
     display: inline-block;

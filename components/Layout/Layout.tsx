@@ -30,6 +30,6 @@ export default function Layout({
 
 Layout.defaultProps = {
   title: 'Newz | A News App',
-  description: 'A news app created with Next.js with its own CMS',
-  keywords: 'news, next.js, cms, maldives',
+  description: 'A news app with its own CMS created with Next.js and MongoDB',
+  keywords: 'news, next.js, mongodb, cms, maldives',
 };
