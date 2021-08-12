@@ -4,11 +4,7 @@ import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/SlateEditor/FilePond';
-import {
-  DashboardWrap,
-  EditorForm,
-  EditorFormWrap,
-} from 'components/Styles/DashboardStyles';
+import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 
 const SlateEditor = dynamic(
@@ -80,12 +76,12 @@ const IndexPage: FC = () => {
 
   return (
     <Layout title='Add New Article'>
-      <DashboardWrap>
+      <DashboardWrite>
         <Navbar />
-        <EditorFormWrap>
+        <div>
+          <h2>Add New Article</h2>
           <EditorForm onSubmit={handleSubmit}>
             <div>
-              <h2>Add New Article</h2>
               <input
                 ref={headlineRef}
                 type='text'
@@ -112,8 +108,8 @@ const IndexPage: FC = () => {
               </Button>
             </div>
           </EditorForm>
-        </EditorFormWrap>
-      </DashboardWrap>
+        </div>
+      </DashboardWrite>
     </Layout>
   );
 };

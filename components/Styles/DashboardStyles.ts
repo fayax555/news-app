@@ -1,20 +1,24 @@
 import styled from 'styled-components';
 
-export const DashboardWrap = styled.div`
+export const DashboardWrap = styled.section`
   display: grid;
   grid-template-columns: 1fr 11fr;
-  padding-bottom: 20rem;
   background-color: #f3f3f3;
 
   > div {
     h2 {
       text-align: center;
+      padding-top: 1rem;
     }
   }
 `;
 
 // pages/admin/dashboard/write
-export const EditorFormWrap = styled.section``;
+export const DashboardWrite = styled(DashboardWrap)`
+  > div {
+    padding-bottom: 30rem;
+  }
+`;
 
 // pages/admin/dashboard/write
 export const EditorForm = styled.form`
@@ -59,6 +63,7 @@ export const NavbarWrap = styled.section`
   display: inline-block;
   font-weight: 600;
   min-height: 96.9vh;
+  padding-bottom: 20rem;
   width: 160px;
 
   a {
