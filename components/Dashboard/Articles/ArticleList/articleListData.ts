@@ -1,5 +1,6 @@
 export const articleListData = [
   {
+    id: '1',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -7,6 +8,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '2',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -14,6 +16,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '3',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -21,6 +24,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '4',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -28,6 +32,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '5',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -35,6 +40,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '6',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -42,6 +48,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
+    id: '7',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',
@@ -49,27 +56,7 @@ export const articleListData = [
     date: '8/12/2021',
   },
   {
-    title: 'Sample Title',
-    author: 'John Doe',
-    category: 'General',
-    tags: 'politics',
-    date: '8/12/2021',
-  },
-  {
-    title: 'Sample Title',
-    author: 'John Doe',
-    category: 'General',
-    tags: 'politics',
-    date: '8/12/2021',
-  },
-  {
-    title: 'Sample Title',
-    author: 'John Doe',
-    category: 'General',
-    tags: 'politics',
-    date: '8/12/2021',
-  },
-  {
+    id: '8',
     title: 'Sample Title',
     author: 'John Doe',
     category: 'General',

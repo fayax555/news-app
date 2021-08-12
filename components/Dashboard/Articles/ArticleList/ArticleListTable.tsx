@@ -40,6 +40,7 @@ interface Props {}
 
 const ArticleListTable: FC<Props> = () => {
   const [isColChecked, setIsColChecked] = useState(false);
+  const [articleList, setArticleList] = useState(articleListData);
 
   return (
     <Table>
@@ -58,13 +59,19 @@ const ArticleListTable: FC<Props> = () => {
         <li>Date</li>
       </TableHead>
       <div>
-        {articleListData.map((tableFields, i) => (
-          <ArticleListTableField
-            key={i}
-            tableFields={tableFields}
-            isColChecked={isColChecked}
-          />
-        ))}
+        {articleList.map((tableFields) => {
+          const { id } = tableFields;
+
+          return (
+            <ArticleListTableField
+              key={id}
+              tableFields={tableFields}
+              isColChecked={isColChecked}
+              articleList={articleList}
+              setArticleList={setArticleList}
+            />
+          );
+        })}
       </div>
     </Table>
   );
