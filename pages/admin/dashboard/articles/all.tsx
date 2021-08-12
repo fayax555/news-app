@@ -2,20 +2,19 @@ import React, { FC } from 'react';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import Layout from 'components/Layout/Layout';
 import { DashboardWrap } from 'components/Styles/DashboardStyles';
+import ArticleList from 'components/Dashboard/Articles/ArticleList/ArticleList';
 
 interface Props {}
 
-const All: FC<Props> = () => {
+const AllArticlesPage: FC<Props> = () => {
   return (
-    <Layout title='All Aritlces'>
+    <Layout title='Aritlces'>
       <DashboardWrap>
         <Navbar />
-        <div>
-          <h2>All Articles</h2>
-        </div>
+        <ArticleList />
       </DashboardWrap>
     </Layout>
   );
 };
 
-export default All;
+export default AllArticlesPage;

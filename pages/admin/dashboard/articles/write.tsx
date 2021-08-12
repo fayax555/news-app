@@ -3,12 +3,12 @@ import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
-import FilePondComponent from 'components/Dashboard/SlateEditor/FilePond';
+import FilePondComponent from 'components/Dashboard/Articles/SlateEditor/FilePond';
 import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 
 const SlateEditor = dynamic(
-  () => import('components/Dashboard/SlateEditor/SlateEditor'),
+  () => import('components/Dashboard/Articles/SlateEditor/SlateEditor'),
   { ssr: false }
 );
 

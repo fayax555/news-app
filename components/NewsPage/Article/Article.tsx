@@ -7,7 +7,7 @@ import {
   CaptionBox,
   TweetWrap,
   Link,
-} from 'components/Dashboard/SlateEditor/EditorStyles';
+} from 'components/Dashboard/Articles/SlateEditor/EditorStyles';
 import { Article as ArticleProps } from '../ArticleTypes';
 import { ContentImage } from '../../Styles/ArticleStyles';
 

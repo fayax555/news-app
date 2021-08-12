@@ -6,9 +6,11 @@ export const DashboardWrap = styled.section`
   background-color: #f3f3f3;
 
   > div {
+    padding: 0 2rem;
+
     h2 {
       text-align: center;
-      padding-top: 1rem;
+      padding: 1rem;
     }
   }
 `;
