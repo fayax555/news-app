@@ -5,6 +5,7 @@ import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/SlateEditor/FilePond';
 import { EditorForm, EditorFormWrap } from 'components/Styles/DashboardStyles';
+import Navbar from 'components/Dashboard/Navbar/Navbar';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/SlateEditor/SlateEditor'),
@@ -76,6 +77,7 @@ const IndexPage: FC = () => {
   return (
     <Layout title='Add New Article'>
       <EditorFormWrap>
+        <Navbar />
         <EditorForm onSubmit={handleSubmit}>
           <div>
             <h2>Add New Article</h2>

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 export const EditorFormWrap = styled.section`
   background-color: #f3f3f3;
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 10fr;
 `;
 
 // pages/admin/dashboard
@@ -48,7 +50,7 @@ export const NavbarWrap = styled.section`
   color: #f4f4f4;
   display: inline-block;
   font-weight: 600;
-  min-height: 94.5vh;
+  min-height: 96.9vh;
 
   a {
     display: inline-block;

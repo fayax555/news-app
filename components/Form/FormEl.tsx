@@ -3,7 +3,6 @@ import {
   Dispatch,
   SetStateAction,
   memo,
-  ChangeEventHandler,
   ChangeEvent,
 } from 'react';
 import styled from 'styled-components';
