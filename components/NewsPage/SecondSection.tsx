@@ -37,10 +37,18 @@ const SecondSection: FC<Props> = ({ articles }) => {
     <SecondSectionWrap>
       {articles
         .slice(5)
-        .map(({ nid, headline, excerpt, coverImage: { imgUrl } }) => (
+        .map(({ _id, nid, headline, excerpt, coverImage: { imgUrl } }) => (
           <ArticleItem
             key={nid}
-            props={{ nid, headline, excerpt, imgUrl, height: 280, width: 400 }}
+            props={{
+              _id,
+              nid,
+              headline,
+              excerpt,
+              imgUrl,
+              height: 280,
+              width: 400,
+            }}
           />
         ))}
     </SecondSectionWrap>

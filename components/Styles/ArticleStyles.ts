@@ -109,14 +109,17 @@ export const HeaderLeft = styled.div`
     gap: 1rem;
     padding-top: 2rem;
 
-    div {
+    div:first-child {
       width: 100px;
       height: 80px;
     }
 
-    &:hover {
-      text-decoration: underline;
+    div:nth-child(2) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
 
+    &:hover {
       img {
         opacity: 0.8;
       }
@@ -126,6 +129,10 @@ export const HeaderLeft = styled.div`
       font-size: 0.9rem;
       line-height: 1.4;
       color: #444;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

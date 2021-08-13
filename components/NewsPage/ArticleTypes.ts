@@ -1,8 +1,7 @@
-import { ObjectId } from 'mongodb';
 import { ReactElement } from 'react';
 
 export interface Article {
-  _id: ObjectId;
+  _id: string;
   nid: string;
   headline: string;
   imageCaption?: string;

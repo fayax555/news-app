@@ -63,7 +63,7 @@ const ArticleListTable: FC<Props> = ({ articles }) => {
           return (
             <ArticleListTableField
               key={String(_id)}
-              id={_id}
+              _id={_id}
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}

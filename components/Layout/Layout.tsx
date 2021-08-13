@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
 import TopBar from 'components/TopBar';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 interface LayoutProps {
   title?: string;
@@ -15,6 +17,8 @@ export default function Layout({
   keywords,
   children,
 }: LayoutProps) {
+  dayjs.extend(relativeTime);
+
   return (
     <>
       <Head>

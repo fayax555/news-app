@@ -3,7 +3,7 @@ import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { ObjectId } from 'mongodb';
+import dayjs from 'dayjs';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -42,7 +42,7 @@ const TableBodyField = styled.ul`
 `;
 
 interface Props {
-  id: ObjectId;
+  _id: string;
   nid: string;
   headline: string;
   isColChecked: boolean;
@@ -51,7 +51,7 @@ interface Props {
 }
 
 const ArticleListTableField: FC<Props> = ({
-  id,
+  _id,
   nid,
   headline,
   isColChecked,
@@ -60,10 +60,11 @@ const ArticleListTableField: FC<Props> = ({
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
-  const dateFromObjectId = (id: ObjectId) =>
-    new Date(parseInt(String(id).substring(0, 8), 16) * 1000);
+  const dateFromObjectId = (id: string) =>
+    new Date(parseInt(id.substring(0, 8), 16) * 1000);
 
-  console.log(dateFromObjectId(id));
+  const date = dayjs(dateFromObjectId(_id)).format('DD/MM/YY HH:mm:ss');
+  console.log(date);
 
   useEffect(() => {
     if (isColChecked) {
@@ -102,7 +103,7 @@ const ArticleListTableField: FC<Props> = ({
       </li>
       <li>John Doe</li>
       <li>General</li>
-      <li>13/8/2021</li>
+      <li>{date}</li>
     </TableBodyField>
   );
 };
