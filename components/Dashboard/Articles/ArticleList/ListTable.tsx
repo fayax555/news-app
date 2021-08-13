@@ -1,7 +1,7 @@
 import { Article } from 'components/NewsPage/ArticleTypes';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import ArticleListTableField from './ArticleListTableField';
+import ArticleListTableField from './ListTableField';
 
 const Table = styled.section`
   display: grid;

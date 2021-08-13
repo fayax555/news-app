@@ -39,6 +39,10 @@ const TableBodyField = styled.ul`
       }
     }
   }
+
+  li:last-child div {
+    position: absolute;
+  }
 `;
 
 interface Props {
@@ -63,8 +67,7 @@ const ArticleListTableField: FC<Props> = ({
   const dateFromObjectId = (id: string) =>
     new Date(parseInt(id.substring(0, 8), 16) * 1000);
 
-  const date = dayjs(dateFromObjectId(_id)).format('DD/MM/YY HH:mm:ss');
-  console.log(date);
+  const date = dayjs(dateFromObjectId(_id));
 
   useEffect(() => {
     if (isColChecked) {
@@ -103,7 +106,12 @@ const ArticleListTableField: FC<Props> = ({
       </li>
       <li>John Doe</li>
       <li>General</li>
-      <li>{date}</li>
+      <li>
+        <div>
+          <p>{date.format('DD/MM/YY')}</p>
+          <p>{date.format('HH:mm:ss')}</p>
+        </div>
+      </li>
     </TableBodyField>
   );
 };

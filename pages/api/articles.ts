@@ -88,6 +88,7 @@ export default async function handler(
           type,
           imgUrl: cloudinaryRes.secure_url,
         },
+        date: new Date(),
       };
 
       await db.collection('articles').insertOne({ ...updatedReqBody });

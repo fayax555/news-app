@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import ArticleListTable from './ArticleListTable';
+import ArticleListTable from './ListTable';
 import { Article } from 'components/NewsPage/ArticleTypes';
 
 interface Props {

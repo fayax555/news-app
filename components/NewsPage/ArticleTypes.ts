@@ -7,6 +7,7 @@ export interface Article {
   imageCaption?: string;
   excerpt?: string;
   content: Content[];
+  date?: Date;
   coverImage: {
     name: string;
     size: number;

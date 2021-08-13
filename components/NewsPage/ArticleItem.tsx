@@ -8,6 +8,7 @@ interface Props {
   props: {
     _id: string;
     nid: string;
+    date?: Date;
     headline: string;
     excerpt?: string;
     imgUrl: string;
@@ -22,8 +23,9 @@ const ArticleItem: FC<Props> = ({
   const dateFromObjectId = (id: string) =>
     new Date(parseInt(id.substring(0, 8), 16) * 1000);
 
-  const date = dayjs(dateFromObjectId(_id));
-  const dateFromNow = dayjs(date).fromNow();
+  const dayjsDate = dayjs(dateFromObjectId(_id));
+  const dateFromNow = dayjs(dayjsDate).fromNow();
+
 
   return (
     <Link key={nid} href={`/news/${nid}`} passHref>
@@ -34,7 +36,7 @@ const ArticleItem: FC<Props> = ({
         <div>
           <h2>{headline.slice(0, 180)}</h2>
           <p>{excerpt?.slice(0, 80)}</p>
-          <p style={{ fontSize: '0.9rem', color: '#aaa' }}>
+          <p style={{ fontSize: '0.9rem', color: '#666' }}>
             <FaRegClock style={{ fontSize: '0.7rem' }} /> {dateFromNow}
           </p>
         </div>

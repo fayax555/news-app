@@ -33,24 +33,29 @@ interface Props {
 }
 
 const SecondSection: FC<Props> = ({ articles }) => {
+  // console.log(articles[0].date);
   return (
     <SecondSectionWrap>
       {articles
         .slice(5)
-        .map(({ _id, nid, headline, excerpt, coverImage: { imgUrl } }) => (
-          <ArticleItem
-            key={nid}
-            props={{
-              _id,
-              nid,
-              headline,
-              excerpt,
-              imgUrl,
-              height: 280,
-              width: 400,
-            }}
-          />
-        ))}
+        .map(
+          ({ _id, nid, date, headline, excerpt, coverImage: { imgUrl } }) => (
+            <ArticleItem
+              key={_id}
+              props={{
+                _id,
+                nid,
+                date,
+                headline,
+                excerpt,
+                imgUrl,
+                height: 280,
+                width: 400,
+              }}
+            />
+          )
+        )}
+      )
     </SecondSectionWrap>
   );
 };

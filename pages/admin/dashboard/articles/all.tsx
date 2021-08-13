@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import Layout from 'components/Layout/Layout';
 import { DashboardWrap } from 'components/Styles/DashboardStyles';
-import ArticleList from 'components/Dashboard/Articles/ArticleList/ArticleList';
+import ArticleList from 'components/Dashboard/Articles/ArticleList/List';
 import { connectToDatabase } from 'util/mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
 

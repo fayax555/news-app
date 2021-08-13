@@ -19,7 +19,7 @@ const Article: FC<{ article: ArticleProps }> = ({
     coverImage: { name, size, type, imgUrl },
   },
 }) => {
-  console.log(content);
+  // console.log(content);
 
   const contentData = content.map(
     ({ children, type, url, videoId, tweetId }, index: number) => {
