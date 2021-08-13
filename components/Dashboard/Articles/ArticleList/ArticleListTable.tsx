@@ -15,7 +15,7 @@ const Table = styled.section`
   > ul:first-child,
   div > ul {
     display: grid;
-    grid-template-columns: 0.4fr 3fr 1.2fr 1.2fr 1fr 1fr;
+    grid-template-columns: 0.4fr 3fr 1.2fr 1.2fr 1fr;
     justify-items: start;
 
     li:first-child {
@@ -56,14 +56,14 @@ const ArticleListTable: FC<Props> = ({ articles }) => {
         <li>Title</li>
         <li>Author</li>
         <li>Category</li>
-        <li>Tags</li>
         <li>Date</li>
       </TableHead>
       <div>
-        {articles.map(({ nid, headline }) => {
+        {articles.map(({ _id, nid, headline }) => {
           return (
             <ArticleListTableField
-              key={nid}
+              key={String(_id)}
+              id={_id}
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}

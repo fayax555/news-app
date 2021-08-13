@@ -3,6 +3,7 @@ import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { ObjectId } from 'mongodb';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -41,6 +42,7 @@ const TableBodyField = styled.ul`
 `;
 
 interface Props {
+  id: ObjectId;
   nid: string;
   headline: string;
   isColChecked: boolean;
@@ -49,6 +51,7 @@ interface Props {
 }
 
 const ArticleListTableField: FC<Props> = ({
+  id,
   nid,
   headline,
   isColChecked,
@@ -56,6 +59,11 @@ const ArticleListTableField: FC<Props> = ({
   setArticleList,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
+
+  const dateFromObjectId = (id: ObjectId) =>
+    new Date(parseInt(String(id).substring(0, 8), 16) * 1000);
+
+  console.log(dateFromObjectId(id));
 
   useEffect(() => {
     if (isColChecked) {
@@ -94,7 +102,6 @@ const ArticleListTableField: FC<Props> = ({
       </li>
       <li>John Doe</li>
       <li>General</li>
-      <li>football</li>
       <li>13/8/2021</li>
     </TableBodyField>
   );

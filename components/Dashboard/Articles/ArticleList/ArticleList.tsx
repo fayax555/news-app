@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import ArticleListTable from './ArticleListTable';
-import styled from 'styled-components';
 import { Article } from 'components/NewsPage/ArticleTypes';
 
 interface Props {

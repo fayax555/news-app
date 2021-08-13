@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 import styled from 'styled-components';
 
