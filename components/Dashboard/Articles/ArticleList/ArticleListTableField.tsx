@@ -1,6 +1,8 @@
+import { Article } from 'components/NewsPage/ArticleTypes';
 import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -13,6 +15,14 @@ const TableBodyField = styled.ul`
   }
 
   li:nth-child(2) {
+    a {
+      color: #1d1d97;
+
+      &:hover {
+        color: #7070f3;
+      }
+    }
+
     div {
       display: none;
       position: absolute;
@@ -30,30 +40,21 @@ const TableBodyField = styled.ul`
   }
 `;
 
-type tableField = {
-  id: string;
-  title: string;
-  author: string;
-  category: string;
-  tags: string;
-  date: string;
-};
-
 interface Props {
-  tableFields: tableField;
+  nid: string;
+  headline: string;
   isColChecked: boolean;
-  articleList: tableField[];
-  setArticleList: Dispatch<SetStateAction<tableField[]>>;
+  articleList: Article[];
+  setArticleList: Dispatch<SetStateAction<Article[]>>;
 }
 
 const ArticleListTableField: FC<Props> = ({
-  tableFields,
+  nid,
+  headline,
   isColChecked,
   articleList,
   setArticleList,
 }) => {
-  const { id, title, author, category, tags, date } = tableFields;
-
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const ArticleListTableField: FC<Props> = ({
   };
 
   const handleDelete = (articleId: string) => {
-    const updatedList = articleList.filter(({ id }) => id !== articleId);
+    const updatedList = articleList.filter(({ nid }) => nid !== articleId);
     setArticleList(updatedList);
   };
 
@@ -79,20 +80,22 @@ const ArticleListTableField: FC<Props> = ({
         <input type='checkbox' checked={isChecked} onChange={handleCheckBox} />
       </li>
       <li>
-        {title}
+        <Link href={`/news/${nid}`}>
+          <a target='_blank'>{headline}</a>
+        </Link>
         <div>
           <FaEdit />
           <FaTrash
             onClick={() => {
-              handleDelete(id);
+              handleDelete(nid);
             }}
           />
         </div>
       </li>
-      <li>{author}</li>
-      <li>{category}</li>
-      <li>{tags}</li>
-      <li>{date}</li>
+      <li>John Doe</li>
+      <li>General</li>
+      <li>football</li>
+      <li>13/8/2021</li>
     </TableBodyField>
   );
 };

@@ -1,6 +1,6 @@
+import { Article } from 'components/NewsPage/ArticleTypes';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
-import { articleListData } from './articleListData';
 import ArticleListTableField from './ArticleListTableField';
 
 const Table = styled.section`
@@ -9,7 +9,6 @@ const Table = styled.section`
   font-size: 1.2rem;
 
   li {
-    text-align: center;
     padding: 0.5rem;
   }
 
@@ -36,11 +35,13 @@ export const TableHead = styled.ul`
   background-color: #ddd;
 `;
 
-interface Props {}
+interface Props {
+  articles: Article[];
+}
 
-const ArticleListTable: FC<Props> = () => {
+const ArticleListTable: FC<Props> = ({ articles }) => {
   const [isColChecked, setIsColChecked] = useState(false);
-  const [articleList, setArticleList] = useState(articleListData);
+  const [articleList, setArticleList] = useState(articles);
 
   return (
     <Table>
@@ -59,13 +60,12 @@ const ArticleListTable: FC<Props> = () => {
         <li>Date</li>
       </TableHead>
       <div>
-        {articleList.map((tableFields) => {
-          const { id } = tableFields;
-
+        {articles.map(({ nid, headline }) => {
           return (
             <ArticleListTableField
-              key={id}
-              tableFields={tableFields}
+              key={nid}
+              nid={nid}
+              headline={headline}
               isColChecked={isColChecked}
               articleList={articleList}
               setArticleList={setArticleList}

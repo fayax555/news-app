@@ -5,9 +5,10 @@ import Article from 'components/NewsPage/Article/Article';
 import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { useRouter } from 'next/router';
 import { connectToDatabase } from 'util/mongodb';
+import { Article as ArticleProp } from 'components/NewsPage/ArticleTypes';
 
 interface Props {
-  article: any;
+  article: ArticleProp;
 }
 
 const NewsId: FC<Props> = ({ article }) => {
