@@ -1,5 +1,5 @@
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 import { Article } from 'components/NewsPage/ArticleTypes';
-import { FC, useState } from 'react';
 import styled from 'styled-components';
 import ArticleListTableField from './TableField';
 
@@ -37,12 +37,17 @@ export const TableHead = styled.ul`
 
 interface Props {
   articles: Article[];
-  setChecked:any;
+  setCheckedList: Dispatch<SetStateAction<string[]>>;
+  isColChecked: any;
+  setIsColChecked: any;
 }
 
-const ArticleListTable: FC<Props> = ({ articles,setChecked }) => {
-  const [isColChecked, setIsColChecked] = useState(false);
-
+const ArticleListTable: FC<Props> = ({
+  articles,
+  setCheckedList,
+  isColChecked,
+  setIsColChecked,
+}) => {
   return (
     <Table>
       <TableHead>
@@ -50,7 +55,7 @@ const ArticleListTable: FC<Props> = ({ articles,setChecked }) => {
           <input
             type='checkbox'
             checked={isColChecked}
-            onChange={() => setIsColChecked((curr) => !curr)}
+            onChange={() => setIsColChecked((curr: any) => !curr)}
           />
         </li>
         <li>Title</li>
@@ -67,7 +72,8 @@ const ArticleListTable: FC<Props> = ({ articles,setChecked }) => {
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}
-              setChecked={setChecked}
+              setIsColChecked={setIsColChecked}
+              setCheckedList={setCheckedList}
             />
           );
         })}

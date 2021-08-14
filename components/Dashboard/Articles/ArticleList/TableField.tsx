@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, MouseEvent } from 'react';
+import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -50,7 +50,8 @@ interface Props {
   nid: string;
   headline: string;
   isColChecked: boolean;
-  setChecked: any;
+  setIsColChecked: any;
+  setCheckedList: Dispatch<SetStateAction<string[]>>;
 }
 
 const ArticleListTableField: FC<Props> = ({
@@ -58,7 +59,8 @@ const ArticleListTableField: FC<Props> = ({
   nid,
   headline,
   isColChecked,
-  setChecked,
+  setIsColChecked,
+  setCheckedList,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -79,9 +81,9 @@ const ArticleListTableField: FC<Props> = ({
     setIsChecked((curr) => !curr);
 
     if (!isChecked) {
-      setChecked((curr: string[]) => [...curr, id]);
+      setCheckedList((curr: string[]) => [...new Set([...curr, id])]);
     } else {
-      setChecked((curr: string[]) => curr.filter((c: string) => c !== id));
+      setCheckedList((curr: string[]) => curr.filter((c: string) => c !== id));
     }
   };
 

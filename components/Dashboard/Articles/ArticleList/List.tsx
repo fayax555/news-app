@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ArticleListTable from './Table';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import styled from 'styled-components';
@@ -24,12 +24,24 @@ interface Props {
 }
 
 const ArticleList: FC<Props> = ({ articles }) => {
-  const [checked, setChecked] = useState([]);
+  const [checkedList, setCheckedList] = useState<string[]>([]);
+  const [isColChecked, setIsColChecked] = useState(false);
+
+  console.log(checkedList);
+
+  useEffect(() => {
+    if (isColChecked) {
+      const ids = articles.map((article) => article._id);
+      setCheckedList([...new Set(ids)]);
+    } else {
+      setCheckedList([]);
+    }
+  }, [articles, isColChecked]);
 
   const handleDeleteMany = () => {
     fetch(`/api/deleteMany`, {
       method: 'DELETE',
-      body: JSON.stringify(checked),
+      body: JSON.stringify([...new Set(checkedList)]),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,6 +49,8 @@ const ArticleList: FC<Props> = ({ articles }) => {
       .then((res) => res.json())
       .then((data) => {
         alert(data.message);
+
+        setIsColChecked(false);
 
         Router.push(window.location.pathname);
       });
@@ -49,7 +63,12 @@ const ArticleList: FC<Props> = ({ articles }) => {
         <button onClick={handleDeleteMany}>Delete</button>
         <button>Filter</button>
       </ArticleBar>
-      <ArticleListTable setChecked={setChecked} articles={articles} />
+      <ArticleListTable
+        isColChecked={isColChecked}
+        setIsColChecked={setIsColChecked}
+        setCheckedList={setCheckedList}
+        articles={articles}
+      />
     </div>
   );
 };
