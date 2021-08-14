@@ -10,11 +10,7 @@ export default async function handler(
     try {
       const { db } = await connectToDatabase();
 
-      const objects = [
-        new ObjectId('6116c2e46f9b6c57ac616994'),
-        new ObjectId('6116bfbb6f9b6c57ac616993'),
-        new ObjectId('6116a056f9a66f7a480e20ef'),
-      ];
+      const objects = req.body.map((id: string) => new ObjectId(id));
 
       const result = await db.collection('articles').deleteMany({
         _id: {
@@ -22,11 +18,8 @@ export default async function handler(
         },
       });
 
-      // const deletedArticle = result.value.headline;
-      console.log(result);
-
       res.status(201).json({
-        message: ` deleted`,
+        message: `${result.deletedCount} deleted`,
       });
     } catch (error) {
       console.error(error);

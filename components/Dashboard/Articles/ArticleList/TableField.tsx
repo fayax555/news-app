@@ -50,6 +50,7 @@ interface Props {
   nid: string;
   headline: string;
   isColChecked: boolean;
+  setChecked: any;
 }
 
 const ArticleListTableField: FC<Props> = ({
@@ -57,6 +58,7 @@ const ArticleListTableField: FC<Props> = ({
   nid,
   headline,
   isColChecked,
+  setChecked,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -73,8 +75,14 @@ const ArticleListTableField: FC<Props> = ({
     }
   }, [isColChecked]);
 
-  const handleCheckBox = () => {
+  const handleCheckBox = (id: string) => {
     setIsChecked((curr) => !curr);
+
+    if (!isChecked) {
+      setChecked((curr: string[]) => [...curr, id]);
+    } else {
+      setChecked((curr: string[]) => curr.filter((c: string) => c !== id));
+    }
   };
 
   const handleDelete = (id: string) => {
@@ -95,7 +103,11 @@ const ArticleListTableField: FC<Props> = ({
   return (
     <TableBodyField>
       <li>
-        <input type='checkbox' checked={isChecked} onChange={handleCheckBox} />
+        <input
+          type='checkbox'
+          checked={isChecked}
+          onChange={() => handleCheckBox(_id)}
+        />
       </li>
       <li>
         <Link href={`/news/${nid}`}>

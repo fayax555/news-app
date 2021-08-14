@@ -37,9 +37,10 @@ export const TableHead = styled.ul`
 
 interface Props {
   articles: Article[];
+  setChecked:any;
 }
 
-const ArticleListTable: FC<Props> = ({ articles }) => {
+const ArticleListTable: FC<Props> = ({ articles,setChecked }) => {
   const [isColChecked, setIsColChecked] = useState(false);
 
   return (
@@ -66,6 +67,7 @@ const ArticleListTable: FC<Props> = ({ articles }) => {
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}
+              setChecked={setChecked}
             />
           );
         })}
