@@ -3,29 +3,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaRegClock } from 'react-icons/fa';
 import dayjs from 'dayjs';
+import { Article } from './ArticleTypes';
 
 interface Props {
-  props: {
-    _id: string;
-    nid: string;
-    date?: Date;
-    headline: string;
-    excerpt?: string;
-    imgUrl: string;
-    height: number;
-    width: number;
-  };
+  article: Article;
+
+  height: number;
+  width: number;
 }
 
-const ArticleItem: FC<Props> = ({
-  props: { _id, nid, headline, imgUrl, height, width, excerpt },
-}) => {
+const ArticleItem: FC<Props> = ({ article, height, width }) => {
+  const {
+    _id,
+    nid,
+    headline,
+    excerpt,
+    coverImage: { imgUrl },
+  } = article;
+
   const dateFromObjectId = (id: string) =>
     new Date(parseInt(id.substring(0, 8), 16) * 1000);
 
   const dayjsDate = dayjs(dateFromObjectId(_id));
   const dateFromNow = dayjs(dayjsDate).fromNow();
-
 
   return (
     <Link key={nid} href={`/news/${nid}`} passHref>

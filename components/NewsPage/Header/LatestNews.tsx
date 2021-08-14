@@ -11,14 +11,14 @@ const LatestNews: FC<Props> = ({ articles }) => {
   return (
     <HeaderLeft>
       <h1>Latest News</h1>
-      {articles
-        .slice(1, 5)
-        .map(({ _id, headline, nid, coverImage: { imgUrl } }) => (
-          <ArticleItem
-            key={nid}
-            props={{ _id, nid, headline, imgUrl, height: 100, width: 80 }}
-          />
-        ))}
+      {articles.slice(1, 5).map((article) => (
+        <ArticleItem
+          key={article._id}
+          article={article}
+          height={80}
+          width={100}
+        />
+      ))}
     </HeaderLeft>
   );
 };
