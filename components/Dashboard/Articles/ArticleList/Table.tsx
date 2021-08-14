@@ -61,7 +61,7 @@ const ArticleListTable: FC<Props> = ({ articles }) => {
         {articles.map(({ _id, nid, headline }) => {
           return (
             <ArticleListTableField
-              key={String(_id)}
+              key={_id}
               _id={_id}
               nid={nid}
               headline={headline}

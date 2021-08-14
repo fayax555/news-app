@@ -69,16 +69,11 @@ export default async function handler(
         }
       );
 
-      const d = (start: number, end: number) =>
-        new Date().toString().slice(start, end);
-
-      const month = new Date().toISOString().slice(5, 7);
-      const dateString =
-        d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
-
       await Promise.all([...contentRes]).then(async () => {
+        const count = await db.collection('articles').countDocuments();
+
         const updatedReqBody = {
-          nid: String(Number(dateString) - 210810103833),
+          nid: String(count + 1),
           headline,
           content,
           imageCaption,
@@ -89,7 +84,7 @@ export default async function handler(
             type,
             imgUrl: cloudinaryRes.secure_url,
           },
-          date: new Date(),
+          createdAt: Date(),
         };
 
         await db.collection('articles').insertOne({ ...updatedReqBody });

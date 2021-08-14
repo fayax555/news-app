@@ -78,10 +78,8 @@ const ArticleListTableField: FC<Props> = ({
   };
 
   const handleDelete = (id: string) => {
-    console.log(id);
-    fetch('/api/deleteArticle', {
+    fetch(`/api/${id}`, {
       method: 'DELETE',
-      body: JSON.stringify({ id }),
       headers: {
         'Content-Type': 'application/json',
       },

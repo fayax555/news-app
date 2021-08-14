@@ -12,12 +12,13 @@ export default async function handler(
     try {
       const result = await db
         .collection('articles')
-        .deleteOne({ _id: new ObjectId(req.body.id) });
+        .findOneAndDelete({ _id: new ObjectId(String(req.query.id)) });
 
-      const del = result.deletedCount;
+      const deletedArticle = result.value.headline;
+      console.log(result);
 
       res.status(201).json({
-        message: `${del} article${del !== 1 ? 's' : ''} deleted`,
+        message: `'${deletedArticle}' deleted`,
       });
     } catch (error) {
       console.error(error);
