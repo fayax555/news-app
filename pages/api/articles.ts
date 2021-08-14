@@ -34,69 +34,70 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { db } = await connectToDatabase();
+  if (req.method === 'POST') {
+    const { db } = await connectToDatabase();
 
-  const {
-    headline,
-    content,
-    excerpt,
-    imageCaption,
-    coverImage: { encodeData, name, size, type },
-  } = req.body as ReqBody;
+    const {
+      headline,
+      content,
+      excerpt,
+      imageCaption,
+      coverImage: { encodeData, name, size, type },
+    } = req.body as ReqBody;
 
-  const contentRes = content.map(async (c) => {
-    if (c.type === 'image') {
-      const cloudinaryEditorImages = await cloudinary.uploader.upload(
-        String(c.url),
+    const contentRes = content.map(async (c) => {
+      if (c.type === 'image') {
+        const cloudinaryEditorImages = await cloudinary.uploader.upload(
+          String(c.url),
+          {
+            upload_preset: 'editor',
+          }
+        );
+
+        c.url = cloudinaryEditorImages.secure_url;
+
+        // probably would work without the return statement
+        return cloudinaryEditorImages.secure_url;
+      }
+    });
+
+    try {
+      const cloudinaryRes = await cloudinary.uploader.upload(
+        `data:${type};base64,${encodeData}`,
         {
-          upload_preset: 'editor',
+          upload_preset: 'cover_image',
         }
       );
 
-      c.url = cloudinaryEditorImages.secure_url;
+      const d = (start: number, end: number) =>
+        new Date().toString().slice(start, end);
 
-      // probably would work without the return statement
-      return cloudinaryEditorImages.secure_url;
+      const month = new Date().toISOString().slice(5, 7);
+      const dateString =
+        d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
+
+      await Promise.all([...contentRes]).then(async () => {
+        const updatedReqBody = {
+          nid: String(Number(dateString) - 210810103833),
+          headline,
+          content,
+          imageCaption,
+          excerpt,
+          coverImage: {
+            name,
+            size,
+            type,
+            imgUrl: cloudinaryRes.secure_url,
+          },
+          date: new Date(),
+        };
+
+        await db.collection('articles').insertOne({ ...updatedReqBody });
+
+        res.status(201).json({ message: 'Success!', article: updatedReqBody });
+      });
+    } catch (error) {
+      console.error(error);
     }
-  });
-
-  try {
-    const cloudinaryRes = await cloudinary.uploader.upload(
-      `data:${type};base64,${encodeData}`,
-      {
-        upload_preset: 'cover_image',
-      }
-    );
-
-    const d = (start: number, end: number) =>
-      new Date().toString().slice(start, end);
-
-    const month = new Date().toISOString().slice(5, 7);
-    const dateString =
-      d(13, 15) + month + d(8, 10) + d(16, 18) + d(19, 21) + d(22, 24);
-
-    await Promise.all([...contentRes]).then(async () => {
-      const updatedReqBody = {
-        nid: String(Number(dateString) - 210810103833),
-        headline,
-        content,
-        imageCaption,
-        excerpt,
-        coverImage: {
-          name,
-          size,
-          type,
-          imgUrl: cloudinaryRes.secure_url,
-        },
-        date: new Date(),
-      };
-
-      await db.collection('articles').insertOne({ ...updatedReqBody });
-
-      res.status(201).json({ message: 'Success!', article: updatedReqBody });
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'An Error Occurred' });
   }
 }

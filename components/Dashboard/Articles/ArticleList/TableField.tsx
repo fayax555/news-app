@@ -1,5 +1,12 @@
 import { Article } from 'components/NewsPage/ArticleTypes';
-import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
+import {
+  FC,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  MouseEvent,
+} from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -81,9 +88,27 @@ const ArticleListTableField: FC<Props> = ({
     setIsChecked((curr) => !curr);
   };
 
-  const handleDelete = (articleId: string) => {
-    const updatedList = articleList.filter(({ nid }) => nid !== articleId);
-    setArticleList(updatedList);
+  const handleDelete = (
+    e: MouseEvent<SVGElement, globalThis.MouseEvent>,
+    id: string
+  ) => {
+    console.log(id);
+    const element =
+      e.currentTarget?.parentElement?.parentElement?.parentElement;
+
+    fetch('/api/deleteArticle', {
+      method: 'DELETE',
+      body: JSON.stringify({ id }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        element?.remove();
+
+        alert(data.message);
+      });
   };
 
   return (
@@ -98,8 +123,8 @@ const ArticleListTableField: FC<Props> = ({
         <div>
           <FaEdit />
           <FaTrash
-            onClick={() => {
-              handleDelete(nid);
+            onClick={(e) => {
+              handleDelete(e, _id);
             }}
           />
         </div>

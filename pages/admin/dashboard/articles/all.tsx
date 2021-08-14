@@ -21,7 +21,7 @@ const AllArticlesPage: FC<Props> = ({ articles }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { db } = await connectToDatabase();
 
   const articles = await db
@@ -34,7 +34,6 @@ export async function getStaticProps() {
     props: {
       articles: JSON.parse(JSON.stringify(articles)),
     },
-    revalidate: 1,
   };
 }
 

@@ -117,6 +117,10 @@ export const HeaderLeft = styled.div`
     div:nth-child(2) {
       display: grid;
       grid-template-columns: 1fr;
+
+      p:nth-child(2) {
+        display: none;
+      }
     }
 
     &:hover {
