@@ -23,21 +23,15 @@ interface Props {
 }
 
 const ArticleList: FC<Props> = ({ articles }) => {
-  return (
-    <>
-      <Header articles={articles} />
-      <SecondSection articles={articles} />
-      <ListWrap>
-        {/* {articles.map((article: any) => (
-          <ArticleItem
-            key={article._id}
-            newsId={article.nid}
-            title={article.headline}
-          />
-        ))} */}
-      </ListWrap>
-    </>
-  );
+  if (articles.length > 0)
+    return (
+      <>
+        <Header articles={articles} />
+        <SecondSection articles={articles} />
+      </>
+    );
+
+  return null;
 };
 
 export default ArticleList;
