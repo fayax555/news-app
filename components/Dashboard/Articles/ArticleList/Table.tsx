@@ -41,7 +41,6 @@ interface Props {
 
 const ArticleListTable: FC<Props> = ({ articles }) => {
   const [isColChecked, setIsColChecked] = useState(false);
-  const [articleList, setArticleList] = useState(articles);
 
   return (
     <Table>
@@ -67,8 +66,6 @@ const ArticleListTable: FC<Props> = ({ articles }) => {
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}
-              articleList={articleList}
-              setArticleList={setArticleList}
             />
           );
         })}

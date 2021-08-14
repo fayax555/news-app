@@ -1,16 +1,9 @@
-import { Article } from 'components/NewsPage/ArticleTypes';
-import {
-  FC,
-  useState,
-  useEffect,
-  Dispatch,
-  SetStateAction,
-  MouseEvent,
-} from 'react';
+import { FC, useState, useEffect, MouseEvent } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import Link from 'next/link';
 import dayjs from 'dayjs';
+import Router from 'next/router';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -57,8 +50,6 @@ interface Props {
   nid: string;
   headline: string;
   isColChecked: boolean;
-  articleList: Article[];
-  setArticleList: Dispatch<SetStateAction<Article[]>>;
 }
 
 const ArticleListTableField: FC<Props> = ({
@@ -66,8 +57,6 @@ const ArticleListTableField: FC<Props> = ({
   nid,
   headline,
   isColChecked,
-  articleList,
-  setArticleList,
 }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -88,14 +77,8 @@ const ArticleListTableField: FC<Props> = ({
     setIsChecked((curr) => !curr);
   };
 
-  const handleDelete = (
-    e: MouseEvent<SVGElement, globalThis.MouseEvent>,
-    id: string
-  ) => {
+  const handleDelete = (id: string) => {
     console.log(id);
-    const element =
-      e.currentTarget?.parentElement?.parentElement?.parentElement;
-
     fetch('/api/deleteArticle', {
       method: 'DELETE',
       body: JSON.stringify({ id }),
@@ -105,7 +88,7 @@ const ArticleListTableField: FC<Props> = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        element?.remove();
+        Router.push(window.location.pathname);
 
         alert(data.message);
       });
@@ -123,8 +106,8 @@ const ArticleListTableField: FC<Props> = ({
         <div>
           <FaEdit />
           <FaTrash
-            onClick={(e) => {
-              handleDelete(e, _id);
+            onClick={() => {
+              handleDelete(_id);
             }}
           />
         </div>
