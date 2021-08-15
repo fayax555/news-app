@@ -7,18 +7,19 @@ import FilePondComponent from 'components/Dashboard/Articles/Editor/FilePond';
 import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { GetServerSideProps } from 'next';
+import { connectToDatabase } from 'util/mongodb';
+import { ObjectId } from 'mongodb';
+import { Article } from 'components/NewsPage/ArticleTypes';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
   { ssr: false }
 );
 
-const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
-  const headlineRef = useRef<HTMLInputElement>(null);
-  const imageCaptionRef = useRef<HTMLInputElement>(null);
-  const excerptRef = useRef<HTMLInputElement>(null);
-
-  console.log(_id);
+const IndexPage: FC<{ article?: Article }> = ({ article }) => {
+  const [headline, setHeadline] = useState(article?.headline);
+  const [imageCaption, setImageCaption] = useState(article?.imageCaption);
+  const [excerpt, setExcerpt] = useState(article?.excerpt);
 
   // cover image from filepond
   const [files, setFiles] = useState<
@@ -29,12 +30,8 @@ const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
     }[]
   >([]);
   // value contains the text inside the slte editor
-  const [value, setValue] = useState<Descendant[]>([
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-  ]);
+  const [value, setValue] = useState<any>(article?.content);
+
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
@@ -42,10 +39,6 @@ const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
 
     setIsSubmit(true);
     console.log('submit button clicked');
-
-    const headline = headlineRef.current!.value;
-    const imageCaption = imageCaptionRef.current!.value;
-    const excerpt = excerptRef.current!.value;
 
     const {
       getFileEncodeBase64String,
@@ -86,18 +79,31 @@ const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
           <EditorForm onSubmit={handleSubmit}>
             <div>
               <input
-                ref={headlineRef}
                 type='text'
                 placeholder='Headline'
+                value={headline}
+                onChange={(e) => {
+                  setHeadline(e.target.value);
+                }}
                 required
               />
               <FilePondComponent files={files} setFiles={setFiles} />
               <input
-                ref={imageCaptionRef}
                 type='text'
+                value={imageCaption}
+                onChange={(e) => {
+                  setImageCaption(e.target.value);
+                }}
                 placeholder='Image Caption'
               />
-              <input ref={excerptRef} type='text' placeholder='Excerpt' />
+              <input
+                type='text'
+                value={excerpt}
+                onChange={(e) => {
+                  setExcerpt(e.target.value);
+                }}
+                placeholder='Excerpt'
+              />
               <SlateEditor value={value} setValue={setValue} />
             </div>
             <div>
@@ -118,8 +124,20 @@ const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  if (query.id) {
+    const { db } = await connectToDatabase();
+
+    const article = await db
+      .collection('articles')
+      .findOne({ _id: new ObjectId(String(query.id)) });
+
+    return {
+      props: { article: JSON.parse(JSON.stringify(article)) },
+    };
+  }
+
   return {
-    props: { _id: query.id || null }, // will be passed to the page component as props
+    props: { article: null },
   };
 };
 

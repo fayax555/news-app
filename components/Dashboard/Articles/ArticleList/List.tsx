@@ -27,8 +27,6 @@ const ArticleList: FC<Props> = ({ articles }) => {
   const [checkedList, setCheckedList] = useState<string[]>([]);
   const [isColChecked, setIsColChecked] = useState(false);
 
-  console.log(checkedList);
-
   useEffect(() => {
     if (isColChecked) {
       const ids = articles.map((article) => article._id);
