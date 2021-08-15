@@ -60,7 +60,9 @@ const ArticleList: FC<Props> = ({ articles }) => {
     <div>
       <h2>Articles</h2>
       <ArticleBar>
-        <button onClick={handleDeleteMany}>Delete</button>
+        <button disabled={checkedList.length === 0} onClick={handleDeleteMany}>
+          Delete
+        </button>
         <button>Filter</button>
       </ArticleBar>
       <ArticleListTable

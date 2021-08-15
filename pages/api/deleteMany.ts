@@ -10,16 +10,18 @@ export default async function handler(
     try {
       const { db } = await connectToDatabase();
 
-      const objects = req.body.map((id: string) => new ObjectId(id));
+      const objectIds = req.body.map((id: string) => new ObjectId(id));
 
       const result = await db.collection('articles').deleteMany({
         _id: {
-          $in: objects,
+          $in: objectIds,
         },
       });
 
+      const del = result.deletedCount;
+
       res.status(201).json({
-        message: `${result.deletedCount} deleted`,
+        message: `${del} article${del !== 1 ? 's' : ''} deleted`,
       });
     } catch (error) {
       console.error(error);

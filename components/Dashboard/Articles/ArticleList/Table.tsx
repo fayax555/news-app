@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import styled from 'styled-components';
 import ArticleListTableField from './TableField';
@@ -38,8 +38,8 @@ export const TableHead = styled.ul`
 interface Props {
   articles: Article[];
   setCheckedList: Dispatch<SetStateAction<string[]>>;
-  isColChecked: any;
-  setIsColChecked: any;
+  isColChecked: boolean;
+  setIsColChecked: Dispatch<SetStateAction<boolean>>;
 }
 
 const ArticleListTable: FC<Props> = ({
@@ -72,7 +72,6 @@ const ArticleListTable: FC<Props> = ({
               nid={nid}
               headline={headline}
               isColChecked={isColChecked}
-              setIsColChecked={setIsColChecked}
               setCheckedList={setCheckedList}
             />
           );

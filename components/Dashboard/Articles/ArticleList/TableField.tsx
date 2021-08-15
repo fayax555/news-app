@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import Router from 'next/router';
+import router, { useRouter } from 'next/router';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -50,7 +51,6 @@ interface Props {
   nid: string;
   headline: string;
   isColChecked: boolean;
-  setIsColChecked: any;
   setCheckedList: Dispatch<SetStateAction<string[]>>;
 }
 
@@ -59,9 +59,9 @@ const ArticleListTableField: FC<Props> = ({
   nid,
   headline,
   isColChecked,
-  setIsColChecked,
   setCheckedList,
 }) => {
+
   const [isChecked, setIsChecked] = useState(false);
 
   const dateFromObjectId = (id: string) =>
@@ -102,6 +102,14 @@ const ArticleListTableField: FC<Props> = ({
       });
   };
 
+  const handleEdit = (_id: string) => {
+
+    router.push({
+      pathname: '/admin/dashboard/articles/write',
+      query: { id: _id },
+    });
+  };
+
   return (
     <TableBodyField>
       <li>
@@ -116,7 +124,11 @@ const ArticleListTableField: FC<Props> = ({
           <a target='_blank'>{headline}</a>
         </Link>
         <div>
-          <FaEdit />
+          <FaEdit
+            onClick={() => {
+              handleEdit(_id);
+            }}
+          />
           <FaTrash
             onClick={() => {
               handleDelete(_id);

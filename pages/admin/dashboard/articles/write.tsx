@@ -6,16 +6,19 @@ import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/Articles/Editor/FilePond';
 import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
+import { GetServerSideProps } from 'next';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
   { ssr: false }
 );
 
-const IndexPage: FC = () => {
+const IndexPage: FC<{ _id?: string }> = ({ _id }) => {
   const headlineRef = useRef<HTMLInputElement>(null);
   const imageCaptionRef = useRef<HTMLInputElement>(null);
   const excerptRef = useRef<HTMLInputElement>(null);
+
+  console.log(_id);
 
   // cover image from filepond
   const [files, setFiles] = useState<
@@ -112,6 +115,12 @@ const IndexPage: FC = () => {
       </DashboardWrite>
     </Layout>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  return {
+    props: { _id: query.id || null }, // will be passed to the page component as props
+  };
 };
 
 export default IndexPage;
