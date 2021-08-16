@@ -40,7 +40,7 @@ const FilePondComponent = ({ imgUrl, files, setFiles }) => {
         files={myFiles() || files}
         onupdatefiles={setFiles}
         allowMultiple={false}
-        maxFileSize='3MB'
+        maxFileSize='10MB'
         allowPaste={false}
         acceptedFileTypes={['image/png', 'image/jpeg', 'image/webp']}
         labelIdle='Drag & Drop your file or <span class="filepond--label-action">Browse</span>'

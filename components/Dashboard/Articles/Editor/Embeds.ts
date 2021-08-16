@@ -12,15 +12,18 @@ export const Embeds = (e: ClipboardEvent<HTMLDivElement>, editor: Editor) => {
     e.preventDefault();
 
     editor.isVoid = (el) => el.type === 'tweet';
-    Transforms.insertNodes(editor, {
-      type: 'tweet',
-      tweetId: matches,
-      children: [
-        {
-          text: '',
-        },
-      ],
-    });
+    Transforms.insertNodes(editor, [
+      {
+        type: 'tweet',
+        tweetId: matches,
+        children: [
+          {
+            text: '',
+          },
+        ],
+      },
+      { type: 'paragraph', children: [{ text: '' }] },
+    ]);
   }
 
   if (pastedText?.includes('youtube.com/')) {

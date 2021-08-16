@@ -4,6 +4,13 @@ import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
 import { CaptionBox, Link } from './EditorStyles';
 import { Tweet } from 'react-twitter-widgets';
+import styled from 'styled-components';
+
+const TweetWrap = styled.div`
+  > span {
+    display: none;
+  }
+`;
 
 export const CustomEditor = {
   isMarkActive(editor: Editor, textFormat: TextFormat) {
@@ -96,12 +103,10 @@ export const renderElement = (props: any) => {
       );
     case 'tweet':
       return (
-        <div {...attributes}>
-          <span contentEditable={false}>
-            <Tweet tweetId={element.tweetId} />
-          </span>
+        <TweetWrap {...attributes} contentEditable={false}>
+          <Tweet tweetId={element.tweetId} />
           {children}
-        </div>
+        </TweetWrap>
       );
     default:
       return <p {...attributes}>{children}</p>;
