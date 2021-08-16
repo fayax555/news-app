@@ -135,15 +135,35 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if (query.id) {
-    const { db } = await connectToDatabase();
+    try {
+      const { db } = await connectToDatabase();
 
-    const article = await db
-      .collection('articles')
-      .findOne({ _id: new ObjectId(String(query.id)) });
+      const article = await db
+        .collection('articles')
+        .findOne({ _id: new ObjectId(String(query.id)) });
 
-    return {
-      props: { article: JSON.parse(JSON.stringify(article)) },
-    };
+      return {
+        props: { article: JSON.parse(JSON.stringify(article)) },
+      };
+    } catch (error) {
+      if (error instanceof TypeError) {
+        return {
+          redirect: {
+            destination: '/admin/dashboard/articles/write',
+            permanent: false,
+          },
+        };
+      }
+
+      console.error(error);
+
+      return {
+        redirect: {
+          destination: '/admin/dashboard/',
+          permanent: false,
+        },
+      };
+    }
   }
 
   return {

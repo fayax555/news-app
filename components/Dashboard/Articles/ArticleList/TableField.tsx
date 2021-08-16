@@ -32,10 +32,14 @@ const TableBodyField = styled.ul`
       > * {
         margin: 0.5rem 1rem;
         font-size: 1.3rem;
+        cursor: pointer;
 
-        &:hover {
-          cursor: pointer;
-          color: blue;
+        &:first-child:hover {
+          color: #0f0fc2;
+        }
+
+        &:nth-child(2):hover {
+          color: #9b1010;
         }
       }
     }

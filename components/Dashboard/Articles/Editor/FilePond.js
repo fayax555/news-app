@@ -24,10 +24,12 @@ registerPlugin(
 );
 
 const FilePondComponent = ({ imgUrl, files, setFiles }) => {
+  // del click is only for dev to remove filepond default image when editing
   const [isDelClick, setDelClick] = useState(false);
+  if (isDelClick) imgUrl = null;
 
   const myFiles = () => {
-    if (!imgUrl || isDelClick) return;
+    if (!imgUrl) return;
 
     return [
       {
@@ -41,7 +43,7 @@ const FilePondComponent = ({ imgUrl, files, setFiles }) => {
       <FilePond
         required={true}
         onremovefile={() => {
-          setDelClick(true);
+          if (process.env.NODE_ENV === 'development') setDelClick(true);
         }}
         files={myFiles() || files}
         onupdatefiles={setFiles}

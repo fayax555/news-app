@@ -14,8 +14,8 @@ export const Wrap = styled.div`
 `;
 
 export const CaptionBox = styled.blockquote`
-  font-size: 0.9rem !important;
-  color: #555;
+  font-size: 1rem !important;
+  color: #444;
 `;
 
 export const TweetWrap = styled.blockquote`

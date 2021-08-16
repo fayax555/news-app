@@ -87,8 +87,6 @@ export default async function handler(
         createdAt: Date(),
       };
 
-      console.log(req.method);
-
       if (req.method === 'POST') {
         await db.collection('articles').insertOne({ ...updatedReqBody });
 

@@ -36,8 +36,14 @@ const ArticleItem: FC<Props> = ({ article, height, width }) => {
         <div>
           <h2>{headline.slice(0, 180)}</h2>
           <p>{excerpt?.slice(0, 80)}</p>
-          <p style={{ fontSize: '0.9rem', color: '#666' }}>
-            <FaRegClock style={{ fontSize: '0.7rem' }} /> {dateFromNow}
+          <p
+            css={`
+              font-size: 0.9rem;
+              color: #666;
+            `}
+          >
+            <FaRegClock css='font-size: 0.7rem;' />
+            {dateFromNow}
           </p>
         </div>
       </a>
