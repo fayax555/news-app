@@ -33,7 +33,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
     ]
   );
 
-  console.log(value)
+  console.log(value);
 
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -63,8 +63,10 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
     };
 
     fetch('/api/articles', {
-      method: 'POST',
-      body: JSON.stringify(reqBody),
+      method: article ? 'PUT' : 'POST',
+      body: article
+        ? JSON.stringify({ _id: article?._id, ...reqBody })
+        : JSON.stringify(reqBody),
       headers: {
         'Content-Type': 'application/json',
       },
