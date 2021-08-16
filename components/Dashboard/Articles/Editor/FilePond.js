@@ -22,12 +22,22 @@ registerPlugin(
   FilePondPluginFileValidateType
 );
 
-const FilePondComponent = ({ files, setFiles }) => {
+const FilePondComponent = ({ imgUrl, files, setFiles }) => {
+  const myFiles = () => {
+    if (!imgUrl) return;
+
+    return [
+      {
+        source: imgUrl,
+      },
+    ];
+  };
+
   return (
     <FilePondWrap>
       <FilePond
         required={true}
-        files={files}
+        files={myFiles() || files}
         onupdatefiles={setFiles}
         allowMultiple={false}
         maxFileSize='3MB'

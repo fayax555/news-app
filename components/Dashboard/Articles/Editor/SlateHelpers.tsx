@@ -97,7 +97,9 @@ export const renderElement = (props: any) => {
     case 'tweet':
       return (
         <div {...attributes}>
-          <Tweet tweetId={element.tweetId} />
+          <span contentEditable={false}>
+            <Tweet tweetId={element.tweetId} />
+          </span>
           {children}
         </div>
       );

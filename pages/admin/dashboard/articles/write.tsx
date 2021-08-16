@@ -17,20 +17,23 @@ const SlateEditor = dynamic(
 );
 
 const IndexPage: FC<{ article?: Article }> = ({ article }) => {
-  const [headline, setHeadline] = useState(article?.headline);
-  const [imageCaption, setImageCaption] = useState(article?.imageCaption);
-  const [excerpt, setExcerpt] = useState(article?.excerpt);
+  const [headline, setHeadline] = useState(article?.headline || '');
+  const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
+  const [excerpt, setExcerpt] = useState(article?.excerpt || '');
 
   // cover image from filepond
-  const [files, setFiles] = useState<
-    {
-      getFileEncodeBase64String: () => string;
-      filenameWithoutExtension: string;
-      file: { size: number; type: string };
-    }[]
-  >([]);
+  const [files, setFiles] = useState<any>([]);
   // value contains the text inside the slte editor
-  const [value, setValue] = useState<any>(article?.content);
+  const [value, setValue] = useState<any>(
+    article?.content || [
+      {
+        type: 'paragraph',
+        children: [{ text: 'A line of text in a paragraph.' }],
+      },
+    ]
+  );
+
+  console.log(value)
 
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -87,7 +90,11 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
                 }}
                 required
               />
-              <FilePondComponent files={files} setFiles={setFiles} />
+              <FilePondComponent
+                imgUrl={article?.coverImage.imgUrl}
+                files={files}
+                setFiles={setFiles}
+              />
               <input
                 type='text'
                 value={imageCaption}

@@ -61,7 +61,6 @@ const ArticleListTableField: FC<Props> = ({
   isColChecked,
   setCheckedList,
 }) => {
-
   const [isChecked, setIsChecked] = useState(false);
 
   const dateFromObjectId = (id: string) =>
@@ -103,7 +102,6 @@ const ArticleListTableField: FC<Props> = ({
   };
 
   const handleEdit = (_id: string) => {
-
     router.push({
       pathname: '/admin/dashboard/articles/write',
       query: { id: _id },

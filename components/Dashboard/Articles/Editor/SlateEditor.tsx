@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef } from 'react';
+import { FC, useCallback, useRef, ClipboardEvent } from 'react';
 import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
@@ -67,7 +67,9 @@ const SlateEditor: FC<SlateEditorProps> = ({ value, setValue }) => {
                 }
               }
             }}
-            onPaste={(event) => Embeds(event, editor)}
+            onPaste={(event) =>
+              Embeds(event, editor)
+            }
           />
         </Wrap>
       </Slate>
