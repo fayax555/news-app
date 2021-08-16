@@ -1,3 +1,4 @@
+import { useState, FC } from 'react';
 import { FilePond, registerPlugin } from 'react-filepond';
 import styled from 'styled-components';
 
@@ -23,8 +24,10 @@ registerPlugin(
 );
 
 const FilePondComponent = ({ imgUrl, files, setFiles }) => {
+  const [isDelClick, setDelClick] = useState(false);
+
   const myFiles = () => {
-    if (!imgUrl) return;
+    if (!imgUrl || isDelClick) return;
 
     return [
       {
@@ -37,6 +40,9 @@ const FilePondComponent = ({ imgUrl, files, setFiles }) => {
     <FilePondWrap>
       <FilePond
         required={true}
+        onremovefile={() => {
+          setDelClick(true);
+        }}
         files={myFiles() || files}
         onupdatefiles={setFiles}
         allowMultiple={false}

@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useRef, useState } from 'react';
+import { FC, FormEventHandler, useRef, useState, memo } from 'react';
 import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
@@ -33,7 +33,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
     ]
   );
 
-  console.log(value);
+  // console.log(value);
 
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -63,6 +63,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
     };
 
     fetch('/api/articles', {
+      // replace the current article if it exists otherwise insert new
       method: article ? 'PUT' : 'POST',
       body: article
         ? JSON.stringify({ _id: article?._id, ...reqBody })
@@ -150,4 +151,4 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 
-export default IndexPage;
+export default memo(IndexPage);
