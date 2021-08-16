@@ -100,7 +100,7 @@ const Article: FC<{ article: ArticleProps }> = ({
 
       if (type === 'tweet')
         return (
-          <TweetWrap>
+          <TweetWrap key={type + index}>
             <Tweet tweetId={tweetId} />
           </TweetWrap>
         );

@@ -7,6 +7,7 @@ import { Tweet } from 'react-twitter-widgets';
 import styled from 'styled-components';
 
 const TweetWrap = styled.div`
+  // removing extra line at the end of tweet when editing
   > span {
     display: none;
   }

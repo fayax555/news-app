@@ -59,18 +59,17 @@ export const Image = ({ attributes, children, element }: any) => {
 
   return (
     <div {...attributes}>
-      <div contentEditable={false}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          style={{
-            maxWidth: '100%',
-            maxHeight: '20em',
-            boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
-          }}
-          src={element.url}
-          alt=''
-        />
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        contentEditable={false}
+        style={{
+          maxWidth: '100%',
+          maxHeight: '20em',
+          boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
+        }}
+        src={element.url}
+        alt=''
+      />
       {children}
     </div>
   );

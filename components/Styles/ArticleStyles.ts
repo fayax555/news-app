@@ -33,7 +33,7 @@ export const ArticleWrap = styled.div`
   p {
     font-size: 1.15rem;
     max-width: 670px;
-    margin-bottom: -0.5rem;
+    margin-bottom: -0.25rem;
   }
 
   p:empty:before,
@@ -47,8 +47,7 @@ export const ArticleWrap = styled.div`
   }
 `;
 
-export const ContentImage = styled.div`
-  padding-top: 1rem !important;
+export const ContentImage = styled.section`
   padding-bottom: 0 !important;
 `;
 
