@@ -81,7 +81,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
       <DashboardWrite>
         <Navbar />
         <div>
-          <h2>Add New Article</h2>
+          <h2>{`${article ? 'Update' : 'Add New'}`} Article</h2>
           <EditorForm onSubmit={handleSubmit}>
             <div>
               <input
@@ -123,7 +123,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
                 disabled={false}
                 type='submit'
               >
-                Publish
+                {`${article ? 'Update' : 'Publish'}`}
               </Button>
             </div>
           </EditorForm>

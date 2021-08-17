@@ -73,7 +73,7 @@ export default async function handler(
       const count = await db.collection('articles').countDocuments();
 
       const updatedReqBody = {
-        nid: String(count + 1),
+        nid: req.method === 'PUT' ? String(count) : String(count + 1),
         headline,
         content,
         imageCaption,
@@ -88,7 +88,7 @@ export default async function handler(
       };
 
       if (req.method === 'POST') {
-        await db.collection('articles').insertOne({ ...updatedReqBody });
+        await db.collection('articles').insertOne(updatedReqBody);
 
         res.status(201).json({ message: 'Inserted!', article: updatedReqBody });
       }
@@ -98,7 +98,7 @@ export default async function handler(
           .collection('articles')
           .findOneAndReplace(
             { _id: new ObjectId(String(req.body._id)) },
-            { ...updatedReqBody }
+            updatedReqBody
           );
 
         res.status(201).json({ message: 'Updated!', article: updatedReqBody });
