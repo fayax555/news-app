@@ -2,7 +2,7 @@ import { connectToDatabase } from 'util/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import { Content } from 'components/NewsPage/ArticleTypes';
-import { ObjectId } from 'mongodb';
+import { ObjectId, Db } from 'mongodb';
 
 export const config = {
   api: {
@@ -35,7 +35,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { db } = await connectToDatabase();
+  const { db }: { db: Db } = await connectToDatabase();
 
   const {
     headline,

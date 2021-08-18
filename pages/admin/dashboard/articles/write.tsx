@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useRef, useState, memo } from 'react';
+import { FC, FormEventHandler, useState } from 'react';
 import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
@@ -8,7 +8,7 @@ import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';
-import { ObjectId } from 'mongodb';
+import { ObjectId, Db } from 'mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
 
 const SlateEditor = dynamic(
@@ -16,7 +16,7 @@ const SlateEditor = dynamic(
   { ssr: false }
 );
 
-const IndexPage: FC<{ article?: Article }> = ({ article }) => {
+const WritePage: FC<{ article?: Article }> = ({ article }) => {
   const [headline, setHeadline] = useState(article?.headline || '');
   const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
@@ -136,7 +136,7 @@ const IndexPage: FC<{ article?: Article }> = ({ article }) => {
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if (query.id) {
     try {
-      const { db } = await connectToDatabase();
+      const { db }: { db: Db } = await connectToDatabase();
 
       const article = await db
         .collection('articles')
@@ -146,6 +146,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         props: { article: JSON.parse(JSON.stringify(article)) },
       };
     } catch (error) {
+      console.error(error);
+
       if (error instanceof TypeError) {
         return {
           redirect: {
@@ -154,8 +156,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
           },
         };
       }
-
-      console.error(error);
 
       return {
         redirect: {
@@ -171,4 +171,4 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 
-export default memo(IndexPage);
+export default WritePage;

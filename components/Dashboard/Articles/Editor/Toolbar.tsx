@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { CustomEditor } from './SlateHelpers';
 import { TextFormat, BlockType } from './SlateTypes';
 import {
@@ -15,7 +15,7 @@ import { insertImage } from './SlateImage';
 import { LinkButton, RemoveLinkButton, isLinkActive } from './SlateLinks';
 
 interface Props {
-  elementType?: string | undefined;
+  elementType?: string;
 }
 
 const Toolbar: FC<Props> = () => {
@@ -36,7 +36,7 @@ const Toolbar: FC<Props> = () => {
     { icon: <MdClosedCaption />, formatType: 'cc' },
   ];
 
-  const fileUploadHandler = (e: any) => {
+  const fileUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       const reader = new FileReader();

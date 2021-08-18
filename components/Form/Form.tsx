@@ -1,7 +1,7 @@
-import { FC, Dispatch, SetStateAction } from 'react';
+import { FC, Dispatch, SetStateAction, FormEvent } from 'react';
 import FormEl from './FormEl';
 import styled from 'styled-components';
-import { Button,LinkBtn } from '../Styles/Styles';
+import { Button, LinkBtn } from '../Styles/Styles';
 
 const FormWrap = styled.div`
   display: grid;
@@ -32,17 +32,19 @@ interface Props {
     setVal: Dispatch<SetStateAction<string>>;
     isRequired?: boolean;
   }[];
+  handleRegisterSubmit?: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const Form: FC<Props> = ({ formData, setScreen, formName, btnName }) => {
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+const Form: FC<Props> = ({ formData, handleRegisterSubmit, btnName }) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log(btnName);
 
     // if the state of input fields are cleared
     // the confirmation screen will not receive those data.
     // setScreen is only for Sign Up Form,
     // the app will break if it is not within the if statement
-    if (formName === 'signform') {
+    if (btnName === 'Sign Up' && handleRegisterSubmit) {
+      return handleRegisterSubmit(e);
     } else {
       formData.forEach((data) => data.setVal(''));
     }

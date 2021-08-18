@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Article } from 'components/NewsPage/ArticleTypes';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import Layout from 'components/Layout/Layout';
 import { DashboardWrap } from 'components/Styles/DashboardStyles';
 import ArticleList from 'components/Dashboard/Articles/ArticleList/List';
 import { connectToDatabase } from 'util/mongodb';
-import { Article } from 'components/NewsPage/ArticleTypes';
+import { Db } from 'mongodb';
 
 interface Props {
   articles: Article[];
@@ -22,9 +23,9 @@ const AllArticlesPage: FC<Props> = ({ articles }) => {
 };
 
 export async function getServerSideProps() {
-  const { db } = await connectToDatabase();
+  const { db }: { db: Db } = await connectToDatabase();
 
-  const articles = await db
+  const articles: Article[] = await db
     .collection('articles')
     .find({})
     .sort({ _id: -1 })

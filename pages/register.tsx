@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
 import { PageHeading } from 'components/Styles/Styles';
@@ -20,10 +20,26 @@ const Register: FC = () => {
     },
   ];
 
+  const handleRegisterSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password, confirmPassword }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
+      .then((data) => alert(data.message));
+  };
+
   return (
     <Layout title='Sign Up'>
       <PageHeading>Sign Up</PageHeading>
-      <Form btnName='Sign Up' formData={formData} />
+      <Form
+        handleRegisterSubmit={(e) => handleRegisterSubmit(e)}
+        btnName='Sign Up'
+        formData={formData}
+      />
     </Layout>
   );
 };

@@ -1,6 +1,6 @@
 import { connectToDatabase } from 'util/mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { ObjectId } from 'mongodb';
+import { ObjectId, Db } from 'mongodb';
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method === 'DELETE') {
     try {
-      const { db } = await connectToDatabase();
+      const { db }: { db: Db } = await connectToDatabase();
 
       const objectIds = req.body.map((id: string) => new ObjectId(id));
 

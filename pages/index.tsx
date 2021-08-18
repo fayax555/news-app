@@ -4,6 +4,7 @@ import ArticleList from 'components/NewsPage/ArticleList';
 import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
+import { Db } from 'mongodb';
 
 interface Props {
   articles: Article[];
@@ -20,7 +21,7 @@ const Home: FC<Props> = ({ articles }) => {
 };
 
 export async function getStaticProps() {
-  const { db } = await connectToDatabase();
+  const { db }: { db: Db } = await connectToDatabase();
 
   const articles = await db
     .collection('articles')

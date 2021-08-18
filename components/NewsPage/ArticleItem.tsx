@@ -42,8 +42,8 @@ const ArticleItem: FC<Props> = ({ article, height, width }) => {
               color: #666;
             `}
           >
-            <FaRegClock css='font-size: 0.7rem;' />
-            {dateFromNow}
+            <FaRegClock css='font-size: 0.7rem; ' />
+            <span> {dateFromNow}</span>
           </p>
         </div>
       </a>
