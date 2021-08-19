@@ -18,7 +18,6 @@ const Header: FC<{ articles: Article[] }> = ({ articles }) => {
               width={1100}
               height={800}
               alt=''
-              loading='eager'
             />
             <div>
               <h1>{articles[0].headline}</h1>

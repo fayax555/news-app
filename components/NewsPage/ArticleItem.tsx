@@ -7,7 +7,6 @@ import { Article } from './ArticleTypes';
 
 interface Props {
   article: Article;
-
   height: number;
   width: number;
 }
@@ -31,7 +30,13 @@ const ArticleItem: FC<Props> = ({ article, height, width }) => {
     <Link key={nid} href={`/news/${nid}`} passHref>
       <a>
         <div>
-          <Image src={imgUrl} height={height} width={width} alt='' />
+          <Image
+            loading='eager'
+            src={imgUrl}
+            height={height}
+            width={width}
+            alt=''
+          />
         </div>
         <div>
           <h2>{headline.slice(0, 180)}</h2>

@@ -20,11 +20,19 @@ export default async function handler(
     return res.status(422).json({ message: 'Invalid Input' });
   }
 
+  const user = await db.collection('users').findOne({ email });
+
+  if (user) return res.status(422).json({ message: 'Email already exists' });
+
   const hashedPassword = await hashPassword(password);
 
-  const result = db
-    .collection('users')
-    .insertOne({ name, email, password: hashedPassword });
+  try {
+    await db
+      .collection('users')
+      .insertOne({ name, email, password: hashedPassword });
 
-  res.status(201).json({ message: 'Sign Up Successful' });
+    res.status(201).json({ message: 'Sign Up Successful' });
+  } catch (error) {
+    console.error(error);
+  }
 }
