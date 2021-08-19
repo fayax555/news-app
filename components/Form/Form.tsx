@@ -33,9 +33,15 @@ interface Props {
     isRequired?: boolean;
   }[];
   handleRegisterSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  handleLoginSubmit?: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const Form: FC<Props> = ({ formData, handleRegisterSubmit, btnName }) => {
+const Form: FC<Props> = ({
+  formData,
+  handleRegisterSubmit,
+  handleLoginSubmit,
+  btnName,
+}) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     console.log(btnName);
 
@@ -45,9 +51,14 @@ const Form: FC<Props> = ({ formData, handleRegisterSubmit, btnName }) => {
     // the app will break if it is not within the if statement
     if (btnName === 'Sign Up' && handleRegisterSubmit) {
       return handleRegisterSubmit(e);
-    } else {
-      formData.forEach((data) => data.setVal(''));
     }
+
+    if (btnName === 'Sign In' && handleLoginSubmit) {
+      return handleLoginSubmit(e);
+    }
+    // else {
+    //   formData.forEach((data) => data.setVal(''));
+    // }
   };
 
   return (

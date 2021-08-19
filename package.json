@@ -46,7 +46,6 @@
     "@types/react": "17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/slate": "^0.47.9",
-    "@types/slate-react": "^0.50.1",
     "@types/styled-components": "^5.1.11",
     "@types/validator": "^13.6.3",
     "eslint": "7.30.0",
