@@ -18,7 +18,7 @@ export default NextAuth({
           .findOne({ email: credentials.email });
 
         if (!user) {
-          throw new Error('email not found!');
+          throw new Error('Email not found!');
         }
 
         const isValid = await verifyPassword(

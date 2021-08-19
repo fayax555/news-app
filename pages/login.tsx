@@ -14,7 +14,6 @@ const Login: FC = () => {
   ];
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
     console.log('login button click');
 

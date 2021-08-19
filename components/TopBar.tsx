@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { Session } from 'next-auth';
 
 const Bar = styled.div`
   background-color: #111;
@@ -38,9 +39,11 @@ const Bar = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  session: Session | null;
+}
 
-const TopBar: FC<Props> = () => {
+const TopBar: FC<Props> = ({ session }) => {
   return (
     <Bar>
       <div>
@@ -50,12 +53,16 @@ const TopBar: FC<Props> = () => {
           </a>
         </Link>
         <div>
-          <Link href='/register' passHref>
-            <a>Register</a>
-          </Link>
-          <Link href='/login' passHref>
-            <a>Sign In</a>
-          </Link>
+          {!session && (
+            <>
+              <Link href='/register' passHref>
+                <a>Register</a>
+              </Link>
+              <Link href='/login' passHref>
+                <a>Sign In</a>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </Bar>

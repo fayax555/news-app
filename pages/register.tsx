@@ -21,8 +21,6 @@ const Register: FC = () => {
   ];
 
   const handleRegisterSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
     fetch('/api/auth/signup', {
       method: 'POST',
       body: JSON.stringify({ name, email, password, confirmPassword }),

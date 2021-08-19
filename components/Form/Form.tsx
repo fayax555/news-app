@@ -43,6 +43,7 @@ const Form: FC<Props> = ({
   btnName,
 }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log(btnName);
 
     // if the state of input fields are cleared
