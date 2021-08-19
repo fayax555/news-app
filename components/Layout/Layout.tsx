@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
-import TopBar from 'components/TopBar';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { useSession } from 'next-auth/client';
+import MenuBars from './MenuBars/MenuBars';
 
 interface LayoutProps {
   title?: string;
@@ -20,11 +19,6 @@ export default function Layout({
 }: LayoutProps) {
   dayjs.extend(relativeTime);
 
-  const [session, loading] = useSession();
-
-  console.log(session);
-  // console.log(loading);
-
   return (
     <>
       <Head>
@@ -32,7 +26,7 @@ export default function Layout({
         <meta name='description' content={description} />
         <meta name='keywords' content={keywords} />
       </Head>
-      <TopBar session={session} />
+      <MenuBars />
       {children}
     </>
   );

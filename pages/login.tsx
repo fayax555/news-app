@@ -3,10 +3,13 @@ import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
 import { PageHeading } from 'components/Styles/Styles';
 import { signIn } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const router = useRouter();
 
   const formData = [
     { label: 'email', val: email, setVal: setEmail },
@@ -14,7 +17,6 @@ const Login: FC = () => {
   ];
 
   const handleLoginSubmit = async (e: FormEvent<HTMLFormElement>) => {
-
     console.log('login button click');
 
     const result = await signIn('credentials', {
@@ -24,6 +26,8 @@ const Login: FC = () => {
     });
 
     console.log(result);
+
+    if (!result?.error) router.replace('admin/dashboard/');
 
     if (result?.error) alert(result?.error);
   };

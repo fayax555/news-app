@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { getSession, signOut } from 'next-auth/client';
+import { GetServerSideProps } from 'next';
 import { Session } from 'next-auth';
 
 const Bar = styled.div`
@@ -40,10 +42,17 @@ const Bar = styled.div`
 `;
 
 interface Props {
-  session: Session | null;
+  session?: Session | null;
 }
 
-const TopBar: FC<Props> = ({ session }) => {
+const Navbar: FC<Props> = ({ session }) => {
+  // const [session, loading] = useSession();
+  console.log(session);
+
+  const logoutHandler = () => {
+    signOut();
+  };
+
   return (
     <Bar>
       <div>
@@ -53,7 +62,7 @@ const TopBar: FC<Props> = ({ session }) => {
           </a>
         </Link>
         <div>
-          {!session && (
+          {!session ? (
             <>
               <Link href='/register' passHref>
                 <a>Register</a>
@@ -62,6 +71,8 @@ const TopBar: FC<Props> = ({ session }) => {
                 <a>Sign In</a>
               </Link>
             </>
+          ) : (
+            <a onClick={logoutHandler}>Logout</a>
           )}
         </div>
       </div>
@@ -69,4 +80,10 @@ const TopBar: FC<Props> = ({ session }) => {
   );
 };
 
-export default TopBar;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  return { props: { session } };
+};
+
+export default Navbar;
