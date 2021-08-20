@@ -9,7 +9,8 @@ const ArticleInfoWrap = styled.div`
   padding-bottom: 0.75rem;
   margin-bottom: 1rem;
   gap: 0.5rem;
-  /* padding: 0.25rem !important; */
+  padding: 0.25rem !important;
+  padding-bottom: 0.75rem !important;
 
   div {
     border-radius: 50%;
@@ -25,11 +26,11 @@ const ArticleInfoWrap = styled.div`
 `;
 
 interface Props {
-  name?: string;
+  author?: string;
   _id: string;
 }
 
-const ArticleInfo: FC<Props> = ({ name, _id }) => {
+const ArticleInfo: FC<Props> = ({ author, _id }) => {
   const dateFromObjectId = (id: string) =>
     new Date(parseInt(id.substring(0, 8), 16) * 1000);
 
@@ -40,10 +41,14 @@ const ArticleInfo: FC<Props> = ({ name, _id }) => {
       {/* <div>
         <Image src={img} alt=''></Image>
       </div> */}
-      <p>
-        By <span>{name || 'Hassan Fayaz'}</span>
-      </p>
-      &nbsp;
+      <>
+        {author && author?.length > 0 && (
+          <p>
+            By <span>{author}</span>
+            &nbsp;
+          </p>
+        )}
+      </>
       <p>Posted: {date.format('DD MMM YY - HH:mm')} </p>
     </ArticleInfoWrap>
   );

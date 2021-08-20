@@ -13,6 +13,7 @@ import { ContentImage } from '../../Styles/ArticleStyles';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
+    author,
     _id,
     headline,
     content,
@@ -20,7 +21,7 @@ const Article: FC<{ article: ArticleProps }> = ({
     coverImage: { name, size, type, imgUrl },
   },
 }) => {
-  // console.log(content);
+  console.log(author);
 
   const contentData = content.map(
     ({ children, type, url, videoId, tweetId }, index) => {
@@ -115,7 +116,7 @@ const Article: FC<{ article: ArticleProps }> = ({
         <Image src={imgUrl} height={400} width={700} alt='' />
         <CaptionBox>{imageCaption}</CaptionBox>
       </div>
-      <ArticleInfo _id={_id} />
+      <ArticleInfo author={author} _id={_id} />
       {contentData}
     </ArticleWrap>
   );

@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 export interface Article {
   _id: string;
   nid: string;
+  author?: string;
   headline: string;
   imageCaption?: string;
   excerpt?: string;

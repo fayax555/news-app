@@ -20,6 +20,7 @@ cloudinary.config({
 });
 
 type ReqBody = {
+  author: string;
   headline: string;
   imageCaption?: string;
   excerpt?: string;
@@ -45,6 +46,7 @@ export default async function handler(
   const { db }: { db: Db } = await connectToDatabase();
 
   const {
+    author,
     headline,
     content,
     excerpt,
@@ -81,6 +83,7 @@ export default async function handler(
 
       const updatedReqBody = {
         nid: req.method === 'PUT' ? String(count) : String(count + 1),
+        author,
         headline,
         content,
         imageCaption,

@@ -8,9 +8,9 @@ import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';
-import { ObjectId, Db } from 'mongodb';
+import { Db } from 'mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
-import { getSession } from 'next-auth/client';
+import { useSession, getSession } from 'next-auth/client';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
@@ -18,6 +18,8 @@ const SlateEditor = dynamic(
 );
 
 const WritePage: FC<{ article?: Article }> = ({ article }) => {
+  const [session] = useSession();
+
   const [headline, setHeadline] = useState(article?.headline || '');
   const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
@@ -51,6 +53,7 @@ const WritePage: FC<{ article?: Article }> = ({ article }) => {
     } = files[0];
 
     const reqBody = {
+      author: session?.user?.name,
       headline,
       imageCaption,
       excerpt,
@@ -160,12 +163,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } catch (error) {
       console.error(error);
 
-      // return {
-      //   redirect: {
-      //     destination: '/admin/dashboard/write',
-      //     permanent: false,
-      //   },
-      // };
+      return {
+        redirect: {
+          destination: '/admin/dashboard/write',
+          permanent: false,
+        },
+      };
     }
   }
 

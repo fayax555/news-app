@@ -47,7 +47,7 @@ interface Props {
 }
 
 const Navbar: FC<Props> = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   const logoutHandler = async () => {
     await signOut({ callbackUrl: '/' });
@@ -62,7 +62,7 @@ const Navbar: FC<Props> = () => {
           </a>
         </Link>
         <div>
-          {!session && !loading && (
+          {!session && (
             <>
               <Link href='/register' passHref>
                 <a>Register</a>
