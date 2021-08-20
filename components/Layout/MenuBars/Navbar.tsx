@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getSession, signOut } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 import { Session } from 'next-auth';
+import { useSession } from 'next-auth/client';
 
 const Bar = styled.div`
   background-color: #111;
@@ -42,12 +43,11 @@ const Bar = styled.div`
 `;
 
 interface Props {
-  session?: Session | null;
+  session?: any;
 }
 
-const Navbar: FC<Props> = ({ session }) => {
-  // const [session, loading] = useSession();
-  console.log(session);
+const Navbar: FC<Props> = () => {
+  const [session, loading] = useSession();
 
   const logoutHandler = () => {
     signOut();
@@ -55,35 +55,31 @@ const Navbar: FC<Props> = ({ session }) => {
 
   return (
     <Bar>
-      <div>
-        <Link href='/' passHref>
-          <a>
-            <h1>News</h1>
-          </a>
-        </Link>
+      {!loading && (
         <div>
-          {!session ? (
-            <>
-              <Link href='/register' passHref>
-                <a>Register</a>
-              </Link>
-              <Link href='/login' passHref>
-                <a>Sign In</a>
-              </Link>
-            </>
-          ) : (
-            <a onClick={logoutHandler}>Logout</a>
-          )}
+          <Link href='/' passHref>
+            <a>
+              <h1>News</h1>
+            </a>
+          </Link>
+          <div>
+            {!session ? (
+              <>
+                <Link href='/register' passHref>
+                  <a>Register</a>
+                </Link>
+                <Link href='/login' passHref>
+                  <a>Sign In</a>
+                </Link>
+              </>
+            ) : (
+              <a onClick={logoutHandler}>Logout</a>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </Bar>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  return { props: { session } };
 };
 
 export default Navbar;

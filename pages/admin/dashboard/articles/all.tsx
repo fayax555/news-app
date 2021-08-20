@@ -6,12 +6,16 @@ import { DashboardWrap } from 'components/Styles/DashboardStyles';
 import ArticleList from 'components/Dashboard/Articles/ArticleList/List';
 import { connectToDatabase } from 'util/mongodb';
 import { Db } from 'mongodb';
+import { useSession, getSession } from 'next-auth/client';
+import { GetServerSideProps } from 'next';
 
 interface Props {
   articles: Article[];
 }
 
 const AllArticlesPage: FC<Props> = ({ articles }) => {
+  const [session, loading] = useSession();
+
   return (
     <Layout title='Aritlces'>
       <DashboardWrap>
@@ -22,7 +26,15 @@ const AllArticlesPage: FC<Props> = ({ articles }) => {
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      notFound: true,
+    };
+  }
+
   const { db }: { db: Db } = await connectToDatabase();
 
   const articles: Article[] = await db
@@ -36,6 +48,6 @@ export async function getServerSideProps() {
       articles: JSON.parse(JSON.stringify(articles)),
     },
   };
-}
+};
 
 export default AllArticlesPage;

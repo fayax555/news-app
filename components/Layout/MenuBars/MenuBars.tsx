@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import Navbar from './Navbar';
-import { getSession } from 'next-auth/client';
 import AdminBar from './AdminBar';
 import { GetServerSideProps } from 'next';
-import { Session } from 'next-auth';
+// import { Session } from 'next-auth';
+import { useSession, getSession } from 'next-auth/client';
 
 interface Props {
-  session?: Session | null;
+  session?: any;
 }
 
-const MenuBars: FC<Props> = ({ session }) => {
-  console.log(session);
+const MenuBars: FC<Props> = () => {
+  const [session, loading] = useSession();
 
   return (
     <div>
@@ -18,12 +18,6 @@ const MenuBars: FC<Props> = ({ session }) => {
       <Navbar />
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
-
-  return { props: { session } };
 };
 
 export default MenuBars;

@@ -10,6 +10,7 @@ const StyledAdminBar = styled.section`
 interface Props {}
 
 const AdminBar: FC<Props> = () => {
+
   return (
     <StyledAdminBar>
       <Link href='/admin/dashboard'>Go to Dashboard</Link>

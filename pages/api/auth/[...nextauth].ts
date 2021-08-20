@@ -10,7 +10,7 @@ export default NextAuth({
   },
   providers: [
     Providers.Credentials({
-      async authorize(credentials: { email: string; password: string }) {
+      async authorize(credentials: any) {
         const { db }: { db: Db } = await connectToDatabase();
 
         const user = await db
