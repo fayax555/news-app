@@ -2,7 +2,6 @@ import { FC, FormEvent, useState } from 'react';
 import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
 import { PageHeading } from 'components/Styles/Styles';
-import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
@@ -37,7 +36,14 @@ const Register: FC = () => {
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => res.json())
-      .then((data) => alert(data.message));
+      .then((data) => {
+        if ((data.message === 'Sign Up Successful')) {
+          alert(data.message);
+          router.replace('/');
+        }
+
+        alert(data.message);
+      });
   };
 
   return (
@@ -55,20 +61,5 @@ const Register: FC = () => {
     </>
   );
 };
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const session = await getSession(context);
-
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: '/',
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return { props: {} };
-// };
 
 export default Register;

@@ -6,7 +6,7 @@ import { DashboardWrap } from 'components/Styles/DashboardStyles';
 import ArticleList from 'components/Dashboard/Articles/ArticleList/List';
 import { connectToDatabase } from 'util/mongodb';
 import { Db } from 'mongodb';
-import { useSession, getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 
 interface Props {
@@ -14,8 +14,6 @@ interface Props {
 }
 
 const AllArticlesPage: FC<Props> = ({ articles }) => {
-  const [session, loading] = useSession();
-
   return (
     <Layout title='Aritlces'>
       <DashboardWrap>

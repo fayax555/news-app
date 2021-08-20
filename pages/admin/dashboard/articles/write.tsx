@@ -152,7 +152,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
       const article = await db
         .collection('articles')
-        .findOne({ _id: new ObjectId(String(query.id)) });
+        .findOne({ nid: query.id });
 
       return {
         props: { article: JSON.parse(JSON.stringify(article)) },
@@ -160,21 +160,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     } catch (error) {
       console.error(error);
 
-      if (error instanceof TypeError) {
-        return {
-          redirect: {
-            destination: '/admin/dashboard/articles/write',
-            permanent: false,
-          },
-        };
-      }
-
-      return {
-        redirect: {
-          destination: '/admin/dashboard/',
-          permanent: false,
-        },
-      };
+      // return {
+      //   redirect: {
+      //     destination: '/admin/dashboard/write',
+      //     permanent: false,
+      //   },
+      // };
     }
   }
 

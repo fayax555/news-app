@@ -9,7 +9,6 @@ export const NewsWrap = styled.div`
 
 // Article
 export const ArticleWrap = styled.div`
-  padding-top: 4rem;
   max-width: 760px;
 
   h1 {

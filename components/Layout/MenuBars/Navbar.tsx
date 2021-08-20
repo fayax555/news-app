@@ -55,29 +55,27 @@ const Navbar: FC<Props> = () => {
 
   return (
     <Bar>
-      {!loading && (
+      <div>
+        <Link href='/' passHref>
+          <a>
+            <h1>News</h1>
+          </a>
+        </Link>
         <div>
-          <Link href='/' passHref>
-            <a>
-              <h1>News</h1>
-            </a>
-          </Link>
-          <div>
-            {!session ? (
-              <>
-                <Link href='/register' passHref>
-                  <a>Register</a>
-                </Link>
-                <Link href='/login' passHref>
-                  <a>Sign In</a>
-                </Link>
-              </>
-            ) : (
-              <a onClick={logoutHandler}>Logout</a>
-            )}
-          </div>
+          {!session && !loading && (
+            <>
+              <Link href='/register' passHref>
+                <a>Register</a>
+              </Link>
+              <Link href='/login' passHref>
+                <a>Sign In</a>
+              </Link>
+            </>
+          )}
+
+          {session && <a onClick={logoutHandler}>Logout</a>}
         </div>
-      )}
+      </div>
     </Bar>
   );
 };

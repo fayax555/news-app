@@ -40,7 +40,7 @@ export default async function handler(
       .collection('users')
       .insertOne({ name, email, password: hashedPassword });
 
-    res.status(201).json({ message: 'Sign Up Successful' });
+    return res.status(201).json({ message: 'Sign Up Successful' });
   } catch (error) {
     console.error(error);
   }

@@ -44,7 +44,6 @@ const Form: FC<Props> = ({
 }) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(btnName);
 
     // if the state of input fields are cleared
     // the confirmation screen will not receive those data.

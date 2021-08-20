@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import Router from 'next/router';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
@@ -65,6 +65,8 @@ const ArticleListTableField: FC<Props> = ({
   isColChecked,
   setCheckedList,
 }) => {
+  const router = useRouter();
+
   const [isChecked, setIsChecked] = useState(false);
 
   const dateFromObjectId = (id: string) =>
@@ -105,10 +107,10 @@ const ArticleListTableField: FC<Props> = ({
       });
   };
 
-  const handleEdit = (_id: string) => {
+  const handleEdit = (id: string) => {
     router.push({
       pathname: '/admin/dashboard/articles/write',
-      query: { id: _id },
+      query: { id },
     });
   };
 
@@ -128,7 +130,7 @@ const ArticleListTableField: FC<Props> = ({
         <div>
           <FaEdit
             onClick={() => {
-              handleEdit(_id);
+              handleEdit(nid);
             }}
           />
           <FaTrash

@@ -13,6 +13,7 @@ import { ContentImage } from '../../Styles/ArticleStyles';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
+    _id,
     headline,
     content,
     imageCaption,
@@ -114,9 +115,8 @@ const Article: FC<{ article: ArticleProps }> = ({
         <Image src={imgUrl} height={400} width={700} alt='' />
         <CaptionBox>{imageCaption}</CaptionBox>
       </div>
+      <ArticleInfo _id={_id} />
       {contentData}
-      {/* <ArticleInfo name={article.name} date={article.date} /> */}
-      {/* <p>{article.body}</p> */}
     </ArticleWrap>
   );
 };
