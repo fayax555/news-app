@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { v2 as cloudinary } from 'cloudinary';
 import { Content } from 'components/NewsPage/ArticleTypes';
 import { ObjectId, Db } from 'mongodb';
+import { getSession } from 'next-auth/client';
 
 export const config = {
   api: {
@@ -35,6 +36,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized access not allowed' });
+  }
+
   const { db }: { db: Db } = await connectToDatabase();
 
   const {

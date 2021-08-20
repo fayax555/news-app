@@ -2,11 +2,20 @@ import { connectToDatabase } from 'util/mongodb';
 import { Db } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { hashPassword } from 'util/auth';
+import { getSession } from 'next-auth/client';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const session = await getSession({ req });
+  // user can't create an account if they are logged in
+  if (session) {
+    res
+      .status(403)
+      .json({ message: 'Please logout before creating an account!' });
+  }
+
   const { db }: { db: Db } = await connectToDatabase();
 
   const { name, email, password } = req.body;

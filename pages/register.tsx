@@ -2,8 +2,18 @@ import { FC, FormEvent, useState } from 'react';
 import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
 import { PageHeading } from 'components/Styles/Styles';
+import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 const Register: FC = () => {
+  const [session, loading] = useSession();
+  const router = useRouter();
+
+  if (session) {
+    router.replace('/');
+  }
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,15 +41,34 @@ const Register: FC = () => {
   };
 
   return (
-    <Layout title='Sign Up'>
-      <PageHeading>Sign Up</PageHeading>
-      <Form
-        handleRegisterSubmit={(e) => handleRegisterSubmit(e)}
-        btnName='Sign Up'
-        formData={formData}
-      />
-    </Layout>
+    <>
+      {!loading && !session && (
+        <Layout title='Sign Up'>
+          <PageHeading>Sign Up</PageHeading>
+          <Form
+            handleRegisterSubmit={(e) => handleRegisterSubmit(e)}
+            btnName='Sign Up'
+            formData={formData}
+          />
+        </Layout>
+      )}
+    </>
   );
 };
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context);
+
+//   if (session) {
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     };
+//   }
+
+//   return { props: {} };
+// };
 
 export default Register;

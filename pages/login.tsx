@@ -2,14 +2,19 @@ import { FC, FormEvent, useState } from 'react';
 import Form from 'components/Form/Form';
 import Layout from 'components/Layout/Layout';
 import { PageHeading } from 'components/Styles/Styles';
-import { signIn } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
 const Login: FC = () => {
+  const router = useRouter();
+  const [session, loading] = useSession();
+
+  if (session) {
+    router.replace('/admin/dashboard');
+  }
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const router = useRouter();
 
   const formData = [
     { label: 'email', val: email, setVal: setEmail },
@@ -33,14 +38,18 @@ const Login: FC = () => {
   };
 
   return (
-    <Layout title='Sign In'>
-      <PageHeading>Sign In</PageHeading>
-      <Form
-        handleLoginSubmit={handleLoginSubmit}
-        btnName='Sign In'
-        formData={formData}
-      />
-    </Layout>
+    <>
+      {!session && !loading && (
+        <Layout title='Sign In'>
+          <PageHeading>Sign In</PageHeading>
+          <Form
+            handleLoginSubmit={handleLoginSubmit}
+            btnName='Sign In'
+            formData={formData}
+          />
+        </Layout>
+      )}
+    </>
   );
 };
 

@@ -49,8 +49,8 @@ interface Props {
 const Navbar: FC<Props> = () => {
   const [session, loading] = useSession();
 
-  const logoutHandler = () => {
-    signOut();
+  const logoutHandler = async () => {
+    await signOut({ callbackUrl: '/' });
   };
 
   return (

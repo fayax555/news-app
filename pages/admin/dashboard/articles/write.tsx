@@ -74,7 +74,8 @@ const WritePage: FC<{ article?: Article }> = ({ article }) => {
       },
     })
       .then((res) => res.json())
-      .then((data) => alert(data.message));
+      .then((data) => alert(data.message))
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -137,13 +138,13 @@ const WritePage: FC<{ article?: Article }> = ({ article }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
 
-  // const session = await getSession(context);
+  const session = await getSession(context);
 
-  // if (!session) {
-  //   return {
-  //     notFound: true,
-  //   };
-  // }
+  if (!session) {
+    return {
+      notFound: true,
+    };
+  }
 
   if (query.id) {
     try {

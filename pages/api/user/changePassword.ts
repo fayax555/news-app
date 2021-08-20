@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
-const logger = require('logger-line-number');
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,9 +9,9 @@ export default async function handler(
     return;
   }
 
-  const session = await getSession({ req: req });
+  const session = await getSession({ req });
 
   if (!session) {
-    res.status(401).json({ message: 'Not authenticated' });
+    res.status(401).json({ message: 'Unauthorized access not allowed' });
   }
 }

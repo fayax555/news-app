@@ -10,7 +10,11 @@ export default NextAuth({
   },
   providers: [
     Providers.Credentials({
-      async authorize(credentials: any) {
+      async authorize(credentials: {
+        name: string;
+        email: string;
+        password: string;
+      }) {
         const { db }: { db: Db } = await connectToDatabase();
 
         const user = await db
@@ -30,7 +34,7 @@ export default NextAuth({
           throw new Error('Incorrect Password!');
         }
 
-        return { email: user.email };
+        return { name: user.name, email: user.email };
       },
     }),
   ],
