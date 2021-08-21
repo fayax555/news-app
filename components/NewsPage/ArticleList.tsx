@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import ArticleItem from './ArticleItem';
+import ArticleItem from './ArticleListItem';
 import Header from './Header/Header';
 import SecondSection from './SecondSection';
 import styled from 'styled-components';

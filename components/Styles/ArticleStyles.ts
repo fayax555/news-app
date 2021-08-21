@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 // news pages
 export const NewsWrap = styled.div`
-  max-width: 1100px;
+  max-width: 1400px;
   margin: auto;
-  padding: 2rem;
+  padding: 2rem 0;
 `;
 
 // Article
@@ -89,14 +89,15 @@ export const FormWrap = styled.div`
 `;
 
 // Header.tsx
-export const HeaderWrap = styled.div`
+export const HeaderWrap = styled.section`
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 1rem;
 `;
 
-export const HeaderLeft = styled.div`
+export const HeaderLeft = styled.section`
   padding-right: 0.75rem;
+  max-width: 400px;
 
   h1 {
     font-size: 1.5rem;
@@ -105,11 +106,11 @@ export const HeaderLeft = styled.div`
   > a {
     display: flex;
     gap: 1rem;
-    padding-top: 2rem;
+    padding-top: 1.85rem;
 
     div:first-child {
-      width: 100px;
       height: 80px;
+      width: 90px;
     }
 
     div:nth-child(2) {
@@ -142,9 +143,10 @@ export const HeaderLeft = styled.div`
 export const LinkWrap = styled.a`
   > div {
     position: relative;
-    padding-top: 1.25rem;
+    padding-top: 1.55rem;
 
     > div {
+      width: 100%;
       position: absolute;
       bottom: 10px;
       background-color: rgba(0, 0, 0, 0.75);

@@ -11,7 +11,7 @@ interface Props {
   width: number;
 }
 
-const ArticleItem: FC<Props> = ({ article, height, width }) => {
+const ArticleListItem: FC<Props> = ({ article, height, width }) => {
   const {
     _id,
     nid,
@@ -56,4 +56,4 @@ const ArticleItem: FC<Props> = ({ article, height, width }) => {
   );
 };
 
-export default ArticleItem;
+export default ArticleListItem;

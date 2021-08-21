@@ -37,9 +37,9 @@ const Register: FC = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if ((data.message === 'Sign Up Successful')) {
+        if (data.message === 'Sign Up Successful') {
           alert(data.message);
-          router.replace('/');
+          return router.replace('/');
         }
 
         alert(data.message);

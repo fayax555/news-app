@@ -66,7 +66,7 @@ const WritePage: FC<{ article?: Article }> = ({ article }) => {
       },
     };
 
-    fetch('/api/articles', {
+    fetch('/api/article/articles', {
       // replace the current article if it exists otherwise insert new
       method: article ? 'PUT' : 'POST',
       body: article

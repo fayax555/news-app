@@ -14,6 +14,7 @@ export const Wrap = styled.div`
 `;
 
 export const CaptionBox = styled.blockquote`
+  max-width: 700px;
   font-size: 1rem !important;
   color: #444;
 `;

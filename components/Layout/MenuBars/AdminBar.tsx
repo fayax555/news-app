@@ -8,8 +8,7 @@ const StyledAdminBar = styled.section`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  /* padding: 0 5rem; */
-  max-width: 1035px;
+  max-width: 1400px;
 
   > div {
     display: flex;
@@ -24,8 +23,6 @@ const AdminBar: FC<Props> = () => {
 
   const [session] = useSession();
 
-  console.log(session?.user);
-
   const path = window.location.pathname;
   const nid = path.replace('/news/', '');
 
@@ -35,6 +32,7 @@ const AdminBar: FC<Props> = () => {
       query: { id: nid },
     });
   };
+
   return (
     <StyledAdminBar>
       <Link href='/admin/dashboard'>

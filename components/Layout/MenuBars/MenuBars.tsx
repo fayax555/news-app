@@ -1,16 +1,15 @@
 import { FC } from 'react';
 import Navbar from './Navbar';
 import AdminBar from './AdminBar';
-import { GetServerSideProps } from 'next';
-// import { Session } from 'next-auth';
-import { useSession, getSession } from 'next-auth/client';
+import { useSession } from 'next-auth/client';
+import { Session } from 'next-auth';
 
 interface Props {
-  session?: any;
+  session?: Session | null;
 }
 
 const MenuBars: FC<Props> = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
 
   return (
     <div>

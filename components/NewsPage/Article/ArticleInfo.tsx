@@ -2,15 +2,16 @@ import dayjs from 'dayjs';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-const ArticleInfoWrap = styled.div`
+const ArticleInfoWrap = styled.section`
   display: flex;
-  border-bottom: 1px solid #444;
+  max-width: 700px;
+  border-bottom: 1px solid #ccc;
   align-items: center;
   padding-bottom: 0.75rem;
   margin-bottom: 1rem;
   gap: 0.5rem;
-  padding: 0.25rem !important;
-  padding-bottom: 0.75rem !important;
+  padding: 0.25rem 0;
+  padding-bottom: 0.75rem;
 
   div {
     border-radius: 50%;

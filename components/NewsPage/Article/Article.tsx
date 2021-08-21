@@ -21,8 +21,6 @@ const Article: FC<{ article: ArticleProps }> = ({
     coverImage: { name, size, type, imgUrl },
   },
 }) => {
-  console.log(author);
-
   const contentData = content.map(
     ({ children, type, url, videoId, tweetId }, index) => {
       const textContent = children.map(

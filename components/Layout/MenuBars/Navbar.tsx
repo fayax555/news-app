@@ -15,8 +15,8 @@ const Bar = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-width: 1100px;
-    padding: 0rem 2rem;
+    max-width: 1400px;
+    /* padding: 0rem 2rem; */
     margin: auto;
     color: #fff;
     text-align: right;
@@ -47,7 +47,7 @@ interface Props {
 }
 
 const Navbar: FC<Props> = () => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
 
   const logoutHandler = async () => {
     await signOut({ callbackUrl: '/' });
@@ -62,7 +62,7 @@ const Navbar: FC<Props> = () => {
           </a>
         </Link>
         <div>
-          {!session && (
+          {!session && !loading && (
             <>
               <Link href='/register' passHref>
                 <a>Register</a>

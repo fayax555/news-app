@@ -16,7 +16,7 @@ const Header: FC<{ articles: Article[] }> = ({ articles }) => {
             <Image
               src={articles[0].coverImage.imgUrl}
               width={1100}
-              height={800}
+              height={750}
               alt=''
             />
             <div>

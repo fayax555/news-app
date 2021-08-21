@@ -18,7 +18,7 @@ export default async function handler(
 
   const { db }: { db: Db } = await connectToDatabase();
 
-  const { name, email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
   if (
     !email ||
@@ -27,6 +27,10 @@ export default async function handler(
     password.trim().length < 3
   ) {
     return res.status(422).json({ message: 'Invalid Input' });
+  }
+
+  if (password !== confirmPassword) {
+    return res.status(422).json({ message: `Passwords don't match` });
   }
 
   const user = await db.collection('users').findOne({ email });

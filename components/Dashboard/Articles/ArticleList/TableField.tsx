@@ -93,7 +93,7 @@ const ArticleListTableField: FC<Props> = ({
   };
 
   const handleDelete = (id: string) => {
-    fetch(`/api/${id}`, {
+    fetch(`/api/article/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

@@ -37,7 +37,7 @@ const ArticleList: FC<Props> = ({ articles }) => {
   }, [articles, isColChecked]);
 
   const handleDeleteMany = () => {
-    fetch(`/api/deleteMany`, {
+    fetch(`/api/article/deleteMany`, {
       method: 'DELETE',
       body: JSON.stringify([...new Set(checkedList)]),
       headers: {

@@ -13,10 +13,21 @@ export default async function handler(
     return res.status(401).json({ message: 'Unauthorized access not allowed' });
   }
 
-  if (req.method === 'DELETE') {
-    const { db }: { db: Db } = await connectToDatabase();
-
+  if (req.method === 'PUT') {
     try {
+      const { db }: { db: Db } = await connectToDatabase();
+      
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error!' });
+    }
+  }
+
+  if (req.method === 'DELETE') {
+    try {
+      const { db }: { db: Db } = await connectToDatabase();
+
       const result = await db
         .collection('articles')
         .findOneAndDelete({ _id: new ObjectId(String(req.query.id)) });
