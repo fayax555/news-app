@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// max-width of the contents of page
+export const max_width = '1300px';
+
 export const PageHeading = styled.h1`
   text-align: center;
   padding-bottom: 2rem;

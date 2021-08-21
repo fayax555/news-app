@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import NavbarSubItem from './NavbarSubItem';
 
@@ -12,6 +13,10 @@ interface Props {
 }
 
 const NavbarItem: FC<Props> = ({ props }) => {
+  const router = useRouter();
+
+  const isPath = router.pathname.includes(props.name.toLowerCase());
+
   return (
     <li>
       <a
@@ -22,7 +27,7 @@ const NavbarItem: FC<Props> = ({ props }) => {
       >
         {props.name}
       </a>
-      <ul>
+      <ul style={{ display: isPath ? 'block' : 'none' }}>
         {props.subItems?.map(({ name, link }) => (
           <NavbarSubItem key={name} name={name} link={link} />
         ))}

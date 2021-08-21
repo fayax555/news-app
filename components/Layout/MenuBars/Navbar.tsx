@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { getSession, signOut } from 'next-auth/client';
-import { GetServerSideProps } from 'next';
-import { Session } from 'next-auth';
+import { signOut } from 'next-auth/client';
 import { useSession } from 'next-auth/client';
+import { max_width } from 'components/Styles/Styles';
 
 const Bar = styled.div`
   background-color: #111;
@@ -15,7 +14,7 @@ const Bar = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-width: 1400px;
+    max-width: ${max_width};
     /* padding: 0rem 2rem; */
     margin: auto;
     color: #fff;

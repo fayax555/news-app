@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // news pages
 export const NewsWrap = styled.div`
-  max-width: 1400px;
+  max-width: 1300px;
   margin: auto;
   padding: 2rem 0;
 `;
@@ -90,9 +90,9 @@ export const FormWrap = styled.div`
 
 // Header.tsx
 export const HeaderWrap = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 1rem;
+  display: flex;
+  justify-content:space-around;
+  gap: 4rem;
 `;
 
 export const HeaderLeft = styled.section`
@@ -141,12 +141,15 @@ export const HeaderLeft = styled.section`
 `;
 
 export const LinkWrap = styled.a`
+  /* max-width: 800px; */
+
   > div {
     position: relative;
     padding-top: 1.55rem;
 
     > div {
       width: 100%;
+      max-height: 480px;
       position: absolute;
       bottom: 10px;
       background-color: rgba(0, 0, 0, 0.75);

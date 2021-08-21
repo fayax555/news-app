@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const DashboardWrap = styled.section`
   display: grid;
@@ -93,10 +93,6 @@ export const List = styled.ul`
       display: none;
       font-size: 0.8rem;
       background-color: #444;
-    }
-
-    &:hover > ul {
-      display: block;
 
       li {
         a {
@@ -110,6 +106,10 @@ export const List = styled.ul`
           }
         }
       }
+    }
+
+    &:hover > ul {
+      display: block !important;
     }
   }
 `;

@@ -3,12 +3,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/client';
+import { max_width } from 'components/Styles/Styles';
 
 const StyledAdminBar = styled.section`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  max-width: 1400px;
+  max-width: ${max_width};
 
   > div {
     display: flex;
