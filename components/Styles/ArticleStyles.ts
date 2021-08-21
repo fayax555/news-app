@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { max_width } from './Styles';
 
 // news pages
 export const NewsWrap = styled.div`
-  max-width: 1300px;
+  ${max_width};
   margin: auto;
-  padding: 2rem 0;
+  padding: 2rem;
 `;
 
 // Article
@@ -91,8 +92,8 @@ export const FormWrap = styled.div`
 // Header.tsx
 export const HeaderWrap = styled.section`
   display: flex;
-  justify-content:space-around;
-  gap: 4rem;
+  justify-content: space-around;
+  gap: 2.1rem;
 `;
 
 export const HeaderLeft = styled.section`
@@ -141,8 +142,6 @@ export const HeaderLeft = styled.section`
 `;
 
 export const LinkWrap = styled.a`
-  /* max-width: 800px; */
-
   > div {
     position: relative;
     padding-top: 1.55rem;

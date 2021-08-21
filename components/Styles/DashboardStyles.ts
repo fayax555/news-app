@@ -94,16 +94,14 @@ export const List = styled.ul`
       font-size: 0.8rem;
       background-color: #444;
 
-      li {
-        a {
-          padding: 0.25rem 1.75rem;
-          opacity: 0.8;
+      li a {
+        padding: 0.25rem 1.75rem;
+        opacity: 0.8;
 
-          &:hover {
-            opacity: 1;
-            font-weight: bold;
-            color: #fff;
-          }
+        &:hover {
+          opacity: 1;
+          font-weight: bold;
+          color: #fff;
         }
       }
     }

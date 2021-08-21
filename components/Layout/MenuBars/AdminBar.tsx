@@ -9,7 +9,7 @@ const StyledAdminBar = styled.section`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  max-width: ${max_width};
+  ${max_width};
 
   > div {
     display: flex;

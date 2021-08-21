@@ -7,7 +7,7 @@ const SecondSectionWrap = styled.section`
   padding: 3rem 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem 5.5rem;
+  gap: 3rem;
 
   a {
     h2 {
@@ -31,7 +31,6 @@ interface Props {
 }
 
 const SecondSection: FC<Props> = ({ articles }) => {
-  // console.log(articles[0].date);
   return (
     <SecondSectionWrap>
       {articles.slice(5).map((article) => (

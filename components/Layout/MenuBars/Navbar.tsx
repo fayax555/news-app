@@ -14,7 +14,8 @@ const Bar = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    max-width: ${max_width};
+    ${max_width};
+
     /* padding: 0rem 2rem; */
     margin: auto;
     color: #fff;

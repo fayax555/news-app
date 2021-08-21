@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // max-width of the contents of page
-export const max_width = '1300px';
+export const max_width = css`
+  max-width: 1300px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+`;
 
 export const PageHeading = styled.h1`
   text-align: center;
