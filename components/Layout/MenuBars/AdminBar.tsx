@@ -24,13 +24,12 @@ const AdminBar: FC<Props> = () => {
 
   const [session] = useSession();
 
-  const path = window.location.pathname;
-  const nid = path.replace('/news/', '');
+  const path = router.pathname;
 
   const handleClick = () => {
     router.push({
       pathname: '/admin/dashboard/articles/write',
-      query: { id: nid },
+      query: { id: router.query.id },
     });
   };
 

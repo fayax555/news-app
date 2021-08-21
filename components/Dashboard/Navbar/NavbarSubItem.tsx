@@ -4,17 +4,16 @@ import { useRouter } from 'next/router';
 
 interface Props {
   name?: string;
-  link?: string;
+  link: string;
 }
 
 const NavbarSubItem: FC<Props> = ({ name, link }) => {
   const router = useRouter();
 
-  console.log(router.pathname);
-  console.log(name);
+  const isPath = router.pathname.includes(link);
 
   return (
-    <li key={name}>
+    <li style={{ backgroundColor: isPath ? '#243d81' : '' }} key={name}>
       <Link href={`/admin/dashboard/${link}`}>
         <a>{name}</a>
       </Link>

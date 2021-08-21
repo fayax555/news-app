@@ -11,15 +11,19 @@ import { connectToDatabase } from 'util/mongodb';
 import { Db } from 'mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import { useSession, getSession } from 'next-auth/client';
+import { Session } from 'next-auth';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
   { ssr: false }
 );
 
-const WritePage: FC<{ article?: Article }> = ({ article }) => {
-  const [session] = useSession();
+interface Props {
+  article?: Article;
+  session?: Session;
+}
 
+const WritePage: FC<Props> = ({ article, session }) => {
   const [headline, setHeadline] = useState(article?.headline || '');
   const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
@@ -143,6 +147,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const session = await getSession(context);
 
+  if (session) {
+    return {
+      props: { session },
+    };
+  }
+
   if (!session) {
     return {
       notFound: true,
@@ -158,7 +168,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         .findOne({ nid: query.id });
 
       return {
-        props: { article: JSON.parse(JSON.stringify(article)) },
+        props: { session, article: JSON.parse(JSON.stringify(article)) },
       };
     } catch (error) {
       console.error(error);

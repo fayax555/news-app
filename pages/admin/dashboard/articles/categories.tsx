@@ -3,7 +3,7 @@ import Layout from 'components/Layout/Layout';
 import { DashboardWrap } from 'components/Styles/DashboardStyles';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 interface Props {}
 

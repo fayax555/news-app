@@ -5,20 +5,17 @@ import { NewsWrap } from 'components/Styles/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 import { Article as ArticleType } from 'components/NewsPage/ArticleTypes';
 import { GetStaticProps, GetStaticPaths } from 'next';
-import countapi from 'countapi-js';
 
 interface Props {
   article: ArticleType;
 }
 
 const NewsId: FC<Props> = ({ article }) => {
-  useEffect(() => {
-    countapi.visits(article._id).then((result) => {
-      console.log(result.value);
-
-      fetch('/api/')
-    });
-  }, [article._id]);
+  // useEffect(() => {
+  //   countapi.visits(article._id).then((result) => {
+  //     console.log(result.value);
+  //   });
+  // }, [article._id]);
 
   return (
     <Layout>

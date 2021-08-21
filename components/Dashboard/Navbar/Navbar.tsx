@@ -22,8 +22,8 @@ const Navbar: FC<Props> = () => {
     {
       name: 'Users',
       subItems: [
-        { link: 'users', name: 'All users' },
-        { link: 'addnewuser', name: 'Add New User' },
+        { link: 'users/all', name: 'All users' },
+        { link: 'users/addnew', name: 'Add New User' },
       ],
     },
     { name: 'Appearance' },
