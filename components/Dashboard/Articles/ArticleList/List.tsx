@@ -1,23 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import ArticleListTable from './Table';
 import { Article } from 'components/NewsPage/ArticleTypes';
-import styled from 'styled-components';
 import Router from 'next/router';
-
-const ArticleBar = styled.div`
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  background-color: #aaa;
-  display: flex;
-  gap: 1rem;
-  justify-content: space-around;
-
-  button {
-    padding: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-`;
+import { ArticleBar } from './Styles';
 
 interface Props {
   articles: Article[];

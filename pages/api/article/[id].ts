@@ -16,8 +16,15 @@ export default async function handler(
   if (req.method === 'PUT') {
     try {
       const { db }: { db: Db } = await connectToDatabase();
-      
 
+      db.collection('articles').updateOne(
+        { _id: new ObjectId(String(req.query.id)) },
+        {
+          $inc: { views: 1 },
+        }
+      );
+
+      res.status(201);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Error!' });

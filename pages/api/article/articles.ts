@@ -19,7 +19,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-type ReqBody = {
+interface ReqBody {
   author: string;
   headline: string;
   imageCaption?: string;
@@ -31,7 +31,7 @@ type ReqBody = {
     type: string;
     encodeData: string;
   };
-};
+}
 
 export default async function handler(
   req: NextApiRequest,

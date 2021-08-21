@@ -1,59 +1,16 @@
 import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import styled from 'styled-components';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-
-const TableBodyField = styled.ul`
-  border-bottom: 1px dashed #777;
-  padding-bottom: 2rem;
-
-  &:hover {
-    li:nth-child(2) > div {
-      display: flex;
-    }
-  }
-
-  li:nth-child(2) {
-    a {
-      color: #1d1d97;
-
-      &:hover {
-        color: #7070f3;
-      }
-    }
-
-    div {
-      display: none;
-      position: absolute;
-
-      > * {
-        margin: 0.5rem 1rem;
-        font-size: 1.3rem;
-        cursor: pointer;
-
-        &:first-child:hover {
-          color: #0f0fc2;
-        }
-
-        &:nth-child(2):hover {
-          color: #9b1010;
-        }
-      }
-    }
-  }
-
-  li:last-child div {
-    position: absolute;
-  }
-`;
+import { TableBodyField } from './Styles';
 
 interface Props {
   _id: string;
   nid: string;
   headline: string;
+  views?: number;
   isColChecked: boolean;
   setCheckedList: Dispatch<SetStateAction<string[]>>;
 }
@@ -62,6 +19,7 @@ const ArticleListTableField: FC<Props> = ({
   _id,
   nid,
   headline,
+  views,
   isColChecked,
   setCheckedList,
 }) => {
@@ -141,7 +99,7 @@ const ArticleListTableField: FC<Props> = ({
         </div>
       </li>
       <li>John Doe</li>
-      <li>General</li>
+      <li>{views}</li>
       <li>
         <div>
           <p>{date.format('DD/MM/YY')}</p>

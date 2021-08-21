@@ -10,7 +10,7 @@ import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';
 import { Db } from 'mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
-import { useSession, getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import { Session } from 'next-auth';
 
 const SlateEditor = dynamic(
@@ -147,12 +147,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const session = await getSession(context);
 
-  if (session) {
-    return {
-      props: { session },
-    };
-  }
-
   if (!session) {
     return {
       notFound: true,
@@ -180,6 +174,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         },
       };
     }
+  }
+
+  if (session) {
+    return {
+      props: { session },
+    };
   }
 
   return {

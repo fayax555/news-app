@@ -13,7 +13,6 @@
     "babel-plugin-styled-components": "^1.13.2",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.3",
-    "countapi-js": "^1.0.2",
     "dayjs": "^1.10.6",
     "filepond": "^4.28.2",
     "filepond-plugin-file-encode": "^2.1.10",

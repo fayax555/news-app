@@ -11,11 +11,14 @@ interface Props {
 }
 
 const NewsId: FC<Props> = ({ article }) => {
-  // useEffect(() => {
-  //   countapi.visits(article._id).then((result) => {
-  //     console.log(result.value);
-  //   });
-  // }, [article._id]);
+  // page visits
+  // everytime an article page is visited, view count is inc by 1
+  useEffect(() => {
+    fetch(`/api/article/${article._id}`, {
+      method: 'PUT',
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout>

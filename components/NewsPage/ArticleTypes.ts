@@ -15,6 +15,7 @@ export interface Article {
     type: string;
     imgUrl: string;
   };
+  views?: number;
 }
 
 export interface Content {
