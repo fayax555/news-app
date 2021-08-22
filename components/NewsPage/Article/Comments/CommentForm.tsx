@@ -31,15 +31,10 @@ const CommentForm: FC<Props> = ({ _id }) => {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
 
-  const handleComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const commentData = { _id, name, comment };
-    // console.log(commentData);
 
     fetch(`/api/comment/comments`, {
       method: 'POST',
@@ -57,7 +52,14 @@ const CommentForm: FC<Props> = ({ _id }) => {
   return (
     <StyledCommentForm onSubmit={handleSubmit}>
       <Input val={name} setVal={setName} ph='Name' />
-      <textarea onChange={handleComment} rows={6} placeholder='Comment' />
+      <textarea
+        value={comment}
+        onChange={(e) => {
+          setComment(e.target.value);
+        }}
+        rows={6}
+        placeholder='Comment'
+      />
       <Button w='20%'>Send</Button>
     </StyledCommentForm>
   );

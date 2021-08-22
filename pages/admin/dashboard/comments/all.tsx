@@ -4,6 +4,8 @@ import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { DashboardWrap } from 'components/Styles/DashboardStyles';
 import { getSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
+import { connectToDatabase } from 'util/mongodb';
+import { Db } from 'mongodb';
 
 interface Props {}
 
@@ -28,6 +30,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       notFound: true,
     };
   }
+
+  try {
+    const { db }: { db: Db } = await connectToDatabase();
+
+    const article = await db.collection('articles').find({})
+
+  } catch (error) {}
 
   return { props: {} };
 };

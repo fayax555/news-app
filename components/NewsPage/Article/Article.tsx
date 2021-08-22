@@ -11,6 +11,7 @@ import {
 import { Article as ArticleProps } from '../ArticleTypes';
 import { ContentImage } from '../../Styles/ArticleStyles';
 import CommentForm from './Comments/CommentForm';
+import Comments from './Comments/Comments';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
@@ -119,7 +120,8 @@ const Article: FC<{ article: ArticleProps }> = ({
       </div>
       <ArticleInfo author={author} _id={_id} />
       {contentData}
-      <CommentForm _id={_id}/>
+      <CommentForm _id={_id} />
+      <Comments _id={_id} />
     </ArticleWrap>
   );
 };

@@ -7,6 +7,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (req.method === 'GET') {
+    try {
+      const { db }: { db: Db } = await connectToDatabase();
+
+      const article = await db.collection('articles').findOne({
+        _id: new ObjectId(String(req.query.id)),
+      });
+
+      res.status(200).json({ data: article?.comments.reverse() });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const session = await getSession({ req });
 
   if (!session) {

@@ -12,17 +12,17 @@ export const NewsWrap = styled.div`
 export const ArticleWrap = styled.div`
   max-width: 760px;
 
-  h1 {
+  > h1 {
     line-height: 1.2;
     font-size: 2.2rem;
     padding-bottom: 1.5rem;
   }
 
-  h2 {
+  > h2 {
     font-size: 1.6rem;
   }
 
-  h3 {
+  > h3 {
     font-size: 1.2rem;
   }
 
