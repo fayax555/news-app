@@ -10,6 +10,7 @@ import {
 } from 'components/Dashboard/Articles/Editor/EditorStyles';
 import { Article as ArticleProps } from '../ArticleTypes';
 import { ContentImage } from '../../Styles/ArticleStyles';
+import CommentForm from './Comments/CommentForm';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
@@ -84,8 +85,10 @@ const Article: FC<{ article: ArticleProps }> = ({
             <Image src={String(url)} width={600} height={340} alt='' />;
           </ContentImage>
         );
+
       if (type === 'cc')
         return <CaptionBox key={type + index}>{textContent}</CaptionBox>;
+
       if (type === 'youtube') {
         return (
           <iframe
@@ -116,6 +119,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       </div>
       <ArticleInfo author={author} _id={_id} />
       {contentData}
+      <CommentForm />
     </ArticleWrap>
   );
 };

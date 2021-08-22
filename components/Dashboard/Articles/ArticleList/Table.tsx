@@ -38,14 +38,15 @@ const ArticleListTable: FC<Props> = ({
         <li>Date</li>
       </TableHead>
       <div>
-        {articles.map(({ _id, nid, headline, views }) => {
+        {articles.map(({ _id, nid, headline, views, author }) => {
           return (
             <ArticleListTableField
               key={_id}
               _id={_id}
               nid={nid}
               headline={headline}
-              views={views}
+              views={views || 0}
+              author={author}
               isColChecked={isColChecked}
               setCheckedList={setCheckedList}
             />

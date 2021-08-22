@@ -17,7 +17,7 @@ const Navbar: FC<Props> = () => {
     },
     {
       name: 'Comments',
-      subItems: [{ link: 'comments', name: 'All Comments' }],
+      subItems: [{ link: 'comments/all', name: 'All Comments' }],
     },
     {
       name: 'Users',

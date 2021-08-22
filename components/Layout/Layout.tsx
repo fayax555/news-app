@@ -3,6 +3,7 @@ import Head from 'next/head';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import MenuBars from './MenuBars/MenuBars';
+import Footer from 'components/Dashboard/Navbar/Footer';
 
 interface LayoutProps {
   title?: string;
@@ -28,6 +29,7 @@ export default function Layout({
       </Head>
       <MenuBars />
       {children}
+      <Footer />
     </>
   );
 }

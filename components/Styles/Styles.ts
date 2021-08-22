@@ -16,12 +16,14 @@ export const PageHeading = styled.h1`
 export const Button = styled.button<{
   isSubmit?: boolean;
   p?: string;
+  w?: string;
   fs?: string;
 }>`
   background-color: #333;
   color: #fff;
   padding: ${(props) => props.p || '0.75rem 1rem'};
   font-size: ${(props) => props.fs || '1.2rem'};
+  width: ${(props) => props.w};
   cursor: pointer;
   border: none;
   outline: none;

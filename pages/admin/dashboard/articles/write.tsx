@@ -12,6 +12,7 @@ import { Db } from 'mongodb';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import { getSession } from 'next-auth/client';
 import { Session } from 'next-auth';
+import Input from 'components/Form/FormEl';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
@@ -25,7 +26,7 @@ interface Props {
 
 const WritePage: FC<Props> = ({ article, session }) => {
   const [headline, setHeadline] = useState(article?.headline || '');
-  const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
+  const [imgCaption, setImgCaption] = useState(article?.imageCaption || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
 
   // cover image from filepond
@@ -59,7 +60,7 @@ const WritePage: FC<Props> = ({ article, session }) => {
     const reqBody = {
       author: session?.user?.name,
       headline,
-      imageCaption,
+      imageCaption: imgCaption,
       excerpt,
       content: value,
       coverImage: {
@@ -93,36 +94,14 @@ const WritePage: FC<Props> = ({ article, session }) => {
           <h2>{`${article ? 'Update' : 'Add New'}`} Article</h2>
           <EditorForm onSubmit={handleSubmit}>
             <div>
-              <input
-                type='text'
-                placeholder='Headline'
-                value={headline}
-                onChange={(e) => {
-                  setHeadline(e.target.value);
-                }}
-                required
-              />
+              <Input val={headline} setVal={setHeadline} ph='Headline' />
               <FilePondComponent
                 imgUrl={article?.coverImage.imgUrl}
                 files={files}
                 setFiles={setFiles}
               />
-              <input
-                type='text'
-                value={imageCaption}
-                onChange={(e) => {
-                  setImageCaption(e.target.value);
-                }}
-                placeholder='Image Caption'
-              />
-              <input
-                type='text'
-                value={excerpt}
-                onChange={(e) => {
-                  setExcerpt(e.target.value);
-                }}
-                placeholder='Excerpt'
-              />
+              <Input val={imgCaption} setVal={setImgCaption} ph='Img Caption' />
+              <Input val={excerpt} setVal={setExcerpt} ph='Excerpt' />
               <SlateEditor value={value} setValue={setValue} />
             </div>
             <div>

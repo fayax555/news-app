@@ -1,10 +1,4 @@
-import {
-  FC,
-  Dispatch,
-  SetStateAction,
-  memo,
-  ChangeEvent,
-} from 'react';
+import { FC, Dispatch, SetStateAction, memo, ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
@@ -18,11 +12,12 @@ const StyledInput = styled.input`
 interface Props {
   val: string | number;
   setVal: Dispatch<SetStateAction<string>>;
-  label: string;
+  label?: string;
+  ph?: string;
   isRequired?: boolean;
 }
 
-const FormEl: FC<Props> = ({ val, setVal, label, isRequired = true }) => {
+const FormEl: FC<Props> = ({ val, setVal, label, ph, isRequired = true }) => {
   const handleValue = (e: ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value);
   };
@@ -42,7 +37,7 @@ const FormEl: FC<Props> = ({ val, setVal, label, isRequired = true }) => {
   return (
     <div>
       <label htmlFor={label}>
-        {label.charAt(0).toUpperCase() + label.slice(1)}
+        {label && label.charAt(0).toUpperCase() + label.slice(1)}
       </label>
       {label === 'gender' ? (
         <>
@@ -71,6 +66,7 @@ const FormEl: FC<Props> = ({ val, setVal, label, isRequired = true }) => {
           type={typeVal()}
           value={val}
           onChange={handleValue}
+          placeholder={ph}
           required={isRequired}
         />
       )}

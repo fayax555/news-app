@@ -11,6 +11,7 @@ interface Props {
   nid: string;
   headline: string;
   views?: number;
+  author?: string;
   isColChecked: boolean;
   setCheckedList: Dispatch<SetStateAction<string[]>>;
 }
@@ -20,6 +21,7 @@ const ArticleListTableField: FC<Props> = ({
   nid,
   headline,
   views,
+  author,
   isColChecked,
   setCheckedList,
 }) => {
@@ -98,7 +100,7 @@ const ArticleListTableField: FC<Props> = ({
           />
         </div>
       </li>
-      <li>John Doe</li>
+      <li>{author}</li>
       <li>{views}</li>
       <li>
         <div>
