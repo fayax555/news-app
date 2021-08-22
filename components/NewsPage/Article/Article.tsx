@@ -119,7 +119,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       </div>
       <ArticleInfo author={author} _id={_id} />
       {contentData}
-      <CommentForm />
+      <CommentForm _id={_id}/>
     </ArticleWrap>
   );
 };

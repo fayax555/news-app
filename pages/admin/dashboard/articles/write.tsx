@@ -26,7 +26,7 @@ interface Props {
 
 const WritePage: FC<Props> = ({ article, session }) => {
   const [headline, setHeadline] = useState(article?.headline || '');
-  const [imgCaption, setImgCaption] = useState(article?.imageCaption || '');
+  const [imageCaption, setImageCaption] = useState(article?.imageCaption || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
 
   // cover image from filepond
@@ -60,7 +60,7 @@ const WritePage: FC<Props> = ({ article, session }) => {
     const reqBody = {
       author: session?.user?.name,
       headline,
-      imageCaption: imgCaption,
+      imageCaption,
       excerpt,
       content: value,
       coverImage: {
@@ -100,8 +100,18 @@ const WritePage: FC<Props> = ({ article, session }) => {
                 files={files}
                 setFiles={setFiles}
               />
-              <Input val={imgCaption} setVal={setImgCaption} ph='Img Caption' />
-              <Input val={excerpt} setVal={setExcerpt} ph='Excerpt' />
+              <Input
+                val={imageCaption}
+                setVal={setImageCaption}
+                ph='Image Caption'
+                isRequired={false}
+              />
+              <Input
+                val={excerpt}
+                setVal={setExcerpt}
+                ph='Excerpt'
+                isRequired={false}
+              />
               <SlateEditor value={value} setValue={setValue} />
             </div>
             <div>

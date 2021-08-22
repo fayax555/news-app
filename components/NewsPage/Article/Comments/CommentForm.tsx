@@ -13,21 +13,23 @@ const StyledCommentForm = styled.form`
     padding: 0.5rem;
     margin-bottom: 1.5rem;
     width: 87%;
+    max-width: 87%;
     border-radius: 5px;
     border: 1px solid #444;
   }
 
   textarea {
-    font-size: 1.03rem;
+    font-size: 1.04rem;
   }
 `;
 
-interface Props {}
+interface Props {
+  _id: string;
+}
 
-const CommentForm: FC<Props> = () => {
+const CommentForm: FC<Props> = ({ _id }) => {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
-
 
   const handleComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -35,6 +37,21 @@ const CommentForm: FC<Props> = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const commentData = { _id, name, comment };
+    // console.log(commentData);
+
+    fetch(`/api/comment/comments`, {
+      method: 'POST',
+      body: JSON.stringify(commentData),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert(data.message);
+        setName('');
+        setComment('');
+      });
   };
 
   return (
