@@ -2,8 +2,10 @@ import { UpdatedComment } from 'components/NewsPage/ArticleTypes';
 import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { StyledLink } from '../Articles/ArticleList/styles';
+import { StyledLink, IconsWrap } from '../Articles/ArticleList/styles';
 import dayjs from 'dayjs';
+import { FaTrash, FaBan } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 const TableRow = styled.ul`
   font-size: 1.2rem;
@@ -17,6 +19,14 @@ const TableRow = styled.ul`
   }
 `;
 
+const CommentWrap = styled.li`
+  &:hover {
+    > div {
+      display: flex;
+    }
+  }
+`;
+
 const TableRowHeader = styled(TableRow)`
   background-color: #ddd;
   font-weight: bold;
@@ -27,7 +37,21 @@ interface Props {
 }
 
 const CommentList: FC<Props> = ({ comments }) => {
-  console.log(comments);
+  const router = useRouter();
+
+  const handleDelete = (id: string) => {
+    fetch(`/api/comment/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then(({ message }) => {
+        router.push(window.location.pathname);
+        alert(message);
+      });
+  };
 
   return (
     <div>
@@ -46,7 +70,17 @@ const CommentList: FC<Props> = ({ comments }) => {
           .map(({ cid, comment, headline, status, createdAt, nid }) => (
             <li key={cid}>
               <TableRow>
-                <li>{comment}</li>
+                <CommentWrap>
+                  {comment}
+                  <IconsWrap>
+                    <FaBan />
+                    <FaTrash
+                      onClick={() => {
+                        handleDelete(cid);
+                      }}
+                    />
+                  </IconsWrap>
+                </CommentWrap>
                 <li>
                   <Link href={`/news/${nid}`} passHref>
                     <StyledLink target='_blank'>
@@ -57,7 +91,7 @@ const CommentList: FC<Props> = ({ comments }) => {
                 <li>{status}</li>
                 <li>
                   <div>
-                    <p>{dayjs(createdAt).format('DD/MM/YY')}</p>
+                    <p>{dayjs(createdAt).format('DD MMM YY')}</p>
                     <p>{dayjs(createdAt).format('HH:mm:ss')}</p>
                   </div>
                 </li>

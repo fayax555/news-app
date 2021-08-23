@@ -2,9 +2,8 @@ import { FC, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Link from 'next/link';
 import dayjs from 'dayjs';
-import Router from 'next/router';
 import { useRouter } from 'next/router';
-import { TableBodyField, StyledLink } from './styles';
+import { TableBodyField, StyledLink, IconsWrap } from './styles';
 
 interface Props {
   _id: string;
@@ -61,7 +60,7 @@ const ArticleListTableField: FC<Props> = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        Router.push(window.location.pathname);
+        router.push(window.location.pathname);
 
         alert(data.message);
       });
@@ -87,7 +86,7 @@ const ArticleListTableField: FC<Props> = ({
         <Link href={`/news/${nid}`} passHref>
           <StyledLink target='_blank'>{headline}</StyledLink>
         </Link>
-        <div>
+        <IconsWrap>
           <FaEdit
             onClick={() => {
               handleEdit(nid);
@@ -98,13 +97,13 @@ const ArticleListTableField: FC<Props> = ({
               handleDelete(_id);
             }}
           />
-        </div>
+        </IconsWrap>
       </li>
       <li>{author}</li>
       <li>{views}</li>
       <li>
         <div>
-          <p>{date.format('DD/MM/YY')}</p>
+          <p>{date.format('DD MMM YY')}</p>
           <p>{date.format('HH:mm:ss')}</p>
         </div>
       </li>

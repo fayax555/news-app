@@ -53,6 +53,25 @@ export const StyledLink = styled.a`
   }
 `;
 
+export const IconsWrap = styled.div`
+  display: none;
+  position: absolute;
+
+  > * {
+    margin: 0.5rem 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:first-child:hover {
+      color: #0f0fc2;
+    }
+
+    &:nth-child(2):hover {
+      color: #9b1010;
+    }
+  }
+`;
+
 export const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
   padding-bottom: 2rem;
@@ -60,27 +79,6 @@ export const TableBodyField = styled.ul`
   &:hover {
     li:nth-child(2) > div {
       display: flex;
-    }
-  }
-
-  li:nth-child(2) {
-    div {
-      display: none;
-      position: absolute;
-
-      > * {
-        margin: 0.5rem 1rem;
-        font-size: 1.3rem;
-        cursor: pointer;
-
-        &:first-child:hover {
-          color: #0f0fc2;
-        }
-
-        &:nth-child(2):hover {
-          color: #9b1010;
-        }
-      }
     }
   }
 
