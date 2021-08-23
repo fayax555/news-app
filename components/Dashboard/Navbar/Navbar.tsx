@@ -38,8 +38,8 @@ const Navbar: FC<Props> = () => {
         </a>
       </Link>
       <List>
-        {navItems.map(({ name, subItems }) => (
-          <NavbarItem key={name} props={{ name, subItems }} />
+        {navItems.map((navItem) => (
+          <NavbarItem key={navItem.name} {...navItem} />
         ))}
       </List>
     </NavbarWrap>

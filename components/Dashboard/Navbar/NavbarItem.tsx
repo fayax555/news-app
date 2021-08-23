@@ -3,19 +3,17 @@ import { FC } from 'react';
 import NavbarSubItem from './NavbarSubItem';
 
 interface Props {
-  props: {
+  name: string;
+  subItems?: {
+    link: string;
     name: string;
-    subItems?: {
-      link: string;
-      name: string;
-    }[];
-  };
+  }[];
 }
 
-const NavbarItem: FC<Props> = ({ props }) => {
+const NavbarItem: FC<Props> = ({ name, subItems }) => {
   const router = useRouter();
 
-  const isPath = router.pathname.includes(props.name.toLowerCase());
+  const isPath = router.pathname.includes(name.toLowerCase());
 
   return (
     <li>
@@ -25,11 +23,11 @@ const NavbarItem: FC<Props> = ({ props }) => {
         }}
         href=''
       >
-        {props.name}
+        {name}
       </a>
       <ul style={{ display: isPath ? 'block' : 'none' }}>
-        {props.subItems?.map(({ name, link }) => (
-          <NavbarSubItem key={name} name={name} link={link} />
+        {subItems?.map((subItem) => (
+          <NavbarSubItem key={name} {...subItem} />
         ))}
       </ul>
     </li>

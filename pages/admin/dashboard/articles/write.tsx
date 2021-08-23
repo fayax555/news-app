@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/Articles/Editor/FilePond';
-import { DashboardWrite, EditorForm } from 'components/Styles/pages/DashboardStyles';
+import {
+  DashboardWrite,
+  EditorForm,
+} from 'components/Styles/pages/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';
@@ -57,7 +60,7 @@ const WritePage: FC<Props> = ({ article, session }) => {
       filenameWithoutExtension,
     } = files[0];
 
-    const reqBody = {
+    const articleData = {
       author: session?.user?.name,
       headline,
       imageCaption,
@@ -72,11 +75,11 @@ const WritePage: FC<Props> = ({ article, session }) => {
     };
 
     fetch('/api/article/articles', {
-      // replace the current article if it exists otherwise insert new
+      // update the current article if editing, otherwise insert new
       method: article ? 'PUT' : 'POST',
       body: article
-        ? JSON.stringify({ _id: article?._id, ...reqBody })
-        : JSON.stringify(reqBody),
+        ? JSON.stringify({ _id: article?._id, ...articleData })
+        : JSON.stringify(articleData),
       headers: {
         'Content-Type': 'application/json',
       },

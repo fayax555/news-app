@@ -31,7 +31,6 @@ const ArticleListItem: FC<Props> = ({ article, height, width }) => {
       <a>
         <div>
           <Image
-            loading='eager'
             src={imgUrl}
             height={height}
             width={width}

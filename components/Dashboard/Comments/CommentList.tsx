@@ -15,15 +15,13 @@ const TableRow = styled.ul`
   border-bottom: 1px dashed #aaa;
   padding: 1.5rem 1rem 1rem;
 
-  > li {
-  }
-`;
-
-const CommentWrap = styled.li`
   &:hover {
-    > div {
+    li:first-child div {
       display: flex;
     }
+  }
+
+  > li {
   }
 `;
 
@@ -70,7 +68,7 @@ const CommentList: FC<Props> = ({ comments }) => {
           .map(({ cid, comment, headline, status, createdAt, nid }) => (
             <li key={cid}>
               <TableRow>
-                <CommentWrap>
+                <li>
                   {comment}
                   <IconsWrap>
                     <FaBan />
@@ -80,7 +78,7 @@ const CommentList: FC<Props> = ({ comments }) => {
                       }}
                     />
                   </IconsWrap>
-                </CommentWrap>
+                </li>
                 <li>
                   <Link href={`/news/${nid}`} passHref>
                     <StyledLink target='_blank'>

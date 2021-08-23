@@ -65,13 +65,7 @@ const Form: FC<Props> = ({
     <FormWrap>
       <StyledForm onSubmit={handleSubmit}>
         {formData.map((data) => (
-          <FormEl
-            key={data.label}
-            label={data.label}
-            val={data.val}
-            setVal={data.setVal}
-            isRequired={data.isRequired}
-          />
+          <FormEl key={data.label} {...data} />
         ))}
         <FormButton type='submit'>{btnName || 'Submit'}</FormButton>
       </StyledForm>
