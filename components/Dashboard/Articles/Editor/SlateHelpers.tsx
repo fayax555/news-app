@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 import { Editor, Transforms } from 'slate';
 import { Image } from './SlateImage';
 import { TextFormat, BlockType } from './SlateTypes';
-import { CaptionBox, Link } from './EditorStyles';
+import { CaptionBox, Link } from './styles';
 import { Tweet } from 'react-twitter-widgets';
 import styled from 'styled-components';
 

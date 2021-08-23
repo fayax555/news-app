@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import Layout from 'components/Layout/Layout';
 import Article from 'components/NewsPage/Article/Article';
-import { NewsWrap } from 'components/Styles/ArticleStyles';
+import { NewsWrap } from 'components/Styles/pages/ArticleStyles';
 import { connectToDatabase } from 'util/mongodb';
 import { Article as ArticleType } from 'components/NewsPage/ArticleTypes';
 import { GetStaticProps, GetStaticPaths } from 'next';

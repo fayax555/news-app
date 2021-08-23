@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
 import { Button } from 'components/Styles/Styles';
 import FilePondComponent from 'components/Dashboard/Articles/Editor/FilePond';
-import { DashboardWrite, EditorForm } from 'components/Styles/DashboardStyles';
+import { DashboardWrite, EditorForm } from 'components/Styles/pages/DashboardStyles';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';

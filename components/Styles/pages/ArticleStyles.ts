@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { max_width } from './Styles';
+import { max_width } from '../Styles';
 
 // news pages
 export const NewsWrap = styled.div`
@@ -48,7 +48,7 @@ export const ArticleWrap = styled.div`
 `;
 
 export const ContentImage = styled.section`
-  padding-bottom: 0 !important;
+  padding-bottom: 0rem;
 `;
 
 //write.tsx

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Layout from 'components/Layout/Layout';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
-import { DashboardWrap } from 'components/Styles/DashboardStyles';
+import { DashboardWrap } from 'components/Styles/pages/DashboardStyles';
 import { getSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 

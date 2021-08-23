@@ -100,19 +100,22 @@ export default async function handler(
       if (req.method === 'POST') {
         await db.collection('articles').insertOne(updatedReqBody);
 
-        res.status(201).json({ message: 'Inserted!', article: updatedReqBody });
+        return res
+          .status(201)
+          .json({ message: 'Inserted!', article: updatedReqBody });
       }
 
       if (req.method === 'PUT') {
-        const result = await db
+        await db
           .collection('articles')
           .findOneAndReplace(
             { _id: new ObjectId(String(req.body._id)) },
             updatedReqBody
           );
 
-        res.status(201).json({ message: 'Updated!', article: updatedReqBody });
-        console.log(result);
+        return res
+          .status(201)
+          .json({ message: 'Updated!', article: updatedReqBody });
       }
     });
   } catch (error) {

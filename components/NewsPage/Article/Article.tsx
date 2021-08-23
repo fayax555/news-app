@@ -1,5 +1,5 @@
 import { CSSProperties, FC, ReactElement } from 'react';
-import { ArticleWrap } from '../../Styles/ArticleStyles';
+import { ArticleWrap } from '../../Styles/pages/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
 import { Tweet } from 'react-twitter-widgets';
@@ -7,9 +7,9 @@ import {
   CaptionBox,
   TweetWrap,
   Link,
-} from 'components/Dashboard/Articles/Editor/EditorStyles';
+} from 'components/Dashboard/Articles/Editor/styles';
 import { Article as ArticleProps } from '../ArticleTypes';
-import { ContentImage } from '../../Styles/ArticleStyles';
+import { ContentImage } from '../../Styles/pages/ArticleStyles';
 import CommentForm from './Comments/CommentForm';
 import Comments from './Comments/Comments';
 

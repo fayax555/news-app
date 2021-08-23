@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { NavbarWrap, List } from '../../Styles/DashboardStyles';
+import { NavbarWrap, List } from '../../Styles/pages/DashboardStyles';
 import NavbarItem from './NavbarItem';
 
 interface Props {}

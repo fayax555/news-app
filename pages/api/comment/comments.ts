@@ -26,10 +26,10 @@ export default async function handler(
         }
       );
 
-      res.status(201).json({ message: 'Comment sent!' });
+      return res.status(201).json({ message: 'Comment sent!' });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: 'An Error occurred!' });
+      return res.status(500).json({ message: 'An Error occurred!' });
     }
   }
 }

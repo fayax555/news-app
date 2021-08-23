@@ -2,8 +2,8 @@ import { FC, useCallback, useRef, ClipboardEvent } from 'react';
 import { createEditor, BaseEditor, Editor } from 'slate';
 import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
 import { CustomEditor, Leaf, renderElement } from './SlateHelpers';
-import Toolbar from './Toolbar';
-import { EditorWrap, Wrap } from './EditorStyles';
+import Toolbar from './Toolbar/Toolbar';
+import { EditorWrap, Wrap } from './styles';
 import { withHistory } from 'slate-history';
 import isHotkey from 'is-hotkey';
 import {

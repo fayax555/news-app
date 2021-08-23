@@ -1,6 +1,6 @@
 import Navbar from 'components/Dashboard/Navbar/Navbar';
 import Layout from 'components/Layout/Layout';
-import { DashboardWrap } from 'components/Styles/DashboardStyles';
+import { DashboardWrap } from 'components/Styles/pages/DashboardStyles';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/client';
 import { FC } from 'react';

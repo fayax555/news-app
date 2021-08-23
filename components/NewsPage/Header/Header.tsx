@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Article } from '../ArticleTypes';
-import { HeaderWrap, LinkWrap } from '../../Styles/ArticleStyles';
+import { HeaderWrap, LinkWrap } from '../../Styles/pages/ArticleStyles';
 import LatestNews from './LatestNews';
 
 const Header: FC<{ articles: Article[] }> = ({ articles }) => {

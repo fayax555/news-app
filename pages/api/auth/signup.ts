@@ -11,7 +11,7 @@ export default async function handler(
   const session = await getSession({ req });
   // user can't create an account if they are logged in
   if (session) {
-    res
+    return res
       .status(403)
       .json({ message: 'Please logout before creating an account!' });
   }

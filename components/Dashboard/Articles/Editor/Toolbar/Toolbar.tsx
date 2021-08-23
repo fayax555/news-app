@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
-import { CustomEditor } from './SlateHelpers';
-import { TextFormat, BlockType } from './SlateTypes';
+import { CustomEditor } from '../SlateHelpers';
+import { TextFormat, BlockType } from '../SlateTypes';
 import {
   MdFormatBold,
   MdFormatItalic,
@@ -10,9 +10,9 @@ import {
 } from 'react-icons/md';
 import { BsTypeH2, BsTypeH3 } from 'react-icons/bs';
 import { useSlate } from 'slate-react';
-import { Icon, ToolbarWrap } from './ToolbarStyles';
-import { insertImage } from './SlateImage';
-import { LinkButton, RemoveLinkButton, isLinkActive } from './SlateLinks';
+import { Icon, ToolbarWrap } from './styles';
+import { insertImage } from '../SlateImage';
+import { LinkButton, RemoveLinkButton, isLinkActive } from '../SlateLinks';
 
 interface Props {
   elementType?: string;

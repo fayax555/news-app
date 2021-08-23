@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Layout from 'components/Layout/Layout';
 import Navbar from 'components/Dashboard/Navbar/Navbar';
-import { DashboardWrap } from 'components/Styles/DashboardStyles';
+import { DashboardWrap } from 'components/Styles/pages/DashboardStyles';
 import { getSession } from 'next-auth/client';
 import { GetServerSideProps } from 'next';
 import { connectToDatabase } from 'util/mongodb';
@@ -34,8 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const { db }: { db: Db } = await connectToDatabase();
 
-    const article = await db.collection('articles').find({})
+    const comments = await db.collection('articles').distinct('comments');
 
+    console.log(comments);
   } catch (error) {}
 
   return { props: {} };

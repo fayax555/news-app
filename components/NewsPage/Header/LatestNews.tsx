@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { HeaderLeft } from '../../Styles/ArticleStyles';
+import { HeaderLeft } from '../../Styles/pages/ArticleStyles';
 import { Article } from '../ArticleTypes';
 import ArticleListItem from '../ArticleListItem';
 
