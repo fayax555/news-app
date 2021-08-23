@@ -4,7 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { StyledLink, IconsWrap } from '../Articles/ArticleList/styles';
 import dayjs from 'dayjs';
-import { FaTrash, FaBan } from 'react-icons/fa';
+import { FaTrash, FaBan, FaRegCheckCircle } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 
 const TableRow = styled.ul`
@@ -71,6 +71,7 @@ const CommentList: FC<Props> = ({ comments }) => {
                 <li>
                   {comment}
                   <IconsWrap>
+                    <FaRegCheckCircle />
                     <FaBan />
                     <FaTrash
                       onClick={() => {

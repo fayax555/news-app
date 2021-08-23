@@ -15,7 +15,7 @@ interface Props {
 
 const AllComments: FC<Props> = ({ comments }) => {
   return (
-    <Layout title='All vomments'>
+    <Layout title='All comments'>
       <DashboardWrap>
         <Navbar />
         <div>

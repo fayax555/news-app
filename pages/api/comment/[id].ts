@@ -14,7 +14,17 @@ export default async function handler(
         comments: { $elemMatch: { cid: new ObjectId(String(req.query.id)) } },
       });
 
-      console.log(article);
+      if (!article) return;
+
+      const result = await db.collection('articles').updateOne(
+        { _id: new ObjectId(String(article._id)) },
+        {
+          $pull: { comments: { cid: new ObjectId(String(req.query.id)) } },
+        }
+      );
+
+      res.status(200).json({ message: 'Success!' });
+      console.log(result);
     } catch (error) {}
   }
 }
