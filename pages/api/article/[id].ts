@@ -7,12 +7,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const _id = new ObjectId(String(req.query.id));
+
   if (req.method === 'GET') {
     try {
       const { db }: { db: Db } = await connectToDatabase();
 
       const article = await db.collection('articles').findOne({
-        _id: new ObjectId(String(req.query.id)),
+        _id ,
       });
 
       res.status(200).json({ data: article?.comments.reverse() });
@@ -32,7 +34,7 @@ export default async function handler(
       const { db }: { db: Db } = await connectToDatabase();
 
       db.collection('articles').updateOne(
-        { _id: new ObjectId(String(req.query.id)) },
+        { _id },
         {
           $inc: { views: 1 },
         }
@@ -51,7 +53,7 @@ export default async function handler(
 
       const result = await db
         .collection('articles')
-        .findOneAndDelete({ _id: new ObjectId(String(req.query.id)) });
+        .findOneAndDelete({ _id });
 
       const deletedArticle = result.value?.headline;
 

@@ -10,21 +10,17 @@ export default async function handler(
     try {
       const { db }: { db: Db } = await connectToDatabase();
 
-      const article = await db.collection('articles').findOne({
-        comments: { $elemMatch: { cid: new ObjectId(String(req.query.id)) } },
-      });
-
-      if (!article) return;
+      const cid = new ObjectId(String(req.query.id));
 
       const result = await db.collection('articles').updateOne(
-        { _id: new ObjectId(String(article._id)) },
         {
-          $pull: { comments: { cid: new ObjectId(String(req.query.id)) } },
-        }
+          comments: { $elemMatch: { cid } },
+        },
+        { $pull: { comments: { cid } } }
       );
 
-      res.status(200).json({ message: 'Success!' });
       console.log(result);
+      res.status(200).json({ message: 'Success!' });
     } catch (error) {}
   }
 }
