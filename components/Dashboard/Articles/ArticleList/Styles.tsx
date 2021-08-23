@@ -45,6 +45,14 @@ export const Table = styled.section`
 `;
 
 // TableField
+export const StyledLink = styled.a`
+  color: #1d1d97;
+
+  &:hover {
+    color: #7070f3;
+  }
+`;
+
 export const TableBodyField = styled.ul`
   border-bottom: 1px dashed #777;
   padding-bottom: 2rem;
@@ -56,14 +64,6 @@ export const TableBodyField = styled.ul`
   }
 
   li:nth-child(2) {
-    a {
-      color: #1d1d97;
-
-      &:hover {
-        color: #7070f3;
-      }
-    }
-
     div {
       display: none;
       position: absolute;

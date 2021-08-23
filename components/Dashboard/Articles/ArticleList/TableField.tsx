@@ -4,7 +4,7 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-import { TableBodyField } from './Styles';
+import { TableBodyField, StyledLink } from './styles';
 
 interface Props {
   _id: string;
@@ -84,8 +84,8 @@ const ArticleListTableField: FC<Props> = ({
         />
       </li>
       <li>
-        <Link href={`/news/${nid}`}>
-          <a target='_blank'>{headline}</a>
+        <Link href={`/news/${nid}`} passHref>
+          <StyledLink target='_blank'>{headline}</StyledLink>
         </Link>
         <div>
           <FaEdit

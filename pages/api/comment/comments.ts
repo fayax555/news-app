@@ -20,16 +20,17 @@ export default async function handler(
               cid: new ObjectId(),
               name,
               comment,
+              status: 'pending',
               createdAt: Date(),
             },
           },
         }
       );
 
-      return res.status(201).json({ message: 'Comment sent!' });
+      res.status(201).json({ message: 'Comment sent!' });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: 'An Error occurred!' });
+      res.status(500).json({ message: 'An Error occurred!' });
     }
   }
 }

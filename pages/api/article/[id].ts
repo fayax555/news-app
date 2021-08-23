@@ -54,7 +54,6 @@ export default async function handler(
         .findOneAndDelete({ _id: new ObjectId(String(req.query.id)) });
 
       const deletedArticle = result.value?.headline;
-      console.log(result);
 
       res.status(201).json({
         message: `'${deletedArticle}' deleted`,

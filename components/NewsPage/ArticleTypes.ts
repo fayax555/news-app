@@ -16,6 +16,20 @@ export interface Article {
     imgUrl: string;
   };
   views?: number;
+  comments?: Comment[];
+}
+
+export interface Comment {
+  cid: string;
+  name: string;
+  comment: string;
+  status: 'pending' | 'approved';
+  createdAt: string;
+}
+
+export interface UpdatedComment extends Comment {
+  nid: string;
+  headline: string;
 }
 
 export interface Content {
