@@ -17,10 +17,10 @@ export default async function handler(
         }
       );
 
-      return res.status(201);
+      return res.status(201).end();
     } catch (error) {
       console.error(error);
-      return res.status(500);
+      return res.end();
     }
   }
 }

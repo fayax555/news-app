@@ -117,5 +117,6 @@ export default async function handler(
     });
   } catch (error) {
     console.error(error);
+    res.end();
   }
 }
