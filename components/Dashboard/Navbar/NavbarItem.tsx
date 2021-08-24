@@ -27,7 +27,7 @@ const NavbarItem: FC<Props> = ({ name, subItems }) => {
       </a>
       <ul style={{ display: isPath ? 'block' : 'none' }}>
         {subItems?.map((subItem) => (
-          <NavbarSubItem key={name} {...subItem} />
+          <NavbarSubItem key={subItem.name} {...subItem} />
         ))}
       </ul>
     </li>

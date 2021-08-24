@@ -13,12 +13,14 @@ interface Props {
 const NewsId: FC<Props> = ({ article }) => {
   // page visits
   // everytime an article page is visited, view count is inc by 1
-  useEffect(() => {
-    fetch(`/api/article/${article._id}`, {
-      method: 'PATCH',
-    }).then((res) => console.log(res));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   fetch(`/api/article/${article._id}`, {
+  //     method: 'PATCH',
+  //   })
+  //     .then((res) => console.log(res))
+  //     .catch((error) => console.log(error));
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Layout>
@@ -41,6 +43,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const article: ArticleType = (await getArticles()).find(
     (articleItem: ArticleType) => articleItem.nid === nid
   );
+
+  if (!article) return { notFound: true };
 
   return {
     props: {

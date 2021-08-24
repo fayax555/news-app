@@ -45,7 +45,7 @@ export default async function handler(
     }
   }
 
-  const session = await getSession({ req });
+  // const session = await getSession({ req });
 
   // if (!session) {
   //   return res.status(401).json({ message: 'Unauthorized access not allowed' });

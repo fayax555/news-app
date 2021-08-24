@@ -82,7 +82,7 @@ export default async function handler(
       const count = await db.collection('articles').countDocuments();
 
       const updatedReqBody = {
-        nid: req.method === 'PUT' ? String(count) : String(count + 1),
+        nid: req.method === 'PUT' ? req.body.nid : String(count + 1),
         author,
         headline,
         content,
@@ -108,10 +108,7 @@ export default async function handler(
       if (req.method === 'PUT') {
         await db
           .collection('articles')
-          .findOneAndReplace(
-            { _id: new ObjectId(String(req.body._id)) },
-            updatedReqBody
-          );
+          .findOneAndReplace({ nid: req.body.nid }, updatedReqBody);
 
         return res
           .status(201)
