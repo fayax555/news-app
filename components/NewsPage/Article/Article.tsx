@@ -1,4 +1,4 @@
-import { CSSProperties, FC, ReactElement } from 'react';
+import { CSSProperties, FC, ReactElement, useEffect } from 'react';
 import { ArticleWrap } from '../../Styles/pages/ArticleStyles';
 import ArticleInfo from './ArticleInfo';
 import Image from 'next/image';
@@ -110,6 +110,19 @@ const Article: FC<{ article: ArticleProps }> = ({
         );
     }
   );
+
+  // page visits
+  // everytime an article page is visited, view count is inc by 1
+  useEffect(() => {
+    fetch('/api/article/views', {
+      method: 'PATCH',
+      body: JSON.stringify({ id: _id }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ArticleWrap>
