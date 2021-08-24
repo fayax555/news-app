@@ -2,7 +2,7 @@ import { UpdatedComment } from 'components/NewsPage/ArticleTypes';
 import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { StyledLink, IconsWrap } from '../Articles/ArticleList/Styles';
+import { StyledLink, IconsWrap } from '../Articles/ArticleList/styles';
 import dayjs from 'dayjs';
 import { FaTrash, FaBan, FaRegCheckCircle } from 'react-icons/fa';
 import { useRouter } from 'next/router';

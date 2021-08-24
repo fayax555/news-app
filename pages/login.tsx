@@ -30,7 +30,7 @@ const Login: FC = () => {
       password,
     });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result?.error) router.replace('admin/dashboard/');
 

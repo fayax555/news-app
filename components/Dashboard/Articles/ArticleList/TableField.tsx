@@ -3,7 +3,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { TableBodyField, StyledLink, IconsWrap } from './Styles';
+import { TableBodyField, StyledLink, IconsWrap } from './styles';
 
 interface Props {
   _id: string;

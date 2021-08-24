@@ -16,8 +16,8 @@ const NewsId: FC<Props> = ({ article }) => {
   useEffect(() => {
     fetch(`/api/article/${article._id}`, {
       method: 'PUT',
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    }).then((res) => console.log(res));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import ArticleListTable from './Table';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import Router from 'next/router';
-import { ArticleBar } from './Styles';
+import { ArticleBar } from './styles';
 
 interface Props {
   articles: Article[];
