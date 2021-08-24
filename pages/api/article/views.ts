@@ -8,12 +8,10 @@ export default async function handler(
 ) {
   if (req.method === 'PATCH') {
     try {
-      const _id = new ObjectId(String(req.body.id));
-
       const { db }: { db: Db } = await connectToDatabase();
 
       await db.collection('articles').updateOne(
-        { _id },
+        { nid: req.body.id },
         {
           $inc: { views: 1 },
         }

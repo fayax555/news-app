@@ -12,6 +12,7 @@ import { Article as ArticleProps } from '../ArticleTypes';
 import { ContentImage } from '../../Styles/pages/ArticleStyles';
 import CommentForm from './Comments/CommentForm';
 import Comments from './Comments/Comments';
+import { useRouter } from 'next/router';
 
 const Article: FC<{ article: ArticleProps }> = ({
   article: {
@@ -113,16 +114,16 @@ const Article: FC<{ article: ArticleProps }> = ({
 
   // page visits
   // everytime an article page is visited, view count is inc by 1
+  const router = useRouter();
   useEffect(() => {
     fetch('/api/article/views', {
       method: 'PATCH',
-      body: JSON.stringify({ id: _id }),
+      body: JSON.stringify({ id: router.query.id }),
       headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router.query.id]);
 
   return (
     <ArticleWrap>
