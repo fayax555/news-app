@@ -14,8 +14,10 @@ const NewsId: FC<Props> = ({ article }) => {
   // page visits
   // everytime an article page is visited, view count is inc by 1
   useEffect(() => {
-    fetch(`/api/article/${article._id}`, {
+    fetch('/api/article/views', {
       method: 'PATCH',
+      body: JSON.stringify({ id: article._id }),
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
