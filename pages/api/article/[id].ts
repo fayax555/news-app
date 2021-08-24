@@ -47,9 +47,9 @@ export default async function handler(
 
   const session = await getSession({ req });
 
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized access not allowed' });
-  }
+  // if (!session) {
+  //   return res.status(401).json({ message: 'Unauthorized access not allowed' });
+  // }
 
   if (req.method === 'DELETE') {
     try {
