@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import dayjs from 'dayjs';
 
 const StyledList = styled.li`
-  padding: 1rem 1rem;
+  padding: 1rem;
   margin: 1.5rem 0;
   background-color: #eee;
   width: 87.4%;
@@ -40,7 +40,7 @@ const Comments: FC<Props> = ({ _id }) => {
   const [comments, setComment] = useState<Comment[]>([]);
 
   useEffect(() => {
-    fetch(`/api/article/${_id}`)
+    fetch(`/api/article/${_id}`, { method: 'GET' })
       .then((res) => res.json())
       .then(({ data }) => setComment(data));
   }, [_id]);

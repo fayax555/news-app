@@ -12,7 +12,7 @@ const TableRow = styled.ul`
   display: grid;
   grid-template-columns: 3fr 2fr 1fr 1fr;
   gap: 5rem;
-  border-bottom: 1px dashed #aaa;
+  border-bottom: 3px dashed #444;
   padding: 1.5rem 1rem 1rem;
 
   &:hover {
@@ -22,6 +22,7 @@ const TableRow = styled.ul`
   }
 
   > li {
+    padding-bottom: 1.75rem;
   }
 `;
 
@@ -36,6 +37,21 @@ interface Props {
 
 const CommentList: FC<Props> = ({ comments }) => {
   const router = useRouter();
+
+  const handleApprove = (id: string) => {
+    fetch(`/api/comment/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status: 'approved' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then(({ message }) => {
+        router.push(window.location.pathname);
+        alert(message);
+      });
+  };
 
   const handleDelete = (id: string) => {
     fetch(`/api/comment/${id}`, {
@@ -71,7 +87,11 @@ const CommentList: FC<Props> = ({ comments }) => {
                 <li>
                   {comment}
                   <IconsWrap>
-                    <FaRegCheckCircle />
+                    <FaRegCheckCircle
+                      onClick={() => {
+                        handleApprove(cid);
+                      }}
+                    />
                     <FaBan />
                     <FaTrash
                       onClick={() => {

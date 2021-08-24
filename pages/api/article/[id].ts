@@ -14,19 +14,17 @@ export default async function handler(
       const { db }: { db: Db } = await connectToDatabase();
 
       const article = await db.collection('articles').findOne({
-        _id ,
+        _id,
       });
 
-      res.status(200).json({ data: article?.comments.reverse() });
+      if (!article) return;
+      if (!article.comments) return;
+
+      return res.status(200).json({ data: article.comments.reverse() });
     } catch (error) {
       console.log(error);
+      return res.status(500).json({ message: 'Error!' });
     }
-  }
-
-  const session = await getSession({ req });
-
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized access not allowed' });
   }
 
   if (req.method === 'PUT') {
@@ -40,20 +38,24 @@ export default async function handler(
         }
       );
 
-      res.status(201);
+      return res.status(201);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error!' });
+      return res.status(500).json({ message: 'Error!' });
     }
+  }
+
+  const session = await getSession({ req });
+
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized access not allowed' });
   }
 
   if (req.method === 'DELETE') {
     try {
       const { db }: { db: Db } = await connectToDatabase();
 
-      const result = await db
-        .collection('articles')
-        .findOneAndDelete({ _id });
+      const result = await db.collection('articles').findOneAndDelete({ _id });
 
       const deletedArticle = result.value?.headline;
 
