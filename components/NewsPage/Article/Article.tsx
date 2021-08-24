@@ -120,7 +120,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       method: 'PATCH',
       body: JSON.stringify({ id: router.query.id }),
       headers: { 'Content-Type': 'application/json' },
-    });
+    }).catch();
   }, [router.query.id]);
 
   return (
