@@ -40,7 +40,7 @@ export default async function handler(
     try {
       const { db }: { db: Db } = await connectToDatabase();
 
-      db.collection('articles').updateOne(
+      await db.collection('articles').updateOne(
         { _id },
         {
           $inc: { views: 1 },
@@ -54,11 +54,11 @@ export default async function handler(
     }
   }
 
-  // const session = await getSession({ req });
+  const session = await getSession({ req });
 
-  // if (!session) {
-  //   return res.status(401).json({ message: 'Unauthorized access not allowed' });
-  // }
+  if (!session) {
+    return res.status(401).json({ message: 'Unauthorized access not allowed' });
+  }
 
   if (req.method === 'DELETE') {
     try {
