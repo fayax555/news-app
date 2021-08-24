@@ -15,7 +15,7 @@ const NewsId: FC<Props> = ({ article }) => {
   // everytime an article page is visited, view count is inc by 1
   useEffect(() => {
     fetch(`/api/article/${article._id}`, {
-      method: 'PUT',
+      method: 'PATCH',
     }).then((res) => console.log(res));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
