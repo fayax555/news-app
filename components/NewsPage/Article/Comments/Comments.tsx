@@ -40,10 +40,7 @@ const Comments: FC<Props> = ({ _id }) => {
   const [comments, setComment] = useState<Comment[]>([]);
 
   useEffect(() => {
-    fetch(`/api/article/${_id}`)
-      .then((res) => res.json())
-      .then(({ data }) => setComment(data))
-      .catch((error) => console.log(error));
+    fetch(`/api/article/${_id}`).then((res) => res.json());
   }, [_id]);
 
   return (
