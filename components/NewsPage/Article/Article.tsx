@@ -22,6 +22,7 @@ const Article: FC<{ article: ArticleProps }> = ({
     content,
     imageCaption,
     coverImage: { name, size, type, imgUrl },
+    comments,
   },
 }) => {
   const contentData = content.map(
@@ -120,7 +121,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       method: 'PATCH',
       body: JSON.stringify({ id: router.query.id }),
       headers: { 'Content-Type': 'application/json' },
-    })
+    });
   }, [router.query.id]);
 
   return (
@@ -133,7 +134,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       <ArticleInfo author={author} _id={_id} />
       {contentData}
       <CommentForm _id={_id} />
-      <Comments _id={_id} />
+      {comments && <Comments comments={comments} />}
     </ArticleWrap>
   );
 };

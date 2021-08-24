@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { Comment } from 'components/NewsPage/ArticleTypes';
 
 const StyledList = styled.li`
   padding: 1rem;
@@ -26,27 +27,10 @@ const StyledList = styled.li`
 `;
 
 interface Props {
-  _id: string;
+  comments: Comment[];
 }
 
-interface Comment {
-  cid: string;
-  name: string;
-  comment: string;
-  createdAt: string;
-}
-
-const Comments: FC<Props> = ({ _id }) => {
-  const [comments, setComment] = useState<Comment[]>([]);
-
-  useEffect(() => {
-    fetch(`/api/article/${_id}`)
-      .then((res) => res.json())
-      .then(({ comments }) => setComment(comments));
-  }, [_id]);
-
-  if (!comments || comments.length < 1) return null;
-
+const Comments: FC<Props> = ({ comments }) => {
   return (
     <div>
       <h3 style={{ paddingTop: '2rem' }}>Comments</h3>
