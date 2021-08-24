@@ -17,10 +17,7 @@ export default async function handler(
         _id,
       });
 
-      if (!article) return;
-      if (!article.comments) return;
-
-      return res.status(200).json({ data: article.comments.reverse() });
+      return res.status(200).json({ data: article?.comments });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ message: 'Error!' });
