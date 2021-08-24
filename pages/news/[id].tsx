@@ -19,8 +19,7 @@ const NewsId: FC<Props> = ({ article }) => {
     })
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [article._id]);
 
   return (
     <Layout>
