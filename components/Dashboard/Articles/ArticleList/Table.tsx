@@ -2,7 +2,7 @@ import { Dispatch, FC, SetStateAction } from 'react';
 import { Article } from 'components/NewsPage/ArticleTypes';
 import styled from 'styled-components';
 import ArticleListTableField from './TableField';
-import { Table } from './styles';
+import { Table } from './Styles';
 
 export const TableHead = styled.ul`
   font-weight: bold;
