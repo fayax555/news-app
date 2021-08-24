@@ -13,14 +13,14 @@ interface Props {
 const NewsId: FC<Props> = ({ article }) => {
   // page visits
   // everytime an article page is visited, view count is inc by 1
-  // useEffect(() => {
-  //   fetch(`/api/article/${article._id}`, {
-  //     method: 'PATCH',
-  //   })
-  //     .then((res) => console.log(res))
-  //     .catch((error) => console.log(error));
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    fetch(`/api/article/${article._id}`, {
+      method: 'PATCH',
+    })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Layout>
@@ -58,6 +58,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const ids: string[] = (await getArticles()).map(
     (article: ArticleType) => article.nid
   );
+
   const paths = ids.map((id: string) => ({ params: { id } }));
 
   return {

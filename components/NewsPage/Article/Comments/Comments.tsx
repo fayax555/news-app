@@ -42,7 +42,7 @@ const Comments: FC<Props> = ({ _id }) => {
   useEffect(() => {
     fetch(`/api/article/${_id}`)
       .then((res) => res.json())
-      .then(({ data }) => setComment(data));
+      .then(({ comments }) => setComment(comments));
   }, [_id]);
 
   if (!comments || comments.length < 1) return null;
