@@ -37,13 +37,15 @@ interface Comment {
 }
 
 const Comments: FC<Props> = ({ _id }) => {
-  const [comments, setComment] = useState<Comment[]>();
+  const [comments, setComment] = useState<Comment[]>([]);
 
   useEffect(() => {
-    fetch(`/api/article/${_id}`).then((res) => res.json());
+    fetch(`/api/article/${_id}`)
+      .then((res) => res.json())
+      .then(({ data }) => setComment(data));
   }, [_id]);
 
-  if (!comments) return null;
+  if (!comments || comments.length < 1) return null;
 
   return (
     <div>
