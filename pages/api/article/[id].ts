@@ -36,24 +36,6 @@ export default async function handler(
     }
   }
 
-  if (req.method === 'PATCH') {
-    try {
-      const { db }: { db: Db } = await connectToDatabase();
-
-      await db.collection('articles').updateOne(
-        { _id },
-        {
-          $inc: { views: 1 },
-        }
-      );
-
-      return res.status(201);
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Error!' });
-    }
-  }
-
   const session = await getSession({ req });
 
   if (!session) {

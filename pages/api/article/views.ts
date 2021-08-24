@@ -15,7 +15,7 @@ export default async function handler(
       await db.collection('articles').updateOne(
         { _id },
         {
-          $inc: { views: 1 },
+          $set: { views: 10 },
         }
       );
 
