@@ -23,28 +23,12 @@ registerPlugin(
   FilePondPluginFileValidateType
 );
 
-const FilePondComponent = ({ imgUrl, files, setFiles }) => {
-  // del click is only for dev to remove filepond default image when editing
-  const [isDelClick, setDelClick] = useState(false);
-
-  const myFiles = () => {
-    if (!imgUrl || isDelClick) return;
-
-    return [
-      {
-        source: imgUrl,
-      },
-    ];
-  };
-
+const FilePondComponent = ({ files, setFiles }) => {
   return (
     <FilePondWrap>
       <FilePond
         required={true}
-        onremovefile={() => {
-          if (process.env.NODE_ENV === 'development') setDelClick(true);
-        }}
-        files={myFiles() || files}
+        files={files}
         onupdatefiles={setFiles}
         allowMultiple={false}
         maxFileSize='10MB'

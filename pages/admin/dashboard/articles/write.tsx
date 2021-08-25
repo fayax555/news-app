@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useState } from 'react';
+import { FC, FormEventHandler, useEffect, useState } from 'react';
 import { Descendant } from 'slate';
 import dynamic from 'next/dynamic';
 import Layout from 'components/Layout/Layout';
@@ -16,6 +16,7 @@ import { Article } from 'components/NewsPage/ArticleTypes';
 import { getSession } from 'next-auth/client';
 import { Session } from 'next-auth';
 import Input from 'components/Form/FormEl';
+import { useRouter } from 'next/router';
 
 const SlateEditor = dynamic(
   () => import('components/Dashboard/Articles/Editor/SlateEditor'),
@@ -33,7 +34,9 @@ const WritePage: FC<Props> = ({ article, session }) => {
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
 
   // cover image from filepond
-  const [files, setFiles] = useState<any>([]);
+  const [files, setFiles] = useState<any>(
+    [{ source: article?.coverImage.imgUrl }] || []
+  );
   // value contains the text inside the slte editor
   const [value, setValue] = useState<any>(
     article?.content || [
@@ -43,6 +46,47 @@ const WritePage: FC<Props> = ({ article, session }) => {
       },
     ]
   );
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // reseting the values of textboxes if the user clicks add new
+    if (!router.query.id) {
+      setHeadline('');
+      setImageCaption('');
+      setExcerpt('');
+      setFiles([]);
+      setValue([
+        {
+          type: 'paragraph',
+          children: [{ text: '' }],
+        },
+      ]);
+    }
+
+    // change page state (to edit state) when user navigates to the edit page (eg: from the back button)
+    if (router.query.id) {
+      setHeadline(article?.headline || '');
+      setImageCaption(article?.imageCaption || '');
+      setExcerpt(article?.excerpt || '');
+      setFiles([{ source: article?.coverImage.imgUrl }] || []);
+      setValue(
+        article?.content || [
+          {
+            type: 'paragraph',
+            children: [{ text: 'A line of text in a paragraph.' }],
+          },
+        ]
+      );
+    }
+  }, [
+    article?.content,
+    article?.coverImage.imgUrl,
+    article?.excerpt,
+    article?.headline,
+    article?.imageCaption,
+    router.query.id,
+  ]);
 
   // console.log(value);
 
@@ -98,11 +142,7 @@ const WritePage: FC<Props> = ({ article, session }) => {
           <EditorForm onSubmit={handleSubmit}>
             <div>
               <Input val={headline} setVal={setHeadline} ph='Headline' />
-              <FilePondComponent
-                imgUrl={article?.coverImage.imgUrl}
-                files={files}
-                setFiles={setFiles}
-              />
+              <FilePondComponent files={files} setFiles={setFiles} />
               <Input
                 val={imageCaption}
                 setVal={setImageCaption}
