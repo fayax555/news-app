@@ -10,32 +10,6 @@ export default async function handler(
 ) {
   const _id = new ObjectId(String(req.query.id));
 
-  if (req.method === 'GET') {
-    try {
-      const { db }: { db: Db } = await connectToDatabase();
-
-      const article = await db.collection('articles').findOne({
-        _id,
-      });
-
-      if (!article || !article.comments) return;
-
-      const comments = article.comments.map(
-        ({ name, comment, createdAt, cid }: Comment) => ({
-          cid,
-          name,
-          comment,
-          createdAt,
-        })
-      );
-
-      return res.status(200).json({ comments });
-    } catch (error) {
-      console.log(error);
-      return res.end();
-    }
-  }
-
   const session = await getSession({ req });
 
   if (!session) {

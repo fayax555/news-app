@@ -20,14 +20,13 @@ export default async function handler(
       const { db }: { db: Db } = await connectToDatabase();
       const { status } = req.body;
 
-      const result = await db.collection('articles').updateOne(
+      await db.collection('articles').updateOne(
         {
           comments: { $elemMatch: { cid } },
         },
-        { $set: { comments: { status } } }
+        { $set: { 'comments.$.status': status } }
       );
 
-      console.log(result);
       res.status(200).json({ message: 'Success!' });
     } catch (error) {
       console.log(error);

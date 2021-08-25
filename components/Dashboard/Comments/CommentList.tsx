@@ -38,13 +38,19 @@ interface Props {
 const CommentList: FC<Props> = ({ comments }) => {
   const router = useRouter();
 
+  if (!comments) return null;
+
+  comments.sort(function (a, b) {
+    return dayjs(a.createdAt).valueOf() - dayjs(b.createdAt).valueOf();
+  });
+
   const handleApprove = (id: string) => {
     fetch(`/api/comment/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify({ status: 'approved' }),
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ status: 'approved' }),
     })
       .then((res) => res.json())
       .then(({ message }) => {
@@ -81,7 +87,7 @@ const CommentList: FC<Props> = ({ comments }) => {
         </li>
 
         {comments
-          ?.reverse()
+          .reverse()
           .map(({ cid, comment, name, headline, status, createdAt, nid }) => (
             <li key={cid}>
               <TableRow>

@@ -35,15 +35,19 @@ const Comments: FC<Props> = ({ comments }) => {
     <div>
       <h3 style={{ paddingTop: '2rem' }}>Comments</h3>
       <ul>
-        {comments.reverse().map(({ cid, name, comment, createdAt }) => (
-          <StyledList key={cid}>
-            <div>
-              <p>{name}</p>
-              <p>{dayjs(createdAt).format('DD MMM YY')}</p>
-            </div>
-            <p>{comment}</p>
-          </StyledList>
-        ))}
+        {comments.reverse().map(({ cid, name, comment, status, createdAt }) => {
+          if (status !== 'approved') return;
+
+          return (
+            <StyledList key={cid}>
+              <div>
+                <p>{name}</p>
+                <p>{dayjs(createdAt).format('DD MMM YY')}</p>
+              </div>
+              <p>{comment}</p>
+            </StyledList>
+          );
+        })}
       </ul>
     </div>
   );
