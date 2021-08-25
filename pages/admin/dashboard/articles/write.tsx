@@ -122,7 +122,11 @@ const WritePage: FC<Props> = ({ article, session }) => {
       // update the current article if editing, otherwise insert new
       method: article ? 'PUT' : 'POST',
       body: article
-        ? JSON.stringify({ nid: article?.nid, ...articleData })
+        ? JSON.stringify({
+            nid: article?.nid,
+            views: article?.views,
+            ...articleData,
+          })
         : JSON.stringify(articleData),
       headers: {
         'Content-Type': 'application/json',

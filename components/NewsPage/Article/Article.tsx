@@ -134,7 +134,7 @@ const Article: FC<{ article: ArticleProps }> = ({
       <ArticleInfo author={author} _id={_id} />
       {contentData}
       <CommentForm _id={_id} />
-      {comments && <Comments comments={comments} />}
+      {comments && comments?.length > 0 && <Comments comments={comments} />}
     </ArticleWrap>
   );
 };

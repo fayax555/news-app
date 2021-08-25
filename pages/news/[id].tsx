@@ -39,9 +39,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   if (!article) return { notFound: true };
 
+  // removing comments that are not approved before sending to the client
+  const comments = article.comments
+    ?.filter((c) => c.status === 'approved')
+    .map(({ cid, comment, name, createdAt }) => ({
+      // removing status field; client doesn't need to know this
+      cid,
+      comment,
+      name,
+      createdAt,
+    }));
+
   return {
     props: {
-      article: JSON.parse(JSON.stringify(article)),
+      article: JSON.parse(JSON.stringify({ ...article, comments })),
     },
     revalidate: 1,
   };
