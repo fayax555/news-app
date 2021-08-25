@@ -21,9 +21,13 @@ const NewsId: FC<Props> = ({ article }) => {
 };
 
 async function getArticles() {
-  const { db } = await connectToDatabase();
+  try {
+    const { db } = await connectToDatabase();
 
-  return await db.collection('articles').find({}).toArray();
+    return await db.collection('articles').find({}).toArray();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {

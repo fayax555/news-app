@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 const TableRow = styled.ul`
   font-size: 1.2rem;
   display: grid;
-  grid-template-columns: 3fr 2fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 2fr 1fr 1fr;
   gap: 5rem;
   border-bottom: 3px dashed #444;
   padding: 1.5rem 1rem 1rem;
@@ -73,6 +73,7 @@ const CommentList: FC<Props> = ({ comments }) => {
         <li>
           <TableRowHeader>
             <li>Comments</li>
+            <li>Name</li>
             <li>Article Title</li>
             <li>Status</li>
             <li>Date</li>
@@ -81,12 +82,12 @@ const CommentList: FC<Props> = ({ comments }) => {
 
         {comments
           ?.reverse()
-          .map(({ cid, comment, headline, status, createdAt, nid }) => (
+          .map(({ cid, comment, name, headline, status, createdAt, nid }) => (
             <li key={cid}>
               <TableRow>
                 <li>
                   {comment}
-                  <IconsWrap>
+                  <IconsWrap c1='#198005' c2='#9b6a10' c3='#8d1111'>
                     <FaRegCheckCircle
                       onClick={() => {
                         handleApprove(cid);
@@ -100,6 +101,7 @@ const CommentList: FC<Props> = ({ comments }) => {
                     />
                   </IconsWrap>
                 </li>
+                <li>{name}</li>
                 <li>
                   <Link href={`/news/${nid}`} passHref>
                     <StyledLink target='_blank'>

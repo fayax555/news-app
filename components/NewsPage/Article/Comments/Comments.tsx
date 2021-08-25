@@ -35,7 +35,7 @@ const Comments: FC<Props> = ({ comments }) => {
     <div>
       <h3 style={{ paddingTop: '2rem' }}>Comments</h3>
       <ul>
-        {comments.map(({ cid, name, comment, createdAt }) => (
+        {comments.reverse().map(({ cid, name, comment, createdAt }) => (
           <StyledList key={cid}>
             <div>
               <p>{name}</p>

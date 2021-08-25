@@ -94,6 +94,7 @@ export default async function handler(
           type,
           imgUrl: cloudinaryRes.secure_url,
         },
+        views: 0,
         createdAt: Date(),
       };
 

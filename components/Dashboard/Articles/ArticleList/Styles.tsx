@@ -53,7 +53,7 @@ export const StyledLink = styled.a`
   }
 `;
 
-export const IconsWrap = styled.div`
+export const IconsWrap = styled.div<{ c1: string; c2: string; c3?: string }>`
   display: none;
   position: absolute;
 
@@ -63,11 +63,15 @@ export const IconsWrap = styled.div`
     cursor: pointer;
 
     &:first-child:hover {
-      color: #0f0fc2;
+      color: ${(props) => props.c1};
     }
 
     &:nth-child(2):hover {
-      color: #9b1010;
+      color: ${(props) => props.c2};
+    }
+
+    &:nth-child(3):hover {
+      color: ${(props) => props.c3};
     }
   }
 `;

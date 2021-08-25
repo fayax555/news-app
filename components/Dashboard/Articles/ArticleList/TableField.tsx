@@ -86,7 +86,7 @@ const ArticleListTableField: FC<Props> = ({
         <Link href={`/news/${nid}`} passHref>
           <StyledLink target='_blank'>{headline}</StyledLink>
         </Link>
-        <IconsWrap>
+        <IconsWrap c1='#1e6cb4' c2='#8d1111'>
           <FaEdit
             onClick={() => {
               handleEdit(nid);
