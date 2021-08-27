@@ -7,12 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req });
-
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized access not allowed' });
-  }
-  
   if (req.method === 'POST') {
     const { _id, name, comment } = req.body;
 
