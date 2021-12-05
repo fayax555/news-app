@@ -27,11 +27,11 @@ const AllArticlesPage: FC<Props> = ({ articles }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      notFound: true,
-    };
-  }
+  // if (!session) {
+  //   return {
+  //     notFound: true,
+  //   };
+  // }
 
   const { db }: { db: Db } = await connectToDatabase();
 

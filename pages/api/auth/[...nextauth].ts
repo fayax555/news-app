@@ -1,8 +1,8 @@
-import { Db } from 'mongodb';
-import NextAuth from 'next-auth';
-import Providers from 'next-auth/providers';
-import { verifyPassword } from 'util/auth';
-import { connectToDatabase } from 'util/mongodb';
+import { Db } from 'mongodb'
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+import { verifyPassword } from 'util/auth'
+import { connectToDatabase } from 'util/mongodb'
 
 export default NextAuth({
   session: {
@@ -11,31 +11,31 @@ export default NextAuth({
   providers: [
     Providers.Credentials({
       async authorize(credentials: {
-        name: string;
-        email: string;
-        password: string;
+        name: string
+        email: string
+        password: string
       }) {
-        const { db }: { db: Db } = await connectToDatabase();
+        const { db }: { db: Db } = await connectToDatabase()
 
         const user = await db
           .collection('staff')
-          .findOne({ email: credentials.email });
+          .findOne({ email: credentials.email })
 
         if (!user) {
-          throw new Error('Email not found!');
+          throw new Error('Email not found!')
         }
 
         const isValid = await verifyPassword(
           credentials.password,
           user.password
-        );
+        )
 
         if (!isValid) {
-          throw new Error('Incorrect Password!');
+          throw new Error('Incorrect Password!')
         }
 
-        return { name: user.name, email: user.email };
+        return { name: user.name, email: user.email }
       },
     }),
   ],
-});
+})
